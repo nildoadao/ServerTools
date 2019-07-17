@@ -1,0 +1,20 @@
+﻿ServerToolsUI
+
+
+winexe
+C#
+.cs
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\
+ServerToolsUI
+none
+false
+DEBUG;TRACE
+D:\Visual Studio\ServerTools\ServerToolsUI\App.xaml
+4337882618
+
+91621024676
+161220108473
+AddServerDialog.xaml;FirmwareUpdatePage.xaml;HomePage.xaml;MainWindow.xaml;
+
+True
+

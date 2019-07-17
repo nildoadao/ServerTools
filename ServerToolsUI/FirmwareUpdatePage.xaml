@@ -1,0 +1,63 @@
+﻿<Page x:Class="ServerToolsUI.FirmwareUpdatePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:ServerToolsUI"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="FirmwareUpdatePage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock HorizontalAlignment="Center" FontSize="48" Margin="15" Style="{DynamicResource MaterialDesignTitleTextBlock}" Grid.ColumnSpan="3">Update de Firmware</TextBlock>
+        <Expander Header="Firmware" Grid.Row="1">
+            <GroupBox Margin="15" Style="{DynamicResource MaterialDesignCardGroupBox}" Header="Selecionar o Firmware" Background="Transparent">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Arquivo:" Style="{DynamicResource MaterialDesignBody1TextBlock}" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left">
+                        <TextBox Style="{DynamicResource MaterialDesignTextBox}" Width="200" Margin="5" materialDesign:HintAssist.Hint=".exe" VerticalAlignment="Center"/>
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}" Margin="5" VerticalAlignment="Center">...</Button>
+                    </StackPanel>
+                    <TextBlock Text="Modo:" Style="{DynamicResource MaterialDesignBody1TextBlock}" Margin="5" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <ComboBox Style="{DynamicResource MaterialDesignFloatingHintComboBox}" Width="200" Margin="5" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                </Grid>
+            </GroupBox>
+        </Expander>
+        <Expander Header="Servidores" Grid.Row="2">
+            <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" Header="Adicionar Servidores" Margin="15">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock  Margin="5" Style="{DynamicResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Left" VerticalAlignment="Center">Lista de Servidores</TextBlock>
+                        <Button Name="AddServerButton" Style="{DynamicResource MaterialDesignFloatingActionButton}" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"
+                                Click="AddServerButton_Click">
+                            <materialDesign:PackIcon Kind="Plus" Width="auto" Height="auto"/>
+                        </Button>
+                        <Button Style="{DynamicResource MaterialDesignRaisedButton}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5">Adicionar CSV</Button>
+                    </StackPanel>
+                    <ListBox Name="ServersListBox" Grid.Row="1" Style="{DynamicResource MaterialDesignListBox}" HorizontalAlignment="Left" Width="250" Height="300" Margin="5"></ListBox>
+                </Grid>
+            </GroupBox>
+        </Expander>
+    </Grid>
+</Page>
