@@ -1,7 +1,8 @@
 ﻿
 FD:\Visual Studio\ServerTools\ServerToolsUI\App.xaml;;
-FD:\Visual Studio\ServerTools\ServerToolsUI\FirmwareUpdatePage.xaml;;
-FD:\Visual Studio\ServerTools\ServerToolsUI\HomePage.xaml;;
-FD:\Visual Studio\ServerTools\ServerToolsUI\MainWindow.xaml;;
-FD:\Visual Studio\ServerTools\ServerToolsUI\AddServerDialog.xaml;;
+FD:\Visual Studio\ServerTools\ServerToolsUI\View\AddServerDialog.xaml;;
+FD:\Visual Studio\ServerTools\ServerToolsUI\View\FirmwareUpdatePage.xaml;;
+FD:\Visual Studio\ServerTools\ServerToolsUI\View\HomePage.xaml;;
+FD:\Visual Studio\ServerTools\ServerToolsUI\View\MainWindow.xaml;;
+FD:\Visual Studio\ServerTools\ServerToolsUI\View\ServerListRow.xaml;;
 

@@ -1,4 +1,4 @@
-﻿<Page x:Class="ServerToolsUI.HomePage"
+﻿<Page x:Class="ServerToolsUI.View.HomePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -17,19 +17,19 @@
         <WrapPanel Grid.Row="1" Margin="15">
             <Button Name="FirmwareUpdateButton" Style="{DynamicResource MaterialDesignFlatButton}" Height="auto" Width="auto" Foreground="Black" Click="FirmwareUpdateButton_Click">
                 <StackPanel Orientation="Vertical">
-                    <Image Height="50" Width="50" Source="Resources/update.png" Margin="5"></Image>
+                    <Image Height="50" Width="50"  Margin="5" Source="/ServerToolsUI;component/Resources/update.png"></Image>
                     <TextBlock Margin="5">Update de Firmware</TextBlock>
                 </StackPanel>
             </Button>
             <Button Style="{DynamicResource MaterialDesignFlatButton}" Height="auto" Width="auto" Foreground="Black">
                 <StackPanel Orientation="Vertical">
-                    <Image Height="50" Width="50" Source="Resources/export.png" Margin="5"></Image>
+                    <Image Height="50" Width="50"  Margin="5" Source="/ServerToolsUI;component/Resources/export.png"></Image>
                     <TextBlock Margin="5">Exportar Arquivo SCP</TextBlock>
                 </StackPanel>
             </Button>
             <Button Style="{DynamicResource MaterialDesignFlatButton}" Height="auto" Width="auto" Foreground="Black">
                 <StackPanel Orientation="Vertical">
-                    <Image Height="50" Width="50" Source="Resources/import.png" Margin="5"></Image>
+                    <Image Height="50" Width="50"  Margin="5" Source="/ServerToolsUI;component/Resources/import.png"></Image>
                     <TextBlock Margin="5">Importar Arquivo SCP</TextBlock>
                 </StackPanel>
             </Button>

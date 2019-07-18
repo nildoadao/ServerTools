@@ -1,5 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ServerToolsUI
+namespace ServerToolsUI.View
 {
     /// <summary>
-    /// Interação lógica para MainWindow.xam
+    /// Interação lógica para ServerListRow.xam
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ServerListRow : UserControl
     {
-        public MainWindow()
+        public ServerListRow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new HomePage());
         }
-
     }
 }

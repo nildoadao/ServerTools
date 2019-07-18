@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Visual Studio\ServerTools\ServerToolsUI\App.xaml
-4337882618
+5-704015314
 
-81424770675
+91128101441
 161220108473
-AddServerDialog.xaml;FirmwareUpdatePage.xaml;HomePage.xaml;MainWindow.xaml;
+View\AddServerDialog.xaml;View\FirmwareUpdatePage.xaml;View\HomePage.xaml;View\MainWindow.xaml;View\ServerListRow.xaml;
 
 False
 

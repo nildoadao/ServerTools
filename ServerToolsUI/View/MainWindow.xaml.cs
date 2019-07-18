@@ -14,23 +14,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ServerToolsUI
+namespace ServerToolsUI.View
 {
     /// <summary>
-    /// Interação lógica para FirmwareUpdatePage.xam
+    /// Interação lógica para MainWindow.xam
     /// </summary>
-    public partial class FirmwareUpdatePage : Page
+    public partial class MainWindow : Window
     {
-        public FirmwareUpdatePage()
+        public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Navigate(new HomePage());
         }
 
-        private async void AddServerButton_Click(object sender, RoutedEventArgs e)
-        {
-            var serverDialog = new AddServerDialog();
-            await DialogHost.Show(serverDialog, "MainHost");
-            ServersListBox.Items.Add(serverDialog.ServerTextBox.Text);
-        }
     }
 }
