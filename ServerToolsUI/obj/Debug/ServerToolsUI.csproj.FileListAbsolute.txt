@@ -25,5 +25,9 @@ D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\FirmwareUpdatePage.bam
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\HomePage.baml
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\MainWindow.baml
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\ServerToolsUI.csprojAssemblyReference.cache
-D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ServerListRow.g.cs
-D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ServerListRow.baml
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\UserMessageDialog.g.cs
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\UserMessageDialog.baml
+D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\ServerToolsIdrac.dll
+D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\RestSharp.dll
+D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\ServerToolsIdrac.pdb
+D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\RestSharp.xml

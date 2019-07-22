@@ -1,0 +1,10 @@
+D:\Visual Studio\ServerTools\ServerToolsIdrac\obj\Debug\ServerToolsIdrac.csproj.CoreCompileInputs.cache
+D:\Visual Studio\ServerTools\ServerToolsIdrac\bin\Debug\ServerToolsIdrac.dll
+D:\Visual Studio\ServerTools\ServerToolsIdrac\bin\Debug\ServerToolsIdrac.pdb
+D:\Visual Studio\ServerTools\ServerToolsIdrac\bin\Debug\Newtonsoft.Json.dll
+D:\Visual Studio\ServerTools\ServerToolsIdrac\bin\Debug\RestSharp.dll
+D:\Visual Studio\ServerTools\ServerToolsIdrac\bin\Debug\Newtonsoft.Json.xml
+D:\Visual Studio\ServerTools\ServerToolsIdrac\bin\Debug\RestSharp.xml
+D:\Visual Studio\ServerTools\ServerToolsIdrac\obj\Debug\ServerToolsIdrac.csproj.CopyComplete
+D:\Visual Studio\ServerTools\ServerToolsIdrac\obj\Debug\ServerToolsIdrac.dll
+D:\Visual Studio\ServerTools\ServerToolsIdrac\obj\Debug\ServerToolsIdrac.pdb

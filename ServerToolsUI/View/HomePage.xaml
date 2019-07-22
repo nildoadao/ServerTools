@@ -12,27 +12,40 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Center" FontSize="48" Margin="15" Style="{DynamicResource MaterialDesignTitleTextBlock}">Server Tools</TextBlock>
-        <WrapPanel Grid.Row="1" Margin="15">
-            <Button Name="FirmwareUpdateButton" Style="{DynamicResource MaterialDesignFlatButton}" Height="auto" Width="auto" Foreground="Black" Click="FirmwareUpdateButton_Click">
-                <StackPanel Orientation="Vertical">
-                    <Image Height="50" Width="50"  Margin="5" Source="/ServerToolsUI;component/Resources/update.png"></Image>
-                    <TextBlock Margin="5">Update de Firmware</TextBlock>
-                </StackPanel>
-            </Button>
-            <Button Style="{DynamicResource MaterialDesignFlatButton}" Height="auto" Width="auto" Foreground="Black">
-                <StackPanel Orientation="Vertical">
-                    <Image Height="50" Width="50"  Margin="5" Source="/ServerToolsUI;component/Resources/export.png"></Image>
-                    <TextBlock Margin="5">Exportar Arquivo SCP</TextBlock>
-                </StackPanel>
-            </Button>
-            <Button Style="{DynamicResource MaterialDesignFlatButton}" Height="auto" Width="auto" Foreground="Black">
-                <StackPanel Orientation="Vertical">
-                    <Image Height="50" Width="50"  Margin="5" Source="/ServerToolsUI;component/Resources/import.png"></Image>
-                    <TextBlock Margin="5">Importar Arquivo SCP</TextBlock>
-                </StackPanel>
-            </Button>
-        </WrapPanel>
+        <GroupBox Grid.Row="1" Margin="15" Header="Funções com Redfish">
+            <WrapPanel Margin="15">
+                <Button Name="FirmwareUpdateButton" Style="{DynamicResource MaterialDesignFlatButton}" Height="auto" Width="auto" Foreground="Black" Click="FirmwareUpdateButton_Click">
+                    <StackPanel Orientation="Vertical">
+                        <Image Height="50" Width="50"  Margin="5" Source="/ServerToolsUI;component/Resources/update.png"></Image>
+                        <TextBlock Margin="5">Update de Firmware</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{DynamicResource MaterialDesignFlatButton}" Height="auto" Width="auto" Foreground="Black">
+                    <StackPanel Orientation="Vertical">
+                        <Image Height="50" Width="50"  Margin="5" Source="/ServerToolsUI;component/Resources/export.png"></Image>
+                        <TextBlock Margin="5">Exportar Arquivo SCP</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{DynamicResource MaterialDesignFlatButton}" Height="auto" Width="auto" Foreground="Black">
+                    <StackPanel Orientation="Vertical">
+                        <Image Height="50" Width="50"  Margin="5" Source="/ServerToolsUI;component/Resources/import.png"></Image>
+                        <TextBlock Margin="5">Importar Arquivo SCP</TextBlock>
+                    </StackPanel>
+                </Button>
+            </WrapPanel>
+        </GroupBox>
+        <GroupBox Grid.Row="2" Margin="15" Header="Funções com Racadm">
+            <WrapPanel Margin="15">
+                <Button Style="{DynamicResource MaterialDesignFlatButton}" Height="auto" Width="auto" Foreground="Black" Click="FirmwareUpdateButton_Click">
+                    <StackPanel Orientation="Vertical">
+                        <Image Height="50" Width="50"  Margin="5" Source="/ServerToolsUI;component/Resources/update.png"></Image>
+                        <TextBlock Margin="5">Update de Firmware</TextBlock>
+                    </StackPanel>
+                </Button>
+            </WrapPanel>
+        </GroupBox>
     </Grid>
 </Page>

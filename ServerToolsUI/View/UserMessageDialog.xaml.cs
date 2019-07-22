@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ServerToolsUI.View
 {
     /// <summary>
-    /// Interação lógica para ServerListRow.xam
+    /// Interação lógica para UserMessageDialog.xam
     /// </summary>
-    public partial class ServerListRow : UserControl
+    public partial class UserMessageDialog : UserControl
     {
-        public ServerListRow()
+        public UserMessageDialog()
         {
             InitializeComponent();
         }

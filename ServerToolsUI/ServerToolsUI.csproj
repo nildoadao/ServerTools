@@ -62,8 +62,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="View\ServerListRow.xaml.cs">
-      <DependentUpon>ServerListRow.xaml</DependentUpon>
+    <Compile Include="Model\JobsDataGridInfo.cs" />
+    <Compile Include="Model\ServerConnectionInfo.cs" />
+    <Compile Include="View\UserMessageDialog.xaml.cs">
+      <DependentUpon>UserMessageDialog.xaml</DependentUpon>
     </Compile>
     <Page Include="View\AddServerDialog.xaml">
       <SubType>Designer</SubType>
@@ -98,7 +100,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\ServerListRow.xaml">
+    <Page Include="View\UserMessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,6 +143,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Util\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServerToolsIdrac\ServerToolsIdrac.csproj">
+      <Project>{724514FA-2A2D-4DEE-85C5-529175E5CFB4}</Project>
+      <Name>ServerToolsIdrac</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
