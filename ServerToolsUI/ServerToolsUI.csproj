@@ -63,7 +63,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\JobsDataGridInfo.cs" />
-    <Compile Include="Model\ServerConnectionInfo.cs" />
     <Compile Include="View\UserMessageDialog.xaml.cs">
       <DependentUpon>UserMessageDialog.xaml</DependentUpon>
     </Compile>

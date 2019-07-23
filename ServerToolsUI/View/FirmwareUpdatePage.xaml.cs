@@ -104,13 +104,16 @@ namespace ServerToolsUI.View
             {
                 string mode = ((ComboBoxItem)ModeCombobox.SelectedItem).Tag.ToString();
                 string path = FirmwareTextBox.Text;
+
                 JobsDataGridInfo job = new JobsDataGridInfo()
                 {
                     Server = connection.Host,
                     JobStatus = "Requested",
                 };
+
                 JobsDataGrid.Items.Add(job);
                 FirmwareAction firmware = new FirmwareAction(connection);
+
                 try
                 {
                     job.JobId = await firmware.UpdateFirmwareAsync(path, mode);                  

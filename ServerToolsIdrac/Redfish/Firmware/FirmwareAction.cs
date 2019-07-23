@@ -20,19 +20,30 @@ namespace ServerToolsIdrac.Redfish.Firmware
         private ConnectionInfo connection;
         private RestClient client;
 
+        /// <summary>
+        /// Creates a new Firmware action instance using Basic Authentication
+        /// </summary>
+        /// <param name="connection">Server Connection information</param>
         public FirmwareAction(ConnectionInfo connection)
         {
             this.connection = connection;
             client = new RestClient(string.Format("https://{0}", connection.Host));
             client.Authenticator = new HttpBasicAuthenticator(connection.User, connection.Password);
+            // Ignore Certificate
+            client.RemoteCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
         }
 
+        /// <summary>
+        /// Upload the firmware file to Idrac asynchronously
+        /// </summary>
+        /// <param name="path">File Path</param>
+        /// <returns>Location for the resource created</returns>
         private async Task<string> UploadFileAsync(string path)
         {
-            var request = new RestRequest(FirmwareInventory, Method.POST, DataFormat.Json);
+            var request = new RestRequest(FirmwareInventory, Method.POST);
             request.AddFile("firmware", path);
             string etag = await GetEtagHeaderAsync();
-            request.AddHeader("Etag", etag);
+            request.AddHeader("If-Match", etag);
             var response = await client.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)
@@ -44,6 +55,10 @@ namespace ServerToolsIdrac.Redfish.Firmware
                 .FirstOrDefault().ToString();
         }
 
+        /// <summary>
+        /// Returns the Etag Header
+        /// </summary>
+        /// <returns></returns>
         private async Task<string> GetEtagHeaderAsync()
         {
             var request = new RestRequest(FirmwareInventory);
@@ -53,25 +68,38 @@ namespace ServerToolsIdrac.Redfish.Firmware
                 throw new RedfishException("Fail to get Etag Header");
 
             return response.Headers
-                .Where(x => x.Name == "Etag")
+                .Where(x => x.Name == "ETag")
                 .Select(x => x.Value)
                 .FirstOrDefault().ToString();
         }
 
+        /// <summary>
+        /// Performs a firmware update from a local file 
+        /// </summary>
+        /// <param name="path">Fila Path</param>
+        /// <param name="option">Update mode</param>
+        /// <returns>Location for Update Job</returns>
         public async Task<string> UpdateFirmwareAsync(string path, string option)
         {
             if (!await ConnectionUtil.CheckConnectionAsync(connection.Host))
                 throw new Exception(string.Format("servidor {0} inacessivel", connection.Host));
 
             string location = await UploadFileAsync(path);
+
             List<string> uris = new List<string>()
             {
                 location
             };
 
-            var request = new RestRequest(DellUpdateService, Method.POST);
-            request.Parameters.Add(new Parameter("SoftwareIdentityURIs", uris, ParameterType.RequestBody));
-            request.Parameters.Add(new Parameter("InstallUpon", option, ParameterType.RequestBody));
+            var request = new RestRequest(DellUpdateService, Method.POST, DataFormat.Json);
+
+            var body = new
+            {
+                SoftwareIdentityURIs = uris,
+                InstallUpon = option
+            };
+
+            request.AddJsonBody(body);
             var response = await client.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)
