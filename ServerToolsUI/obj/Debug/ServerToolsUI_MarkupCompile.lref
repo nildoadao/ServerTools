@@ -1,8 +1,10 @@
 ﻿
 FD:\Visual Studio\ServerTools\ServerToolsUI\App.xaml;;
-FD:\Visual Studio\ServerTools\ServerToolsUI\View\AddServerDialog.xaml;;
-FD:\Visual Studio\ServerTools\ServerToolsUI\View\FirmwareUpdatePage.xaml;;
-FD:\Visual Studio\ServerTools\ServerToolsUI\View\HomePage.xaml;;
-FD:\Visual Studio\ServerTools\ServerToolsUI\View\MainWindow.xaml;;
-FD:\Visual Studio\ServerTools\ServerToolsUI\View\UserMessageDialog.xaml;;
+FD:\Visual Studio\ServerTools\ServerToolsUI\View\AddServerView.xaml;;
+FD:\Visual Studio\ServerTools\ServerToolsUI\View\FirmwareUpdateView.xaml;;
+FD:\Visual Studio\ServerTools\ServerToolsUI\View\HomeView.xaml;;
+FD:\Visual Studio\ServerTools\ServerToolsUI\View\MainView.xaml;;
+FD:\Visual Studio\ServerTools\ServerToolsUI\View\ProgressView.xaml;;
+FD:\Visual Studio\ServerTools\ServerToolsUI\View\ScpExportView.xaml;;
+FD:\Visual Studio\ServerTools\ServerToolsUI\View\UserMessageView.xaml;;
 

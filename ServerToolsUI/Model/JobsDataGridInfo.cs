@@ -10,14 +10,6 @@ namespace ServerToolsUI.Model
 {
     public class JobsDataGridInfo : INotifyPropertyChanged
     {
-        private string server;
-        private string serialNumber;
-        private string jobId;
-        private string jobName;
-        private string jobStatus;
-        private int jobPercentComplete;
-        private string jobMessage;
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -25,6 +17,7 @@ namespace ServerToolsUI.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private string server;
         public string Server
         {
             get => server;
@@ -38,6 +31,7 @@ namespace ServerToolsUI.Model
             }
         }
 
+        private string serialNumber;
         public string SerialNumber
         {
             get => serialNumber;
@@ -51,6 +45,7 @@ namespace ServerToolsUI.Model
             }
         }
 
+        private string jobId;
         public string JobId
         {
             get => jobId;
@@ -64,6 +59,7 @@ namespace ServerToolsUI.Model
             } 
         }
 
+        private string jobName;
         public string JobName
         {
             get => jobName;
@@ -77,6 +73,7 @@ namespace ServerToolsUI.Model
             }
         }
 
+        private string jobStatus;
         public string JobStatus
         {
             get => jobStatus;
@@ -90,6 +87,7 @@ namespace ServerToolsUI.Model
             }
         }
 
+        private int jobPercentComplete;
         public int JobPercentComplete
         {
             get => jobPercentComplete;
@@ -103,6 +101,7 @@ namespace ServerToolsUI.Model
             }
         }
 
+        private string jobMessage;
         public string JobMessage
         {
             get => jobMessage;

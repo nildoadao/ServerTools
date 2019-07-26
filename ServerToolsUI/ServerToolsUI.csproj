@@ -62,44 +62,66 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Enums\FirmwareUpdateMode.cs" />
+    <Compile Include="Model\Enums\ScpExportMode.cs" />
+    <Compile Include="Model\Enums\ScpFileContent.cs" />
+    <Compile Include="Model\JobInfo.cs" />
     <Compile Include="Model\JobsDataGridInfo.cs" />
-    <Compile Include="View\UserMessageDialog.xaml.cs">
-      <DependentUpon>UserMessageDialog.xaml</DependentUpon>
+    <Compile Include="Util\RelayCommand.cs" />
+    <Compile Include="ViewModel\AddServerViewModel.cs" />
+    <Compile Include="ViewModel\FirmwareUpdateViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\ProgressView.xaml.cs">
+      <DependentUpon>ProgressView.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\AddServerDialog.xaml">
+    <Compile Include="View\ScpExportView.xaml.cs">
+      <DependentUpon>ScpExportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserMessageView.xaml.cs">
+      <DependentUpon>UserMessageView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\AddServerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FirmwareUpdatePage.xaml">
+    <Page Include="View\FirmwareUpdateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\HomePage.xaml">
+    <Page Include="View\HomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainWindow.xaml">
+    <Page Include="View\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="View\AddServerDialog.xaml.cs">
-      <DependentUpon>AddServerDialog.xaml</DependentUpon>
+    <Compile Include="View\AddServerView.xaml.cs">
+      <DependentUpon>AddServerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\FirmwareUpdatePage.xaml.cs">
-      <DependentUpon>FirmwareUpdatePage.xaml</DependentUpon>
+    <Compile Include="View\FirmwareUpdateView.xaml.cs">
+      <DependentUpon>FirmwareUpdateView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\HomePage.xaml.cs">
-      <DependentUpon>HomePage.xaml</DependentUpon>
+    <Compile Include="View\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="View\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\UserMessageDialog.xaml">
+    <Page Include="View\ProgressView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ScpExportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserMessageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -140,9 +162,7 @@
   <ItemGroup>
     <Resource Include="Resources\update.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Util\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ServerToolsIdrac\ServerToolsIdrac.csproj">
       <Project>{724514FA-2A2D-4DEE-85C5-529175E5CFB4}</Project>

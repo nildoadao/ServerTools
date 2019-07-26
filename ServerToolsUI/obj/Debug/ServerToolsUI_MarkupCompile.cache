@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Visual Studio\ServerTools\ServerToolsUI\App.xaml
-5-1242521718
+7649398442
 
-10169910827
+20-1658953104
 17-1445330509
-View\AddServerDialog.xaml;View\FirmwareUpdatePage.xaml;View\HomePage.xaml;View\MainWindow.xaml;View\UserMessageDialog.xaml;
+View\AddServerView.xaml;View\FirmwareUpdateView.xaml;View\HomeView.xaml;View\MainView.xaml;View\ProgressView.xaml;View\ScpExportView.xaml;View\UserMessageView.xaml;
 
 False
 
