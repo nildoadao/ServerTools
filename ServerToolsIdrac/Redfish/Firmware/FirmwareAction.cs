@@ -5,6 +5,7 @@ using ServerToolsIdrac.Redfish.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,19 +18,15 @@ namespace ServerToolsIdrac.Redfish.Firmware
         public const string DellUpdateService = @"/redfish/v1/UpdateService/Actions/Oem/DellUpdateService.Install";
         public const string SimpleUpdate = @"/redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate";
 
-        private ConnectionInfo connection;
         private RestClient client;
+        private string host;
 
-        /// <summary>
-        /// Creates a new Firmware action instance using Basic Authentication
-        /// </summary>
-        /// <param name="connection">Server Connection information</param>
-        public FirmwareAction(ConnectionInfo connection)
+        public FirmwareAction(string host, NetworkCredential credentials)
         {
-            this.connection = connection;
-            client = new RestClient(string.Format("https://{0}", connection.Host));
-            client.Authenticator = new HttpBasicAuthenticator(connection.User, connection.Password);
-            // Ignore Certificate
+            this.host = host;
+            client = new RestClient(string.Format("https://{0}", host));
+            client.Authenticator = new NtlmAuthenticator(credentials);
+            // Ignore SSL Certificate
             client.RemoteCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
         }
 
@@ -81,8 +78,8 @@ namespace ServerToolsIdrac.Redfish.Firmware
         /// <returns>Location for Update Job</returns>
         public async Task<string> UpdateFirmwareAsync(string path, string option)
         {
-            if (!await ConnectionUtil.CheckConnectionAsync(connection.Host))
-                throw new Exception(string.Format("servidor {0} inacessivel", connection.Host));
+            if (!await ConnectionUtil.CheckConnectionAsync(host))
+                throw new Exception(string.Format("servidor {0} inacessivel", host));
 
             string location = await UploadFileAsync(path);
 

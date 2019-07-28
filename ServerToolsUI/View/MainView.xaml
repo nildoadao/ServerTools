@@ -6,8 +6,12 @@
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ServerToolsUI"
         mc:Ignorable="d"
-        Title="Server Tools" Height="600" Width="800"
-        Background="{DynamicResource MaterialDesignPaper}">
+        Title="Server Tools" Height="600" Width="1000"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
     <md:DialogHost Identifier="MainHost">
         <ScrollViewer>
             <Frame Name="MainFrame"/>

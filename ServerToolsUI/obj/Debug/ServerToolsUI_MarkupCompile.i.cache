@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Visual Studio\ServerTools\ServerToolsUI\App.xaml
-7649398442
+7-1944594416
 
-21-1462699103
+21-561332409
 17-1445330509
-View\AddServerView.xaml;View\FirmwareUpdateView.xaml;View\HomeView.xaml;View\MainView.xaml;View\ProgressView.xaml;View\ScpExportView.xaml;View\UserMessageView.xaml;
+View\CredentialsView.xaml;View\FirmwareUpdateView.xaml;View\HomeView.xaml;View\MainView.xaml;View\ProgressView.xaml;View\ScpExportView.xaml;View\UserMessageView.xaml;
 
 False
 

@@ -7,21 +7,29 @@
       xmlns:local="clr-namespace:ServerToolsUI.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ScpExportPage">
+      Title="ScpExportPage"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      Background="{DynamicResource MaterialDesignPaper}"
+      TextElement.FontWeight="Medium"
+      TextElement.FontSize="14"
+      FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Center" 
-                   FontSize="48" Margin="15" 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock HorizontalAlignment="Left" 
+                   FontSize="28" Margin="15" 
                    Style="{DynamicResource MaterialDesignTitleTextBlock}">
             Exportar Arquivo SCP
         </TextBlock>
-        <GroupBox Header="Dados da Idrac" 
+        <GroupBox Header="Dados do Export" 
                   Grid.Row="1" Margin="15"
                   Style="{DynamicResource MaterialDesignCardGroupBox}">
             <Grid>
@@ -30,75 +38,64 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
                 <TextBox Style="{DynamicResource MaterialDesignTextBox}" 
-                         Width="200" Margin="5"  
+                         Width="250" Margin="5"
+                         Grid.ColumnSpan="2"
                          materialDesign:HintAssist.Hint="Host" 
                          HorizontalAlignment="Left"/>
-                <TextBox Style="{DynamicResource MaterialDesignTextBox}" 
-                         Width="200" Margin="5" 
-                         Grid.Row="1"
-                         materialDesign:HintAssist.Hint="Usuario" 
-                         HorizontalAlignment="Left"/>
-                <PasswordBox  Width="200" Margin="5" 
-                              Grid.Row="2" 
-                              materialDesign:HintAssist.Hint="Senha" 
-                              HorizontalAlignment="Left"/>
-            </Grid>
-        </GroupBox>
-        <GroupBox Grid.Row="2" 
-                  Header="Dados do Arquivo" Margin="15"
-                  Style="{DynamicResource MaterialDesignCardGroupBox}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Itens a serem exportados:" Margin="5"
+                <TextBlock Text="Itens a serem exportados:" 
+                           Grid.Row="1"
+                           Margin="5"
+                           HorizontalAlignment="Left"
                            Style="{DynamicResource MaterialDesignBody1TextBlock}"
                            VerticalAlignment="Center"/>
-                <ComboBox Grid.Column="1" HorizontalAlignment="Right" Margin="5"
+                <ComboBox Grid.Row="1" 
+                          Grid.Column="1"
+                          HorizontalAlignment="Left" 
+                          Margin="5"
                           Width="200" Style="{DynamicResource MaterialDesignFloatingHintComboBox}">
-                    <ComboBoxItem Content="Tudo" Tag="ALL" Margin="5"/>
-                    <ComboBoxItem Content="System" Tag="System" Margin="5"/>
-                    <ComboBoxItem Content="BIOS" Tag="BIOS" Margin="5"/>
-                    <ComboBoxItem Content="IDRAC" Tag="IDRAC" Margin="5"/>
-                    <ComboBoxItem Content="NIC" Tag="NIC" Margin="5"/>
-                    <ComboBoxItem Content="FC" Tag="FC" Margin="5"/>
-                    <ComboBoxItem Content="Lifecycle" Tag="LifecycleController" Margin="5"/>
-                    <ComboBoxItem Content="RAID" Tag="RAID" Margin="5"/>
+                    <ComboBoxItem Content="Tudo"/>
+                    <ComboBoxItem Content="System"/>
+                    <ComboBoxItem Content="BIOS"/>
+                    <ComboBoxItem Content="IDRAC"/>
+                    <ComboBoxItem Content="NIC"/>
+                    <ComboBoxItem Content="FC"/>
+                    <ComboBoxItem Content="Lifecycle"/>
+                    <ComboBoxItem Content="RAID"/>
                 </ComboBox>
-                <TextBlock Text="Modo de Export:" Grid.Row="1" Margin="5"
+                <TextBlock Text="Modo de Export:" 
+                           Grid.Row="2"
+                           Margin="5"
                            Style="{DynamicResource MaterialDesignBody1TextBlock}"
-                           VerticalAlignment="Center"/>
-                <ComboBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="5"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"/>
+                <ComboBox Grid.Row="2" 
+                          Grid.Column="1" 
+                          HorizontalAlignment="Left" 
+                          Margin="5"
                           Width="200" Style="{DynamicResource MaterialDesignFloatingHintComboBox}">
-                    <ComboBoxItem Content="Padrão" Tag="Default" Margin="5"/>
-                    <ComboBoxItem Content="Clonar" Tag="Clone" Margin="5"/>
-                    <ComboBoxItem Content="Substituir" Tag="Replace" Margin="5"/>
+                    <ComboBoxItem Content="Padrão"/>
+                    <ComboBoxItem Content="Clonar"/>
+                    <ComboBoxItem Content="Substituir"/>
                 </ComboBox>
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Row="3" Style="{DynamicResource MaterialDesignCardGroupBox}" 
-                  Margin="15">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal">
-                    <Button Name="ExportButton" Click="ExportButton_Click" Margin="15"
-                        Style="{DynamicResource MaterialDesignFloatingActionButton}"
-                        materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-                        materialDesign:ButtonProgressAssist.IsIndicatorVisible="False"
-                        materialDesign:ButtonProgressAssist.Value="-1">
-                        Exportar
-                    </Button>
-                </StackPanel>
-            </Grid>
-        </GroupBox>
+        <Button Name="ExportButton"
+                Grid.Row="2"
+                Margin="15">
+            Exportar
+        </Button>
+        <materialDesign:Card Grid.Row="1"
+                             Grid.Column="1"
+                             Margin="15">
+            <TextBlock
+                Margin="15">
+                Nenhum Export em execução
+            </TextBlock>
+        </materialDesign:Card>
     </Grid>
 </Page>

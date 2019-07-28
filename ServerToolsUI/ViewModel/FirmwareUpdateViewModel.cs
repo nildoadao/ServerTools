@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,9 +25,10 @@ namespace ServerToolsUI.ViewModel
             UpdateFirmwareCommand = new RelayCommand(UpdateFirmware);
             RemoveServerCommand = new RelayCommand(RemoveServer);
             OpenFolderCommand = new RelayCommand(OpenFolder);
+            ClearJobsCommand = new RelayCommand(ClearJobs);
 
             jobs = new ObservableCollection<JobsDataGridInfo>();
-            servers = new ObservableCollection<ConnectionInfo>();
+            servers = new ObservableCollection<string>();
         }
 
         private ObservableCollection<JobsDataGridInfo> jobs;
@@ -71,8 +73,8 @@ namespace ServerToolsUI.ViewModel
             }
         }
 
-        private ObservableCollection<ConnectionInfo> servers;
-        public ObservableCollection<ConnectionInfo> Servers
+        private ObservableCollection<string> servers;
+        public ObservableCollection<string> Servers
         {
             get => servers;
             set
@@ -85,36 +87,113 @@ namespace ServerToolsUI.ViewModel
             }
         }
 
+        private bool hasServers = false;
+        public bool HasServers
+        {
+            get => hasServers;
+            set
+            {
+                if(value != hasServers)
+                {
+                    hasServers = value;
+                    NotifyPropertyChanged("HasServers");
+                }
+            }
+        }
+
+        private bool hasJobs = false;
+        public bool HasJobs
+        {
+            get => hasJobs;
+            set
+            {
+                if(value != hasJobs)
+                {
+                    hasJobs = value;
+                    NotifyPropertyChanged("HasJobs");
+                }
+            }
+        }
+
+        private string server;
+        public string Server
+        {
+            get => server;
+            set
+            {
+                if(value != server)
+                {
+                    server = value;
+                    NotifyPropertyChanged("Server");
+                }
+            }
+        }
+
+        private bool noServerCardVisible = true;
+        public bool NoServerCardVisible
+        {
+            get => noServerCardVisible;
+            set
+            {
+                if(value != noServerCardVisible)
+                {
+                    noServerCardVisible = value;
+                    NotifyPropertyChanged("NoServerCardVisible");
+                }
+            }
+        }
+
+        private bool noJobCardVisible = true;
+        public bool NoJobCardVisible
+        {
+            get => noJobCardVisible;
+            set
+            {
+                if (value != noJobCardVisible)
+                {
+                    noJobCardVisible = value;
+                    NotifyPropertyChanged("NoJobCardVisible");
+                }
+            }
+        }
+
         public RelayCommand AddServerCommand { get; private set; }
         public RelayCommand UpdateFirmwareCommand { get; private set; }
         public RelayCommand RemoveServerCommand { get; private set; }
         public RelayCommand OpenFolderCommand { get; private set; }
-        private async void AddServer(object parameter)
+        public RelayCommand ClearJobsCommand { get; private set; }
+        private void AddServer(object parameter)
         {
-            var view = new AddServerView
+            if (!string.IsNullOrEmpty(Server))
             {
-                DataContext = new AddServerViewModel()
-            };
-            try
-            {
-                ConnectionInfo result = (ConnectionInfo)await DialogHost.Show(view);
-                servers.Add(result);
+                Servers.Add(Server);
+                HasServers = true;
+                NoServerCardVisible = false;
             }
-            catch { } // Cancel hit
+            Server = string.Empty;
         }
 
         private async void UpdateFirmware(object parameter)
         {
-            foreach (ConnectionInfo connection in Servers)
+            var view = new CredentialsView()
+            {
+                DataContext = new CredentialsViewModel()
+            };
+
+            NetworkCredential credentials = (NetworkCredential)await DialogHost.Show(view, "MainHost");
+
+            foreach (string server in Servers)
             {
                 JobsDataGridInfo job = new JobsDataGridInfo()
                 {
-                    Server = connection.Host,
+                    Server = server,
                     JobStatus = "Requested",
                 };
 
                 Jobs.Add(job);
-                FirmwareAction firmware = new FirmwareAction(connection);
+                HasJobs = true;
+                NoJobCardVisible = false;
+                FirmwareAction firmware = new FirmwareAction(server, credentials);
 
                 try
                 {
@@ -133,7 +212,9 @@ namespace ServerToolsUI.ViewModel
 
         private void RemoveServer(object parameter)
         {
-            servers.Remove((ConnectionInfo)parameter);
+            Servers.Remove((string)parameter);
+            HasServers = servers.Any();
+            NoServerCardVisible = !HasServers;
         }
 
         private void OpenFolder(object parameter)
@@ -148,6 +229,13 @@ namespace ServerToolsUI.ViewModel
                 FirmwarePath = dialog.FileName;
             };
             folderDialog.ShowDialog();
+        }
+
+        private void ClearJobs(object parameter)
+        {
+            Jobs.Clear();
+            HasJobs = false;
+            NoJobCardVisible = true;
         }
     }
 }

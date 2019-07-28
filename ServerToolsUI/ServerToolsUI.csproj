@@ -68,9 +68,12 @@
     <Compile Include="Model\JobInfo.cs" />
     <Compile Include="Model\JobsDataGridInfo.cs" />
     <Compile Include="Util\RelayCommand.cs" />
-    <Compile Include="ViewModel\AddServerViewModel.cs" />
+    <Compile Include="ViewModel\CredentialsViewModel.cs" />
     <Compile Include="ViewModel\FirmwareUpdateViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\CredentialsView.xaml.cs">
+      <DependentUpon>CredentialsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ProgressView.xaml.cs">
       <DependentUpon>ProgressView.xaml</DependentUpon>
     </Compile>
@@ -80,7 +83,7 @@
     <Compile Include="View\UserMessageView.xaml.cs">
       <DependentUpon>UserMessageView.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\AddServerView.xaml">
+    <Page Include="View\CredentialsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -96,9 +99,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="View\AddServerView.xaml.cs">
-      <DependentUpon>AddServerView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>

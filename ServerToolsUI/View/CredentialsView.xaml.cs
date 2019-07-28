@@ -16,13 +16,19 @@ using System.Windows.Shapes;
 namespace ServerToolsUI.View
 {
     /// <summary>
-    /// Interação lógica para AddServerDialog.xam
+    /// Interação lógica para CredentialsView.xam
     /// </summary>
-    public partial class AddServerView : UserControl
+    public partial class CredentialsView : UserControl
     {
-        public AddServerView()
+        public CredentialsView()
         {
             InitializeComponent();
+        }
+
+        private void PasswordText_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            { ((dynamic)this.DataContext).SecurePassword = ((PasswordBox)sender).SecurePassword; }
         }
     }
 }
