@@ -8,3 +8,4 @@ D:\Visual Studio\ServerTools\ServerToolsIdrac\bin\Debug\RestSharp.xml
 D:\Visual Studio\ServerTools\ServerToolsIdrac\obj\Debug\ServerToolsIdrac.csproj.CopyComplete
 D:\Visual Studio\ServerTools\ServerToolsIdrac\obj\Debug\ServerToolsIdrac.dll
 D:\Visual Studio\ServerTools\ServerToolsIdrac\obj\Debug\ServerToolsIdrac.pdb
+D:\Visual Studio\ServerTools\ServerToolsIdrac\obj\Debug\ServerToolsIdrac.csprojAssemblyReference.cache

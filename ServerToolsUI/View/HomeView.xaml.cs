@@ -37,7 +37,11 @@ namespace ServerToolsUI.View
 
         private void ScpExportButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ScpExportView());
+            var view = new ScpExportView()
+            {
+                DataContext = new ScpExportViewModel()
+            };
+            NavigationService.Navigate(view);
         }
     }
 }

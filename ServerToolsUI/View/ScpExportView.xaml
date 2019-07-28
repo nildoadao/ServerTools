@@ -13,7 +13,9 @@
       TextElement.FontWeight="Medium"
       TextElement.FontSize="14"
       FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
-
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -46,7 +48,8 @@
                          Width="250" Margin="5"
                          Grid.ColumnSpan="2"
                          materialDesign:HintAssist.Hint="Host" 
-                         HorizontalAlignment="Left"/>
+                         HorizontalAlignment="Left"
+                         Text="{Binding Host}"/>
                 <TextBlock Text="Itens a serem exportados:" 
                            Grid.Row="1"
                            Margin="5"
@@ -57,7 +60,9 @@
                           Grid.Column="1"
                           HorizontalAlignment="Left" 
                           Margin="5"
-                          Width="200" Style="{DynamicResource MaterialDesignFloatingHintComboBox}">
+                          SelectedIndex="{Binding FileContent}"
+                          Width="200" 
+                          Style="{DynamicResource MaterialDesignFloatingHintComboBox}">
                     <ComboBoxItem Content="Tudo"/>
                     <ComboBoxItem Content="System"/>
                     <ComboBoxItem Content="BIOS"/>
@@ -77,6 +82,7 @@
                           Grid.Column="1" 
                           HorizontalAlignment="Left" 
                           Margin="5"
+                          SelectedIndex="{Binding ExportMode}"
                           Width="200" Style="{DynamicResource MaterialDesignFloatingHintComboBox}">
                     <ComboBoxItem Content="Padrão"/>
                     <ComboBoxItem Content="Clonar"/>
@@ -86,16 +92,57 @@
         </GroupBox>
         <Button Name="ExportButton"
                 Grid.Row="2"
-                Margin="15">
+                Margin="15"
+                VerticalAlignment="Bottom"
+                Command="{Binding ExportCommand}">
             Exportar
         </Button>
         <materialDesign:Card Grid.Row="1"
                              Grid.Column="1"
-                             Margin="15">
+                             VerticalAlignment="Center"
+                             Margin="15"
+                             Visibility="{Binding Path=NoExportCardVisible, Converter={StaticResource BoolToVis}}">
             <TextBlock
                 Margin="15">
                 Nenhum Export em execução
             </TextBlock>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="1"
+                             Grid.Column="1"
+                             Margin="15"
+                             VerticalAlignment="Center"
+                             Visibility="{Binding Path=ExportRunning, Converter={StaticResource BoolToVis}}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Margin="15">
+                    Exportando Arquivo...
+                </TextBlock>
+                <ProgressBar Margin="15"
+                             IsIndeterminate="True"/>
+            </StackPanel>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="2"
+                             Grid.Column="1"
+                             Visibility="{Binding Path=ExportFinished, Converter={StaticResource BoolToVis}}"
+                             Margin="15">
+            <StackPanel Margin="15"
+                        Orientation="Horizontal">
+                <materialDesign:PackIcon Margin="15">
+                    <materialDesign:PackIcon.Style>
+                        <Style TargetType="materialDesign:PackIcon">
+                            <Setter Property="Kind" Value="CheckCircle"/>
+                            <Setter Property="Foreground" Value="Green"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ExportFail}" Value="True">
+                                    <Setter Property="Kind" Value="CloseCircle"/>
+                                    <Setter Property="Foreground" Value="Red"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </materialDesign:PackIcon.Style>
+                </materialDesign:PackIcon>
+                <TextBlock Text="{Binding ExportMessage}" 
+                           Margin="15"/>
+            </StackPanel>
         </materialDesign:Card>
     </Grid>
 </Page>

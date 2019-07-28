@@ -49,15 +49,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Redfish\Common\IdracJob.cs" />
     <Compile Include="Redfish\Firmware\FirmwareAction.cs" />
     <Compile Include="Redfish\Common\ConnectionInfo.cs" />
+    <Compile Include="Redfish\Job\JobAction.cs" />
+    <Compile Include="Redfish\Scp\ScpFileAction.cs" />
     <Compile Include="Redfish\Util\ConnectionUtil.cs" />
     <Compile Include="Redfish\Util\RedfishException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Racadm\" />
     <Folder Include="Redfish\Chassis\" />
-    <Folder Include="Redfish\Scp\" />
     <Folder Include="Redfish\Storage\" />
   </ItemGroup>
   <ItemGroup>

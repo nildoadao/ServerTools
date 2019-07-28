@@ -35,3 +35,6 @@ D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ScpExportView.baml
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\UserMessageView.baml
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\CredentialsView.g.cs
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\CredentialsView.baml
+D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\MaterialDesignColors.pdb
+D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\Newtonsoft.Json.dll
+D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\Newtonsoft.Json.xml
