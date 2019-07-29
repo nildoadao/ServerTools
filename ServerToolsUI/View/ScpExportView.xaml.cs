@@ -25,12 +25,5 @@ namespace ServerToolsUI.View
         {
             InitializeComponent();
         }
-
-        private async void ExportButton_Click(object sender, RoutedEventArgs e)
-        {
-            var progressDialog = new ProgressView();
-            progressDialog.MessageTextBox.Text = "Exportando...";
-            await DialogHost.Show(progressDialog, "MainHost");
-        }
     }
 }

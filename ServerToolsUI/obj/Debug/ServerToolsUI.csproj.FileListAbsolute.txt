@@ -24,13 +24,11 @@ D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\RestSharp.xml
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\FirmwareUpdateView.g.cs
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\HomeView.g.cs
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\MainView.g.cs
-D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ProgressView.g.cs
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ScpExportView.g.cs
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\UserMessageView.g.cs
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\FirmwareUpdateView.baml
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\HomeView.baml
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\MainView.baml
-D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ProgressView.baml
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ScpExportView.baml
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\UserMessageView.baml
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\CredentialsView.g.cs
@@ -38,3 +36,4 @@ D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\CredentialsView.baml
 D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\MaterialDesignColors.pdb
 D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\Newtonsoft.Json.dll
 D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\Newtonsoft.Json.xml
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\GeneratedInternalTypeHelper.g.cs

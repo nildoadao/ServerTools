@@ -65,18 +65,15 @@
     <Compile Include="Model\Enums\FirmwareUpdateMode.cs" />
     <Compile Include="Model\Enums\ScpExportMode.cs" />
     <Compile Include="Model\Enums\ScpFileContent.cs" />
-    <Compile Include="Model\JobInfo.cs" />
     <Compile Include="Model\JobsDataGridInfo.cs" />
     <Compile Include="Util\RelayCommand.cs" />
     <Compile Include="ViewModel\CredentialsViewModel.cs" />
     <Compile Include="ViewModel\FirmwareUpdateViewModel.cs" />
     <Compile Include="ViewModel\ScpExportViewModel.cs" />
+    <Compile Include="ViewModel\Validators\StringNotEmptyRule.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\CredentialsView.xaml.cs">
       <DependentUpon>CredentialsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ProgressView.xaml.cs">
-      <DependentUpon>ProgressView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ScpExportView.xaml.cs">
       <DependentUpon>ScpExportView.xaml</DependentUpon>
@@ -114,10 +111,6 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\ProgressView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\ScpExportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

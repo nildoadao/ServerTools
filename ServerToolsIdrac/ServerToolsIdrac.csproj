@@ -51,7 +51,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Redfish\Common\IdracJob.cs" />
     <Compile Include="Redfish\Firmware\FirmwareAction.cs" />
-    <Compile Include="Redfish\Common\ConnectionInfo.cs" />
     <Compile Include="Redfish\Job\JobAction.cs" />
     <Compile Include="Redfish\Scp\ScpFileAction.cs" />
     <Compile Include="Redfish\Util\ConnectionUtil.cs" />

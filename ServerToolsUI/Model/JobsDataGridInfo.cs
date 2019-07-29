@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServerToolsIdrac.Redfish.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,6 +11,12 @@ namespace ServerToolsUI.Model
 {
     public class JobsDataGridInfo : INotifyPropertyChanged
     {
+
+        public JobsDataGridInfo()
+        {
+            Job = new IdracJob();
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -45,72 +52,16 @@ namespace ServerToolsUI.Model
             }
         }
 
-        private string jobId;
-        public string JobId
+        private IdracJob job;
+        public IdracJob Job
         {
-            get => jobId;
+            get => job;
             set
             {
-                if(value != JobId)
+                if(value != job)
                 {
-                    jobId = value;
-                    NotifyPropertyChanged("JobId");
-                }
-            } 
-        }
-
-        private string jobName;
-        public string JobName
-        {
-            get => jobName;
-            set
-            {
-                if(value != jobName)
-                {
-                    jobName = value;
-                    NotifyPropertyChanged("JobName");
-                }
-            }
-        }
-
-        private string jobStatus;
-        public string JobStatus
-        {
-            get => jobStatus;
-            set
-            {
-                if(value != jobStatus)
-                {
-                    jobStatus = value;
-                    NotifyPropertyChanged("JobStatus");
-                }
-            }
-        }
-
-        private int jobPercentComplete;
-        public int JobPercentComplete
-        {
-            get => jobPercentComplete;
-            set
-            {
-                if(value != jobPercentComplete)
-                {
-                    jobPercentComplete = value;
-                    NotifyPropertyChanged("JobPercentComplete");
-                }
-            }
-        }
-
-        private string jobMessage;
-        public string JobMessage
-        {
-            get => jobMessage;
-            set
-            {
-                if(value != jobMessage)
-                {
-                    jobMessage = value;
-                    NotifyPropertyChanged("JobMessage");
+                    job = value;
+                    NotifyPropertyChanged("Job");
                 }
             }
         }

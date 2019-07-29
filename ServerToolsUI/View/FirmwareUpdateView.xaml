@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:ServerToolsUI"
+      xmlns:validators="clr-namespace:ServerToolsUI.ViewModel.Validators"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1000"
       Title="FirmwareUpdatePage"
@@ -63,8 +64,15 @@
                     <TextBox Style="{DynamicResource MaterialDesignTextBox}" 
                                  Width="200" Margin="5" 
                                  materialDesign:HintAssist.Hint="Local do arquivo" 
-                                 VerticalAlignment="Center" Name="FirmwareTextBox"
-                                 Text="{Binding FirmwarePath}"/>
+                                 VerticalAlignment="Center">
+                        <TextBox.Text >
+                            <Binding Path="FirmwarePath">
+                                <Binding.ValidationRules>
+                                    <validators:StringNotEmptyRule  ValidationStep="RawProposedValue"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <Button Style="{DynamicResource MaterialDesignFlatButton}" 
                                 Margin="5" 
                                 VerticalAlignment="Center"
@@ -114,6 +122,7 @@
                                 Style="{DynamicResource MaterialDesignFloatingActionButton}" 
                                 Width="40" Height="40" 
                                 HorizontalAlignment="Left" 
+                                IsDefault="True"
                                 VerticalAlignment="Center" Margin="5"
                                 Command="{Binding AddServerCommand}">
                         <materialDesign:PackIcon Kind="Plus" Width="auto" Height="auto"/>
@@ -217,23 +226,23 @@
                     </Button>
                 </StackPanel>
                 <DataGrid Name="JobsDataGrid"                 
-                  Grid.Row="2"
-                  Grid.Column="1"
-                  Grid.RowSpan="2"
-                  MaxHeight="500" 
-                  Margin="15" 
-                  HorizontalContentAlignment="Center"
-                  AutoGenerateColumns="False"
-                  IsReadOnly="True"
+                          Grid.Row="2"
+                          Grid.Column="1"
+                          Grid.RowSpan="2"
+                          MaxHeight="500" 
+                          Margin="15" 
+                          HorizontalContentAlignment="Center"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"                          
                   ItemsSource="{Binding Jobs}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Servidor" Binding="{Binding Server}"/>
                         <DataGridTextColumn Header="Serial" Binding="{Binding SerialNumber}"/>
-                        <DataGridTextColumn Header="Job Id" Binding="{Binding JobId}"/>
-                        <DataGridTextColumn Header="Nome" Binding="{Binding JobName}"/>
-                        <DataGridTextColumn Header="Status" Binding="{Binding JobStatus}"/>
-                        <DataGridTextColumn Header="% Concluido" Binding="{Binding JobPercentComplete}"/>
-                        <DataGridTextColumn Header="Mensagem" Binding="{Binding JobMessage}"/>
+                        <DataGridTextColumn Header="Job Id" Binding="{Binding Job.Id}"/>
+                        <DataGridTextColumn Header="Nome" Binding="{Binding Job.Name}"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding Job.JobState}"/>
+                        <DataGridTextColumn Header="% Concluido" Binding="{Binding Job.PercentComplete}"/>
+                        <DataGridTextColumn Header="Mensagem" Binding="{Binding Job.Message}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

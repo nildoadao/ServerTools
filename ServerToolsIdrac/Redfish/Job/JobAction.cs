@@ -19,7 +19,7 @@ namespace ServerToolsIdrac.Redfish.Job
         public const string JobResult = @"/redfish/v1/TaskService/Tasks/";
         public const double JobTimeout = 10;
 
-        private RestClient client;
+        private IRestClient client;
         private string host;
 
         public JobAction(string host, NetworkCredential credentials)
@@ -29,12 +29,6 @@ namespace ServerToolsIdrac.Redfish.Job
             client.Authenticator = new NtlmAuthenticator(credentials);
             // Ignore SSL Certificate
             client.RemoteCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
-        }
-
-        public JobAction(string host, RestClient client)
-        {
-            this.host = host;
-            this.client = client;
         }
 
         public async Task<IdracJob> GetJobAsync(string jobUri)
@@ -47,8 +41,7 @@ namespace ServerToolsIdrac.Redfish.Job
 
             try
             {
-                IdracJob job = JsonConvert.DeserializeObject<IdracJob>(response.Content);
-                return job;
+                return JsonConvert.DeserializeObject<IdracJob>(response.Content);
             }
             catch(Exception ex)
             {

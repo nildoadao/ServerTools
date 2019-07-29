@@ -18,7 +18,7 @@ namespace ServerToolsIdrac.Redfish.Firmware
         public const string DellUpdateService = @"/redfish/v1/UpdateService/Actions/Oem/DellUpdateService.Install";
         public const string SimpleUpdate = @"/redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate";
 
-        private RestClient client;
+        private IRestClient client;
         private string host;
 
         public FirmwareAction(string host, NetworkCredential credentials)

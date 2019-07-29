@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using ServerToolsIdrac.Redfish.Common;
 using ServerToolsIdrac.Redfish.Firmware;
+using ServerToolsIdrac.Redfish.Job;
 using ServerToolsIdrac.Redfish.Util;
 using ServerToolsUI.Model;
 using ServerToolsUI.Model.Enums;
@@ -187,25 +188,34 @@ namespace ServerToolsUI.ViewModel
                 JobsDataGridInfo job = new JobsDataGridInfo()
                 {
                     Server = server,
-                    JobStatus = "Requested",
                 };
 
                 Jobs.Add(job);
                 HasJobs = true;
                 NoJobCardVisible = false;
                 FirmwareAction firmware = new FirmwareAction(server, credentials);
+                JobAction jobAction = new JobAction(server, credentials);
 
                 try
                 {
-                    job.JobId = await firmware.UpdateFirmwareAsync(FirmwarePath, ((FirmwareUpdateMode)SelectedMode).ToString());
+                    string jobUri = await firmware.UpdateFirmwareAsync(FirmwarePath, ((FirmwareUpdateMode)SelectedMode).ToString());
+                    job.Job = await jobAction.GetJobAsync(jobUri);
                 }
                 catch (RedfishException rex)
                 {
-                    job.JobMessage = string.Format("Erro na requisição Redfish: {0}", rex.Message);
+                    job.Job.Id = "Unknow";
+                    job.SerialNumber = "Unknow";
+                    job.Job.Name = "Unknow";
+                    job.Job.Message = string.Format("Erro na requisição Redfish: {0}", rex.Message);
+                    job.Job.JobState = "Failed";
                 }
                 catch (Exception ex)
                 {
-                    job.JobMessage = string.Format("Erro na requisição: {0}", ex.Message);
+                    job.Job.Id = "Unknow";
+                    job.SerialNumber = "Unknow";
+                    job.Job.Name = "Unknow";
+                    job.Job.Message = string.Format("Erro na requisição: {0}", ex.Message);
+                    job.Job.JobState = "Failed";
                 }
             }
         }
