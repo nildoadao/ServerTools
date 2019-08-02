@@ -44,7 +44,8 @@ namespace ServerToolsIdrac.Redfish.Firmware
             var response = await client.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)
-                throw new RedfishException("Fail to upload the file");
+                throw new RedfishException(string.Format("Fail to upload the file, Error Code {0}",
+                    response.StatusCode));
 
             return response.Headers
                 .Where(x => x.Name == "Location")
@@ -62,7 +63,8 @@ namespace ServerToolsIdrac.Redfish.Firmware
             var response = await client.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)
-                throw new RedfishException("Fail to get Etag Header");
+                throw new RedfishException(string.Format("Fail to get Etag Header, Error Code {0}",
+                    response.StatusCode));
 
             return response.Headers
                 .Where(x => x.Name == "ETag")
@@ -79,7 +81,7 @@ namespace ServerToolsIdrac.Redfish.Firmware
         public async Task<string> UpdateFirmwareAsync(string path, string option)
         {
             if (!await ConnectionUtil.CheckConnectionAsync(host))
-                throw new Exception(string.Format("servidor {0} inacessivel", host));
+                throw new Exception(string.Format("Servidor {0} inacessivel", host));
 
             string location = await UploadFileAsync(path);
 
@@ -100,7 +102,8 @@ namespace ServerToolsIdrac.Redfish.Firmware
             var response = await client.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)
-                throw new RedfishException("fail to create update Job");
+                throw new RedfishException(string.Format("Fail to create update Job, Error Code {0}", 
+                    response.StatusCode));
 
             return response.Headers
                 .Where(x => x.Name == "Location")

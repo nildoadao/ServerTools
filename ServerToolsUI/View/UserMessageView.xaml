@@ -12,12 +12,25 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Name="MessageTextBox" HorizontalAlignment="Left" 
-                   Style="{DynamicResource MaterialDesignBody1TextBlock}" Margin="15"
+        <TextBlock Name="MessageTextBox" 
+                   HorizontalAlignment="Left" 
+                   Style="{DynamicResource MaterialDesignBody1TextBlock}" 
+                   Margin="15"
                    VerticalAlignment="Center"/>
-        <Button Grid.Row="1" Style="{DynamicResource MaterialDesignFlatButton}" Margin="15"
-                Command="materialDesign:DialogHost.CloseDialogCommand">
-            Ok
-        </Button>
+        <StackPanel Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+            <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                    Margin="15"
+                    Command="materialDesign:DialogHost.CloseDialogCommand">
+                OK
+            </Button>
+            <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                    Margin="15"
+                    Command="materialDesign:DialogHost.CloseDialogCommand">
+                CANCEL
+            </Button>
+        </StackPanel>
+
     </Grid>
 </UserControl>

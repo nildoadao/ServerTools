@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerToolsUI.Model.Enums
+namespace ServerToolsUI.ViewModel
 {
-    public enum ScpExportMode
+    public class ScpImportViewModel : ViewModelBase
     {
-        Default = 0,
-        Clone = 1,
-        Replace = 2
     }
 }

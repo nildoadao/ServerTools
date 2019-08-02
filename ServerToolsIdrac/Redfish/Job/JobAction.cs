@@ -16,7 +16,6 @@ namespace ServerToolsIdrac.Redfish.Job
     {
         // Uris to Job Actions
         public const string JobStatus = @"/redfish/v1/Managers/iDRAC.Embedded.1/Jobs/";
-        public const string JobResult = @"/redfish/v1/TaskService/Tasks/";
         public const double JobTimeout = 10;
 
         private IRestClient client;
@@ -33,11 +32,15 @@ namespace ServerToolsIdrac.Redfish.Job
 
         public async Task<IdracJob> GetJobAsync(string jobUri)
         {
+            if (!await ConnectionUtil.CheckConnectionAsync(host))
+                throw new Exception(string.Format("Servidor {0} inacessivel", host));
+
             var request = new RestRequest(jobUri, Method.GET);
             var response = await client.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)
-                throw new RedfishException("Fail to read Job Status");
+                throw new RedfishException(string.Format("Fail to read Job Status, Error code {0}", 
+                    response.StatusCode));
 
             try
             {
@@ -47,17 +50,6 @@ namespace ServerToolsIdrac.Redfish.Job
             {
                 throw new RedfishException(string.Format("Fail to read Job: {0}", ex.Message));
             }
-        }
-
-        public async Task<string> GetJobResultAsync(string jobId)
-        {
-            var request = new RestRequest(JobResult + jobId, Method.GET);
-            var response = await client.ExecuteTaskAsync(request);
-
-            if (!response.IsSuccessful)
-                throw new RedfishException("Fail to read Job Result");
-
-            return response.Content;
         }
     }
 }

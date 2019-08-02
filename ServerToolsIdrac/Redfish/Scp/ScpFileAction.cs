@@ -1,8 +1,7 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Authenticators;
-using ServerToolsIdrac.Redfish.Common;
-using ServerToolsIdrac.Redfish.Job;
 using ServerToolsIdrac.Redfish.Util;
 using System;
 using System.Collections.Generic;
@@ -22,12 +21,10 @@ namespace ServerToolsIdrac.Redfish.Scp
 
         private IRestClient client;
         private string host;
-        private NetworkCredential credentials;
 
         public ScpFileAction(string host, NetworkCredential credentials)
         {
             this.host = host;
-            this.credentials = credentials;
             client = new RestClient(string.Format("https://{0}", host));
             client.Authenticator = new NtlmAuthenticator(credentials);
             // Ignore SSL Certificate
@@ -39,29 +36,34 @@ namespace ServerToolsIdrac.Redfish.Scp
             if (!await ConnectionUtil.CheckConnectionAsync(host))
                 throw new Exception(string.Format("servidor {0} inacessivel", host));
           
-            string jobUri = await CreateExportJobAsync(target, exportUse);           
-            DateTime start = DateTime.Now;
-
-            while (true)
-            {
-                JobAction action = new JobAction(host, credentials);
-                IdracJob job = await action.GetJobAsync(jobUri);
-
-                if (job.JobState.Contains("Completed"))
-                    return await action.GetJobResultAsync(job.Id); 
-
-                else if (job.JobState.Contains("Failed"))
-                    throw new RedfishException(string.Format("Fail to execute the Job: {0}", job.Message));
-
-                else if (DateTime.Now >= start.AddMinutes(JobAction.JobTimeout))
-                    throw new TimeoutException("Job Time exceeded");
-            }         
+            string jobUri = await CreateExportJobAsync(target, exportUse);
+            return await GetFileContentAsync(jobUri);   
         }
 
         public async Task<string> ImportScpFileAsync(string path, string target, string shutdownType, string powerStatus)
         {
+            if (!await ConnectionUtil.CheckConnectionAsync(host))
+                throw new Exception(string.Format("Servidor {0} inacessivel", host));
+
+            var request = new RestRequest(ImportSystemConfiguration, Method.POST, DataFormat.Json);
+            var body = BuildRequestBody(path, target, shutdownType, powerStatus);
+            request.AddJsonBody(body);
+            var response = await client.ExecuteTaskAsync(request);
+
+            if (!response.IsSuccessful)
+                throw new RedfishException(string.Format("Fail to import the file, Error Code {0}", 
+                    response.StatusCode));
+
+            return response.Headers
+                .Where(x => x.Name == "Location")
+                .Select(x => x.Value)
+                .FirstOrDefault().ToString();
+        }
+
+        private object BuildRequestBody(string path, string target, string shutdownType, string powerStatus)
+        {
             string file = File.ReadAllText(path);
-            var body = new
+            return  new
             {
                 ImportBuffer = file,
                 ShareParameters = new
@@ -71,18 +73,18 @@ namespace ServerToolsIdrac.Redfish.Scp
                 ShutdownType = shutdownType,
                 HostPowerState = powerStatus
             };
+        }
 
-            var request = new RestRequest(ImportSystemConfiguration, Method.POST, DataFormat.Json);
-            request.AddJsonBody(body);
+        private async Task<string> GetFileContentAsync(string jobUri)
+        {
+            var request = new RestRequest(jobUri);
             var response = await client.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)
-                throw new RedfishException("Fail to import the file");
+                throw new RedfishException(string.Format("Fail to retrive SCP File, Error Code {0}", 
+                    response.StatusCode));
 
-            return response.Headers
-                .Where(x => x.Name == "Location")
-                .Select(x => x.Value)
-                .FirstOrDefault().ToString();
+            return response.Content;
         }
 
         private async Task<string> CreateExportJobAsync(string target, string exportUse)
@@ -102,7 +104,8 @@ namespace ServerToolsIdrac.Redfish.Scp
             var response = await client.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)
-                throw new RedfishException("Fail to create Export Job");
+                throw new RedfishException(string.Format("Fail to create Export Job, Error Code {0}",
+                    response.StatusCode));
             
             return response.Headers
                 .Where(x => x.Name == "Location")

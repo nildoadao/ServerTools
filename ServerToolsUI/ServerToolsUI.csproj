@@ -41,6 +41,9 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.6.0.325, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.6.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Syroot.KnownFolders, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syroot.Windows.IO.KnownFolders.1.2.1\lib\net452\Syroot.KnownFolders.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -65,11 +68,13 @@
     <Compile Include="Model\Enums\FirmwareUpdateMode.cs" />
     <Compile Include="Model\Enums\ScpExportMode.cs" />
     <Compile Include="Model\Enums\ScpFileContent.cs" />
+    <Compile Include="Model\JobMonitor.cs" />
     <Compile Include="Model\JobsDataGridInfo.cs" />
     <Compile Include="Util\RelayCommand.cs" />
     <Compile Include="ViewModel\CredentialsViewModel.cs" />
     <Compile Include="ViewModel\FirmwareUpdateViewModel.cs" />
     <Compile Include="ViewModel\ScpExportViewModel.cs" />
+    <Compile Include="ViewModel\ScpImportViewModel.cs" />
     <Compile Include="ViewModel\Validators\StringNotEmptyRule.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\CredentialsView.xaml.cs">

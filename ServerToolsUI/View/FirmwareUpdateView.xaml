@@ -234,15 +234,15 @@
                           HorizontalContentAlignment="Center"
                           AutoGenerateColumns="False"
                           IsReadOnly="True"                          
-                  ItemsSource="{Binding Jobs}">
+                  ItemsSource="{Binding Monitor.Jobs}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Servidor" Binding="{Binding Server}"/>
                         <DataGridTextColumn Header="Serial" Binding="{Binding SerialNumber}"/>
-                        <DataGridTextColumn Header="Job Id" Binding="{Binding Job.Id}"/>
-                        <DataGridTextColumn Header="Nome" Binding="{Binding Job.Name}"/>
-                        <DataGridTextColumn Header="Status" Binding="{Binding Job.JobState}"/>
-                        <DataGridTextColumn Header="% Concluido" Binding="{Binding Job.PercentComplete}"/>
-                        <DataGridTextColumn Header="Mensagem" Binding="{Binding Job.Message}"/>
+                        <DataGridTextColumn Header="Job Id" Binding="{Binding JobId}"/>
+                        <DataGridTextColumn Header="Nome" Binding="{Binding JobName}"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding JobStatus}"/>
+                        <DataGridTextColumn Header="% Concluido" Binding="{Binding JobPercentComplete}"/>
+                        <DataGridTextColumn Header="Mensagem" Binding="{Binding JobMessage}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

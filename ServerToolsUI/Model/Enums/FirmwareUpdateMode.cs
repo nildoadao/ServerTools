@@ -8,8 +8,8 @@ namespace ServerToolsUI.Model.Enums
 {
     public enum FirmwareUpdateMode
     {
-        Now = 1,
-        NowAndReboot = 2,
-        NextReboot = 3
+        Now = 0,
+        NowAndReboot = 1,
+        NextReboot = 2
     }
 }

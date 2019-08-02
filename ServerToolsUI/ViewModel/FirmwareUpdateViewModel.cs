@@ -20,6 +20,7 @@ namespace ServerToolsUI.ViewModel
 {
     public class FirmwareUpdateViewModel : ViewModelBase
     {
+        private const int JobRefreshTime = 5;
         public FirmwareUpdateViewModel()
         {
             AddServerCommand = new RelayCommand(AddServer);
@@ -27,23 +28,7 @@ namespace ServerToolsUI.ViewModel
             RemoveServerCommand = new RelayCommand(RemoveServer);
             OpenFolderCommand = new RelayCommand(OpenFolder);
             ClearJobsCommand = new RelayCommand(ClearJobs);
-
-            jobs = new ObservableCollection<JobsDataGridInfo>();
-            servers = new ObservableCollection<string>();
-        }
-
-        private ObservableCollection<JobsDataGridInfo> jobs;
-        public ObservableCollection<JobsDataGridInfo> Jobs
-        {
-            get =>  jobs;
-            set
-            {
-                if (value != jobs)
-                {
-                    jobs = value;
-                    NotifyPropertyChanged("Jobs");
-                }
-            }
+            Servers = new ObservableCollection<string>();
         }
 
         private string firmwarePath;
@@ -158,6 +143,19 @@ namespace ServerToolsUI.ViewModel
             }
         }
 
+        private JobMonitor monitor;
+        public JobMonitor Monitor
+        {
+            get => monitor;
+            set
+            {
+                if(value != monitor)
+                {
+                    monitor = value;
+                    NotifyPropertyChanged("Monitor");
+                }
+            }
+        }
         public RelayCommand AddServerCommand { get; private set; }
         public RelayCommand UpdateFirmwareCommand { get; private set; }
         public RelayCommand RemoveServerCommand { get; private set; }
@@ -182,49 +180,38 @@ namespace ServerToolsUI.ViewModel
             };
 
             NetworkCredential credentials = (NetworkCredential)await DialogHost.Show(view, "MainHost");
+            HasJobs = true;
+            NoJobCardVisible = false;
+            Monitor = new JobMonitor(credentials, JobRefreshTime);
 
             foreach (string server in Servers)
             {
-                JobsDataGridInfo job = new JobsDataGridInfo()
-                {
-                    Server = server,
-                };
-
-                Jobs.Add(job);
-                HasJobs = true;
-                NoJobCardVisible = false;
                 FirmwareAction firmware = new FirmwareAction(server, credentials);
-                JobAction jobAction = new JobAction(server, credentials);
 
                 try
                 {
                     string jobUri = await firmware.UpdateFirmwareAsync(FirmwarePath, ((FirmwareUpdateMode)SelectedMode).ToString());
-                    job.Job = await jobAction.GetJobAsync(jobUri);
+                    Monitor.AddJob(server, jobUri);
                 }
-                catch (RedfishException rex)
+                catch (Exception)
                 {
-                    job.Job.Id = "Unknow";
-                    job.SerialNumber = "Unknow";
-                    job.Job.Name = "Unknow";
-                    job.Job.Message = string.Format("Erro na requisição Redfish: {0}", rex.Message);
-                    job.Job.JobState = "Failed";
+                    Monitor.AddJob(server, "");
                 }
-                catch (Exception ex)
-                {
-                    job.Job.Id = "Unknow";
-                    job.SerialNumber = "Unknow";
-                    job.Job.Name = "Unknow";
-                    job.Job.Message = string.Format("Erro na requisição: {0}", ex.Message);
-                    job.Job.JobState = "Failed";
-                }
+
+                Monitor.Start();
             }
+            HasJobs = Monitor.Jobs.Any();
+            NoJobCardVisible = !HasJobs;
         }
 
         private void RemoveServer(object parameter)
         {
-            Servers.Remove((string)parameter);
-            HasServers = servers.Any();
-            NoServerCardVisible = !HasServers;
+            if (!HasJobs)
+            {
+                Servers.Remove((string)parameter);
+                HasServers = servers.Any();
+                NoServerCardVisible = !HasServers;
+            }
         }
 
         private void OpenFolder(object parameter)
@@ -243,7 +230,8 @@ namespace ServerToolsUI.ViewModel
 
         private void ClearJobs(object parameter)
         {
-            Jobs.Clear();
+            Monitor.Jobs.Clear();
+            Monitor.Stop();
             HasJobs = false;
             NoJobCardVisible = true;
         }

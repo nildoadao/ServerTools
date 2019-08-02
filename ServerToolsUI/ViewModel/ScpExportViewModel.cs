@@ -5,6 +5,7 @@ using ServerToolsUI.Util;
 using ServerToolsUI.View;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -154,11 +155,19 @@ namespace ServerToolsUI.ViewModel
             try
             {
                 string fileData = await action.ExportScpFileAsync(target, mode);
+                string downloadsFolder = Syroot.Windows.IO.KnownFolders.Downloads.Path;
+
+                string fileName = string.Format("SCP_{0}{1}{2}.xml", 
+                    DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+
+                File.WriteAllText(Path.Combine(downloadsFolder, fileName), fileData);
+
                 ExportRunning = false;
                 ExportFinished = true;
                 NoExportCardVisible = true;
                 ExportFail = false;
-                ExportMessage = "Export executado com sucesso !";
+                ExportMessage = string.Format("Export executado com sucesso !, salvo em {0}",
+                    Path.Combine(downloadsFolder, fileName));
             }
             catch(Exception ex)
             {
