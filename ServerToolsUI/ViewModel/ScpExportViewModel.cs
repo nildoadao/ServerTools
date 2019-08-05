@@ -1,10 +1,12 @@
 ﻿using MaterialDesignThemes.Wpf;
+using ServerToolsIdrac.Common.Enums;
 using ServerToolsIdrac.Redfish.Scp;
-using ServerToolsUI.Model.Enums;
 using ServerToolsUI.Util;
 using ServerToolsUI.View;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -18,6 +20,25 @@ namespace ServerToolsUI.ViewModel
         public ScpExportViewModel()
         {
             ExportCommand = new RelayCommand(Export);
+            BackCommand = new RelayCommand(Back);
+        }
+
+        private bool Validate()
+        {
+            validationErrors.Clear();
+
+            if (string.IsNullOrEmpty(Host))
+            {
+                List<string> errors = new List<string>()
+                {
+                    "Informe o Host para export"
+                };
+                validationErrors["Host"] = errors;
+            }
+
+            RaiseErrorsChanged("Host");
+
+            return validationErrors.Count == 0;
         }
 
         private bool noExportCardVisible = true;
@@ -133,9 +154,16 @@ namespace ServerToolsUI.ViewModel
         }
 
         public RelayCommand ExportCommand { get; private set; }
-
+        public RelayCommand BackCommand { get; private set; }
+        private void Back(object parameter)
+        {
+            NavigationUtil.NotifyColleagues("Home", null);
+        }
         private async void Export(object parameter)
         {
+            if (!Validate())
+                return;
+
             var view = new CredentialsView()
             {
                 DataContext = new CredentialsViewModel()

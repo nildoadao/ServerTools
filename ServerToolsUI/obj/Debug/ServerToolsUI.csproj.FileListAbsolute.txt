@@ -37,3 +37,11 @@ D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\MaterialDesignColors.pdb
 D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\Newtonsoft.Json.dll
 D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\Newtonsoft.Json.xml
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\Syroot.KnownFolders.dll
+D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\Syroot.KnownFolders.xml
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ScpImportView.g.cs
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ScpImportView.baml
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ServersListView.g.cs
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ServersListView.baml
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\SettingsView.g.cs
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\SettingsView.baml

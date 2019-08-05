@@ -1,16 +1,18 @@
 ﻿using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
+using ServerToolsIdrac.Common.Enums;
 using ServerToolsIdrac.Redfish.Common;
 using ServerToolsIdrac.Redfish.Firmware;
 using ServerToolsIdrac.Redfish.Job;
 using ServerToolsIdrac.Redfish.Util;
 using ServerToolsUI.Model;
-using ServerToolsUI.Model.Enums;
 using ServerToolsUI.Util;
 using ServerToolsUI.View;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -28,7 +30,37 @@ namespace ServerToolsUI.ViewModel
             RemoveServerCommand = new RelayCommand(RemoveServer);
             OpenFolderCommand = new RelayCommand(OpenFolder);
             ClearJobsCommand = new RelayCommand(ClearJobs);
+            OpenServerListCommand = new RelayCommand(OpenServerList);
+            BackCommand = new RelayCommand(Back);
             Servers = new ObservableCollection<string>();
+        }
+
+        private bool Validate()
+        {
+            validationErrors.Clear();
+
+            if (string.IsNullOrEmpty(FirmwarePath))
+            {
+                List<string> errors = new List<string>()
+                {
+                    "Informe o Firmware a ser utilizado"
+                };
+                validationErrors["FirmwarePath"] = errors;               
+            }
+
+            if (Servers.Count == 0)
+            {
+                List<string> errors = new List<string>()
+                {
+                    "Adicione ao menos 1 servidor para Update"
+                };
+                validationErrors["Server"] = errors;
+            }
+
+            RaiseErrorsChanged("Server");
+            RaiseErrorsChanged("FirmwarePath");
+
+            return validationErrors.Count == 0;
         }
 
         private string firmwarePath;
@@ -161,6 +193,9 @@ namespace ServerToolsUI.ViewModel
         public RelayCommand RemoveServerCommand { get; private set; }
         public RelayCommand OpenFolderCommand { get; private set; }
         public RelayCommand ClearJobsCommand { get; private set; }
+        public RelayCommand OpenServerListCommand { get; private set; }
+        public RelayCommand BackCommand { get; private set; }
+
         private void AddServer(object parameter)
         {
             if (!string.IsNullOrEmpty(Server))
@@ -172,8 +207,41 @@ namespace ServerToolsUI.ViewModel
             Server = string.Empty;
         }
 
+        private void Back(object parameter)
+        {
+            NavigationUtil.NotifyColleagues("Home", null);
+        }
+
+        private async void OpenServerList(object parameter)
+        {
+            var view = new ServersListView()
+            {
+                DataContext = new ServersListViewModel()
+            };
+            try
+            {
+                var serverList = (List<string>)await DialogHost.Show(view, "MainHost");
+
+                if (!serverList.Any())
+                    return;
+
+                HasServers = true;
+                NoServerCardVisible = false;
+
+                foreach (string item in serverList)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                        Servers.Add(item);
+                }
+            }
+            catch { } // Dialog return an empty List
+        }
+
         private async void UpdateFirmware(object parameter)
         {
+            if (!Validate())
+                return;
+
             var view = new CredentialsView()
             {
                 DataContext = new CredentialsViewModel()
@@ -187,7 +255,6 @@ namespace ServerToolsUI.ViewModel
             foreach (string server in Servers)
             {
                 FirmwareAction firmware = new FirmwareAction(server, credentials);
-
                 try
                 {
                     string jobUri = await firmware.UpdateFirmwareAsync(FirmwarePath, ((FirmwareUpdateMode)SelectedMode).ToString());
@@ -197,7 +264,6 @@ namespace ServerToolsUI.ViewModel
                 {
                     Monitor.AddJob(server, "");
                 }
-
                 Monitor.Start();
             }
             HasJobs = Monitor.Jobs.Any();

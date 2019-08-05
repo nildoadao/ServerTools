@@ -15,7 +15,6 @@ namespace ServerToolsUI.Model
 {
     public class JobMonitor : INotifyPropertyChanged
     {
-
         public JobMonitor(NetworkCredential credentials, int refreshTime)
         {
             this.credentials = credentials;
@@ -27,9 +26,9 @@ namespace ServerToolsUI.Model
             timer.Tick += Timer_Tick;
         }
 
-        private DispatcherTimer timer;
+        private readonly DispatcherTimer timer;
         
-        private NetworkCredential credentials;
+        private readonly NetworkCredential credentials;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

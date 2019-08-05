@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewmodels="clr-namespace:ServerToolsUI.ViewModel"
         xmlns:local="clr-namespace:ServerToolsUI"
         mc:Ignorable="d"
         Title="Server Tools" Height="600" Width="1000"
@@ -11,10 +12,12 @@
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
-        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        DataContext="{DynamicResource MainViewModel}">
+    <Window.Resources>
+        <viewmodels:MainViewModel x:Key="MainViewModel"/>
+    </Window.Resources>
     <md:DialogHost Identifier="MainHost">
-        <ScrollViewer>
-            <Frame Name="MainFrame"/>
-        </ScrollViewer>
+        <Frame Content="{Binding CurrentView}" NavigationUIVisibility="Hidden"/>
     </md:DialogHost>
 </Window>

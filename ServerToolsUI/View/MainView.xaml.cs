@@ -24,7 +24,6 @@ namespace ServerToolsUI.View
         public MainView()
         {
             InitializeComponent();
-            MainFrame.Navigate(new HomeView());
         }
 
     }

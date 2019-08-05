@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerToolsUI.Model.Enums
+namespace ServerToolsIdrac.Common.Enums
 {
     public enum ScpExportMode
     {
-        Default = 0,
-        Clone = 1,
-        Replace = 2
+        Default,
+        Clone,
+        Replace
     }
 }

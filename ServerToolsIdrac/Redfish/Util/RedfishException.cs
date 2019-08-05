@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServerToolsIdrac.Redfish.Util
 {
+    [Serializable]
     public class RedfishException : Exception
     {
         public RedfishException(string message) : base (message) { }

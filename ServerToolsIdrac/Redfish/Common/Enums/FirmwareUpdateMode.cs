@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerToolsUI.Model.Enums
+namespace ServerToolsIdrac.Common.Enums
 {
     public enum FirmwareUpdateMode
     {
-        Now = 0,
-        NowAndReboot = 1,
-        NextReboot = 2
+        Now,
+        NowAndReboot,
+        NextReboot
     }
 }

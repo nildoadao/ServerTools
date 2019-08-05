@@ -26,11 +26,23 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock HorizontalAlignment="Left" 
-                   FontSize="28" Margin="15" 
-                   Style="{DynamicResource MaterialDesignTitleTextBlock}">
-            Exportar Arquivo SCP
-        </TextBlock>
+        <StackPanel Orientation="Horizontal">
+            <Button Margin="15"
+                    VerticalAlignment="Center"
+                    Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{Binding BackCommand}"
+                    materialDesign:HintAssist.Hint="Voltar">
+                <materialDesign:PackIcon Kind="ArrowLeftCircleOutline"
+                                         Width="auto"
+                                         Height="auto"/>
+            </Button>
+            <TextBlock HorizontalAlignment="Left" 
+                       VerticalAlignment="Center"
+                       FontSize="28" Margin="15" 
+                       Style="{DynamicResource MaterialDesignTitleTextBlock}">
+                Exportar Arquivo SCP
+            </TextBlock>
+        </StackPanel>
         <GroupBox Header="Dados do Export" 
                   Grid.Row="1" Margin="15"
                   Style="{DynamicResource MaterialDesignCardGroupBox}">

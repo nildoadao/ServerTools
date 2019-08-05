@@ -25,23 +25,5 @@ namespace ServerToolsUI.View
         {
             InitializeComponent();
         }
-
-        private void FirmwareUpdateButton_Click(object sender, RoutedEventArgs e)
-        {
-            var view = new FirmwareUpdateView()
-            {
-                DataContext = new FirmwareUpdateViewModel()
-            };
-            NavigationService.Navigate(view);
-        }
-
-        private void ScpExportButton_Click(object sender, RoutedEventArgs e)
-        {
-            var view = new ScpExportView()
-            {
-                DataContext = new ScpExportViewModel()
-            };
-            NavigationService.Navigate(view);
-        }
     }
 }

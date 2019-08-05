@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:viewmodels="clr-namespace:ServerToolsUI.ViewModel"
       xmlns:local="clr-namespace:ServerToolsUI"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
@@ -13,53 +14,72 @@
       TextElement.FontWeight="Medium"
       TextElement.FontSize="14"
       FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
-    <Grid>
+    <Page.Resources>
+        <viewmodels:HomeViewModel x:Key="HomeViewModel"/>
+    </Page.Resources>
+    <Grid DataContext="{Binding Source={StaticResource HomeViewModel}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Left" 
-                   FontSize="28" Margin="15" 
-                   Style="{DynamicResource MaterialDesignTitleTextBlock}">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock HorizontalAlignment="Left" 
+                       FontSize="28" Margin="15" 
+                       Style="{DynamicResource MaterialDesignTitleTextBlock}">
             Server Tools
-        </TextBlock>
+            </TextBlock>
+            <Button Margin="15"
+                    HorizontalAlignment="Right"
+                    Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{Binding SettingsCommand}">
+                <materialDesign:PackIcon Kind="SettingsOutline"
+                                         Height="auto"
+                                         Width="auto"/>
+            </Button>
+        </StackPanel>
         <GroupBox Grid.Row="1" Margin="15" Header="Funções com Redfish">
             <WrapPanel Margin="15">
                 <Button Name="FirmwareUpdateButton" 
                         Style="{DynamicResource MaterialDesignFlatButton}" 
                         Height="auto" 
-                        Width="auto" 
-                        Click="FirmwareUpdateButton_Click">
+                        Width="auto"
+                        Command="{Binding FirmwareUpdatePageCommand}">
                     <StackPanel Orientation="Vertical">
-                        <materialDesign:PackIcon Kind="BriefcaseDownload"
+                        <materialDesign:PackIcon Kind="Update"
                                                  Width="50"
                                                  Height="50"
                                                  Margin="5"
-                                                 VerticalAlignment="Center"/>
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"/>
                         <TextBlock Margin="5">Update de Firmware</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Name="ScpExportButton" 
                         Style="{DynamicResource MaterialDesignFlatButton}" 
-                        Height="auto" Width="auto" 
-                        Click="ScpExportButton_Click">
+                        Height="auto" Width="auto"
+                        Command="{Binding ScpExportPageCommand}">
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="ArrowUpBoldBox"
                                                  Width="50"
                                                  Height="50"
-                                                 Margin="5"/>
+                                                 Margin="5"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"/>
                         <TextBlock Margin="5">Exportar Arquivo SCP</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Style="{DynamicResource MaterialDesignFlatButton}" 
                         Height="auto" 
-                        Width="auto">
+                        Width="auto"
+                        Command="{Binding ScpImportPageCommand}">
                     <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="ArrowDownBoldBox"
                                                  Width="50"
                                                  Height="50"
-                                                 Margin="5"/>
+                                                 Margin="5"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"/>
                         <TextBlock Margin="5">Importar Arquivo SCP</TextBlock>
                     </StackPanel>
                 </Button>
@@ -69,13 +89,14 @@
             <WrapPanel Margin="15">
                 <Button Style="{DynamicResource MaterialDesignFlatButton}" 
                         Height="auto" 
-                        Width="auto" 
-                        Click="FirmwareUpdateButton_Click">
+                        Width="auto">
                     <StackPanel Orientation="Vertical">
-                        <materialDesign:PackIcon Kind="BriefcaseDownload"
+                        <materialDesign:PackIcon Kind="Update"
                                                  Width="50"
                                                  Height="50"
-                                                 Margin="5"/>
+                                                 Margin="5"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"/>
                         <TextBlock Margin="5">Update de Firmware</TextBlock>
                     </StackPanel>
                 </Button>

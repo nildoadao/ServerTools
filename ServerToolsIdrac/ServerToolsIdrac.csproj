@@ -49,6 +49,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Redfish\Common\Enums\FirmwareUpdateMode.cs" />
+    <Compile Include="Redfish\Common\Enums\ScpExportMode.cs" />
+    <Compile Include="Redfish\Common\Enums\ScpFileContent.cs" />
+    <Compile Include="Redfish\Common\Enums\ShutdownType.cs" />
     <Compile Include="Redfish\Common\IdracJob.cs" />
     <Compile Include="Redfish\Firmware\FirmwareAction.cs" />
     <Compile Include="Redfish\Job\JobAction.cs" />

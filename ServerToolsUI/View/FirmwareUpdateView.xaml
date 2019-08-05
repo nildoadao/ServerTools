@@ -14,9 +14,6 @@
       TextElement.FontWeight="Medium"
       TextElement.FontSize="14"
       FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
-    <Page.DataContext>
-        <Binding Path="FirmwareUpdateViewModel"/>
-    </Page.DataContext>
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </Page.Resources>
@@ -36,10 +33,23 @@
                       ResizeDirection="Columns"
                       Width="5">
         </GridSplitter>
-        <TextBlock HorizontalAlignment="Left" 
+        <StackPanel Orientation="Horizontal">
+            <Button Margin="15"
+                    VerticalAlignment="Center"
+                    Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{Binding BackCommand}"
+                    materialDesign:HintAssist.Hint="Voltar">
+                <materialDesign:PackIcon Kind="ArrowLeftCircleOutline"
+                                         Width="auto"
+                                         Height="auto"/>
+            </Button>
+            <TextBlock HorizontalAlignment="Left" 
+                       VerticalAlignment="Center"
                    FontSize="28" Margin="15" 
                    Style="{DynamicResource MaterialDesignTitleTextBlock}" 
                    Grid.ColumnSpan="3">Update de Firmware</TextBlock>
+        </StackPanel>
+
         <GroupBox Margin="15"
                   Grid.Row="1"
                   Grid.Column="1"
@@ -60,19 +70,14 @@
                                Margin="5" 
                                VerticalAlignment="Center" 
                                HorizontalAlignment="Right"/>
-                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal" 
+                            Grid.Column="1" 
+                            HorizontalAlignment="Left">
                     <TextBox Style="{DynamicResource MaterialDesignTextBox}" 
                                  Width="200" Margin="5" 
                                  materialDesign:HintAssist.Hint="Local do arquivo" 
-                                 VerticalAlignment="Center">
-                        <TextBox.Text >
-                            <Binding Path="FirmwarePath">
-                                <Binding.ValidationRules>
-                                    <validators:StringNotEmptyRule  ValidationStep="RawProposedValue"/>
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                                 VerticalAlignment="Center"
+                             Text="{Binding FirmwarePath, ValidatesOnNotifyDataErrors=True}"/>
                     <Button Style="{DynamicResource MaterialDesignFlatButton}" 
                                 Margin="5" 
                                 VerticalAlignment="Center"
@@ -130,10 +135,11 @@
                     <Button Style="{DynamicResource MaterialDesignFlatButton}" 
                             HorizontalAlignment="Left" 
                             VerticalAlignment="Center" 
-                            ToolTip="Adicionar CSV"
-                            Margin="5">
+                            ToolTip="Adicionar Lista"
+                            Margin="5"
+                            Command="{Binding OpenServerListCommand}">
                         <materialDesign:PackIcon 
-                            Kind="FileDocumentOutline"
+                            Kind="FormatListNumbered"
                             Width="auto"
                             Height="auto"/>
                     </Button>
@@ -161,7 +167,7 @@
                       CanUserDeleteRows="False" 
                       CanUserResizeColumns="False"
                       IsReadOnly="True" MaxHeight="400"
-                      ItemsSource="{Binding Servers}">
+                      ItemsSource="{Binding Servers, ValidatesOnNotifyDataErrors=True}">
                 <DataGrid.Columns>
                     <DataGridTextColumn 
                         FontSize="12"
@@ -173,7 +179,7 @@
                                     VerticalAlignment="Center"
                                     Style="{DynamicResource MaterialDesignFlatButton}"
                                     Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}, Path=DataContext.RemoveServerCommand}"
-                                    CommandParameter="{Binding ElementName=DeleteButton, Path=DataContext}">
+                                    CommandParameter="{Binding }">
                                     <materialDesign:PackIcon Kind="MinusCircle" 
                                                 Width="14" 
                                                 Height="14" 
