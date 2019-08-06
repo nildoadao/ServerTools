@@ -103,6 +103,7 @@
             </Grid>
         </GroupBox>
         <Button Name="ExportButton"
+                materialDesign:HintAssist.Hint="Iniciar Export"
                 Grid.Row="2"
                 Margin="15"
                 VerticalAlignment="Bottom"
@@ -111,7 +112,7 @@
         </Button>
         <materialDesign:Card Grid.Row="1"
                              Grid.Column="1"
-                             VerticalAlignment="Center"
+                             VerticalAlignment="Top"
                              Margin="15"
                              Visibility="{Binding Path=NoExportCardVisible, Converter={StaticResource BoolToVis}}">
             <TextBlock
@@ -122,7 +123,7 @@
         <materialDesign:Card Grid.Row="1"
                              Grid.Column="1"
                              Margin="15"
-                             VerticalAlignment="Center"
+                             VerticalAlignment="Top"
                              Visibility="{Binding Path=ExportRunning, Converter={StaticResource BoolToVis}}">
             <StackPanel Orientation="Vertical">
                 <TextBlock Margin="15">
@@ -138,14 +139,17 @@
                              Margin="15">
             <StackPanel Margin="15"
                         Orientation="Horizontal">
-                <materialDesign:PackIcon Margin="15">
+                <materialDesign:PackIcon Margin="15"
+                                         Height="auto"
+                                         Width="auto"
+                                         VerticalAlignment="Center">
                     <materialDesign:PackIcon.Style>
                         <Style TargetType="materialDesign:PackIcon">
-                            <Setter Property="Kind" Value="CheckCircle"/>
+                            <Setter Property="Kind" Value="EmoticonWink"/>
                             <Setter Property="Foreground" Value="Green"/>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding ExportFail}" Value="True">
-                                    <Setter Property="Kind" Value="CloseCircle"/>
+                                    <Setter Property="Kind" Value="EmoticonDead"/>
                                     <Setter Property="Foreground" Value="Red"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -153,7 +157,8 @@
                     </materialDesign:PackIcon.Style>
                 </materialDesign:PackIcon>
                 <TextBlock Text="{Binding ExportMessage}" 
-                           Margin="15"/>
+                           Margin="15"
+                           VerticalAlignment="Center"/>
             </StackPanel>
         </materialDesign:Card>
     </Grid>

@@ -21,85 +21,86 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock HorizontalAlignment="Left" 
-                       FontSize="28" Margin="15" 
-                       Style="{DynamicResource MaterialDesignTitleTextBlock}">
-            Server Tools
-            </TextBlock>
-            <Button Margin="15"
-                    HorizontalAlignment="Right"
-                    Style="{DynamicResource MaterialDesignFlatButton}"
-                    Command="{Binding SettingsCommand}">
-                <materialDesign:PackIcon Kind="SettingsOutline"
-                                         Height="auto"
-                                         Width="auto"/>
-            </Button>
-        </StackPanel>
-        <GroupBox Grid.Row="1" Margin="15" Header="Funções com Redfish">
+        <GroupBox Margin="15" Header="Funções com Redfish">
             <WrapPanel Margin="15">
-                <Button Name="FirmwareUpdateButton" 
+                <StackPanel Orientation="Vertical"
+                            Margin="5">
+                    <Button Name="FirmwareUpdateButton" 
                         Style="{DynamicResource MaterialDesignFlatButton}" 
                         Height="auto" 
                         Width="auto"
                         Command="{Binding FirmwareUpdatePageCommand}">
-                    <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="Update"
                                                  Width="50"
                                                  Height="50"
                                                  Margin="5"
                                                  VerticalAlignment="Center"
                                                  HorizontalAlignment="Center"/>
-                        <TextBlock Margin="5">Update de Firmware</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Name="ScpExportButton" 
+                    </Button>
+                    <TextBlock Margin="5"
+                               Style="{DynamicResource MaterialDesignBody1TextBlock}">
+                        Update de Firmware
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Vertical"
+                            Margin="5">
+                    <Button Name="ScpExportButton" 
                         Style="{DynamicResource MaterialDesignFlatButton}" 
                         Height="auto" Width="auto"
                         Command="{Binding ScpExportPageCommand}">
-                    <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="ArrowUpBoldBox"
                                                  Width="50"
                                                  Height="50"
                                                  Margin="5"
                                                  VerticalAlignment="Center"
                                                  HorizontalAlignment="Center"/>
-                        <TextBlock Margin="5">Exportar Arquivo SCP</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                    </Button>
+                    <TextBlock Margin="5"
+                               Style="{DynamicResource MaterialDesignBody1TextBlock}">
+                        Exportar Arquivo SCP
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Vertical"
+                            Margin="5">
+                    <Button Style="{DynamicResource MaterialDesignFlatButton}" 
                         Height="auto" 
                         Width="auto"
                         Command="{Binding ScpImportPageCommand}">
-                    <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="ArrowDownBoldBox"
                                                  Width="50"
                                                  Height="50"
                                                  Margin="5"
                                                  VerticalAlignment="Center"
                                                  HorizontalAlignment="Center"/>
-                        <TextBlock Margin="5">Importar Arquivo SCP</TextBlock>
-                    </StackPanel>
-                </Button>
+                    </Button>
+                    <TextBlock Margin="5"
+                               Style="{DynamicResource MaterialDesignBody1TextBlock}">
+                        Importar Arquivo SCP
+                    </TextBlock>
+                </StackPanel>
             </WrapPanel>
         </GroupBox>
-        <GroupBox Grid.Row="2" Margin="15" Header="Funções com Racadm">
+        <GroupBox Grid.Row="1" Margin="15" Header="Funções com Racadm">
             <WrapPanel Margin="15">
-                <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                <StackPanel Orientation="Vertical"
+                            Margin="5">
+                    <Button Style="{DynamicResource MaterialDesignFlatButton}" 
                         Height="auto" 
                         Width="auto">
-                    <StackPanel Orientation="Vertical">
                         <materialDesign:PackIcon Kind="Update"
                                                  Width="50"
                                                  Height="50"
                                                  Margin="5"
                                                  VerticalAlignment="Center"
                                                  HorizontalAlignment="Center"/>
-                        <TextBlock Margin="5">Update de Firmware</TextBlock>
-                    </StackPanel>
-                </Button>
+
+                    </Button>
+                    <TextBlock Margin="5"
+                               Style="{DynamicResource MaterialDesignBody1TextBlock}">
+                        Update de Firmware
+                    </TextBlock>
+                </StackPanel>
             </WrapPanel>
         </GroupBox>
     </Grid>

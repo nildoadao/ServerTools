@@ -79,9 +79,10 @@
                              VerticalAlignment="Center"
                              Text="{Binding FilePath, ValidatesOnNotifyDataErrors=True}"/>
                     <Button Style="{DynamicResource MaterialDesignFlatButton}" 
-                                Margin="5" 
-                                VerticalAlignment="Center"
-                                Command="{Binding OpenFolderCommand}">
+                            Margin="5" 
+                            VerticalAlignment="Center"
+                            Command="{Binding OpenFolderCommand}"
+                            materialDesign:HintAssist.Hint="Selecionar Firmware">
                         <materialDesign:PackIcon Kind="FileFindOutline" 
                                                  Width="auto" 
                                                  Height="auto"/>
@@ -219,7 +220,8 @@
         <Button Margin="15"
                 Grid.Row="3"
                 VerticalAlignment="Bottom"
-                Command="{Binding ImportFileCommand}">
+                Command="{Binding ImportFileCommand}"
+                materialDesign:HintAssist.Hint="Iniciar Import">
             Importar
         </Button>
         <materialDesign:Card
@@ -247,7 +249,8 @@
                         Jobs em Execução
                     </TextBlock>
                     <Button Margin="15"
-                            Command="{Binding ClearJobsCommand}">
+                            Command="{Binding ClearJobsCommand}"
+                            materialDesign:HintAssist.Hint="Limpar Jobs">
                         Limpar Jobs
                     </Button>
                 </StackPanel>
@@ -255,7 +258,7 @@
                           Grid.Row="2"
                           Grid.Column="1"
                           Grid.RowSpan="2"
-                          MaxHeight="500" 
+                          MaxHeight="300" 
                           Margin="15" 
                           HorizontalContentAlignment="Center"
                           AutoGenerateColumns="False"

@@ -18,6 +18,7 @@ namespace ServerToolsUI.ViewModel
             NavigationUtil.Register("FirmwareUpdate", GoToUpdateFirmware);
             NavigationUtil.Register("ScpExport", GoToScpExport);
             NavigationUtil.Register("ScpImport", GoToScpImport);
+            SettingsCommand = new RelayCommand(Settings);
         }
 
         private object currentView;
@@ -33,6 +34,8 @@ namespace ServerToolsUI.ViewModel
                 }
             }
         }
+
+        public RelayCommand SettingsCommand { get; private set; }
 
         private void GoToHome(object parameter)
         {
@@ -52,6 +55,15 @@ namespace ServerToolsUI.ViewModel
         private void GoToScpImport(object parameter)
         {
             CurrentView = new ScpImportViewModel();
+        }
+
+        private async void Settings(object parameter)
+        {
+            var view = new SettingsView()
+            {
+                DataContext = new SettingsViewModel()
+            };
+            await DialogHost.Show(view);
         }
     }
 }

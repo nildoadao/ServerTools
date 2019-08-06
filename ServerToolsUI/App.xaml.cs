@@ -40,14 +40,9 @@ namespace ServerToolsUI
             }
 
             if (theme == BaseTheme.Dark)
-            {
                 Resources.MergedDictionaries.Insert(0, new ResourceDictionary { Source = new Uri(darkSource) });
-            }
-            else
-            {
-                //This handles both Light and Inherit
+            else //This handles both Light and Inherit
                 Resources.MergedDictionaries.Insert(0, new ResourceDictionary { Source = new Uri(lightSource) });
-            }
         }
     }
 }

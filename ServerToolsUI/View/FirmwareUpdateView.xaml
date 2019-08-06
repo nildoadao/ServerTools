@@ -79,10 +79,11 @@
                                  VerticalAlignment="Center"
                              Text="{Binding FirmwarePath, ValidatesOnNotifyDataErrors=True}"/>
                     <Button Style="{DynamicResource MaterialDesignFlatButton}" 
-                                Margin="5" 
-                                VerticalAlignment="Center"
-                                Name="OpenFolderButton" 
-                                Command="{Binding OpenFolderCommand}">
+                            Margin="5" 
+                            VerticalAlignment="Center"
+                            Name="OpenFolderButton" 
+                            Command="{Binding OpenFolderCommand}"
+                            materialDesign:HintAssist.Hint="Selecionar Arquivo">
                         <materialDesign:PackIcon Kind="FileFindOutline" 
                                                  Width="auto" 
                                                  Height="auto"/>
@@ -124,12 +125,13 @@
                               Text="{Binding Server}">
                     </TextBox>
                     <Button Name="AddServerButton" 
-                                Style="{DynamicResource MaterialDesignFloatingActionButton}" 
-                                Width="40" Height="40" 
-                                HorizontalAlignment="Left" 
-                                IsDefault="True"
-                                VerticalAlignment="Center" Margin="5"
-                                Command="{Binding AddServerCommand}">
+                            Style="{DynamicResource MaterialDesignFloatingActionButton}" 
+                            Width="40" Height="40" 
+                            HorizontalAlignment="Left" 
+                            IsDefault="True"
+                            VerticalAlignment="Center" Margin="5"
+                            Command="{Binding AddServerCommand}"
+                            materialDesign:HintAssist.Hint="Adicionar Servidor">
                         <materialDesign:PackIcon Kind="Plus" Width="auto" Height="auto"/>
                     </Button>
                     <Button Style="{DynamicResource MaterialDesignFlatButton}" 
@@ -199,6 +201,7 @@
                 Margin="15"
                 Grid.Row="3"
                 VerticalAlignment="Bottom"
+                materialDesign:HintAssist.Hint="Iniciar Update"
                 Command="{Binding UpdateFirmwareCommand}">
             Atualizar
         </Button>
@@ -227,7 +230,8 @@
                         Jobs em Execução
                     </TextBlock>
                     <Button Margin="15"
-                            Command="{Binding ClearJobsCommand}">
+                            Command="{Binding ClearJobsCommand}"
+                            materialDesign:HintAssist.Hint="Limpar Jobs">
                         Limpar Jobs
                     </Button>
                 </StackPanel>
@@ -235,7 +239,7 @@
                           Grid.Row="2"
                           Grid.Column="1"
                           Grid.RowSpan="2"
-                          MaxHeight="500" 
+                          MaxHeight="300" 
                           Margin="15" 
                           HorizontalContentAlignment="Center"
                           AutoGenerateColumns="False"

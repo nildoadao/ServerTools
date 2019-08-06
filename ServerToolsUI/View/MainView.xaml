@@ -7,17 +7,81 @@
         xmlns:viewmodels="clr-namespace:ServerToolsUI.ViewModel"
         xmlns:local="clr-namespace:ServerToolsUI"
         mc:Ignorable="d"
-        Title="Server Tools" Height="600" Width="1000"
+        Title="Server Tools" Height="750" Width="1000"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
+        BorderBrush="Transparent"
+        BorderThickness="0"
+        WindowStyle="None"
         TextElement.FontSize="14"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         DataContext="{DynamicResource MainViewModel}">
     <Window.Resources>
         <viewmodels:MainViewModel x:Key="MainViewModel"/>
     </Window.Resources>
-    <md:DialogHost Identifier="MainHost">
-        <Frame Content="{Binding CurrentView}" NavigationUIVisibility="Hidden"/>
-    </md:DialogHost>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <md:ColorZone
+            MouseDown="ColorZone_MouseDown"
+            Mode="PrimaryMid">
+            <DockPanel>
+                <Button
+                    Style="{DynamicResource MaterialDesignToolForegroundButton}"
+                    DockPanel.Dock="Right"
+                    Name="CloseButton"
+                    Click="CloseButton_Click"
+                    Margin="5">
+                    <md:PackIcon
+                        Kind="WindowClose"
+                        Height="auto"
+                        Width="auto"/>
+                </Button>
+                <Button
+                    Style="{DynamicResource MaterialDesignToolForegroundButton}"
+                    DockPanel.Dock="Right"
+                    Name="MaximizeButton"
+                    Click="MaximizeButton_Click"
+                    Margin="5">
+                    <md:PackIcon
+                        Kind="WindowMaximize"
+                        Height="auto"
+                        Width="auto"/>
+                </Button>
+                <Button
+                    Style="{DynamicResource MaterialDesignToolForegroundButton}"
+                    DockPanel.Dock="Right"
+                    Name="MinimizeButton"
+                    Click="MinimizeButton_Click"
+                    Margin="5">
+                    <md:PackIcon
+                        Kind="WindowMinimize"
+                        Height="auto"
+                        Width="auto"/>
+                </Button>
+                <Button Margin="5"
+                        HorizontalAlignment="Right"
+                        DockPanel.Dock="Right"
+                        Style="{DynamicResource MaterialDesignToolForegroundButton}"
+                        Command="{Binding SettingsCommand}">
+                    <md:PackIcon Kind="SettingsOutline"
+                                         Height="auto"
+                                         Width="auto"/>
+                </Button>
+                <TextBlock HorizontalAlignment="Right" 
+                           DockPanel.Dock="Right"
+                           VerticalAlignment="Center"
+                           Margin="5"
+                       Style="{DynamicResource MaterialDesignTitleTextBlock}">
+                    Server Tools 
+                </TextBlock>
+            </DockPanel>
+        </md:ColorZone>
+        <md:DialogHost Identifier="MainHost" Grid.Row="1">
+            <Frame Content="{Binding CurrentView}" NavigationUIVisibility="Hidden"/>
+        </md:DialogHost>
+    </Grid>
 </Window>
