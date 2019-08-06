@@ -1,4 +1,5 @@
-﻿using ServerToolsIdrac.Redfish.Common;
+﻿using ServerToolsIdrac.Redfish.Chassis;
+using ServerToolsIdrac.Redfish.Common;
 using ServerToolsIdrac.Redfish.Job;
 using System;
 using System.Collections.Generic;
@@ -119,6 +120,12 @@ namespace ServerToolsUI.Model
                     {
                         if (job.JobStatus.Contains("Failed") || job.JobStatus.Contains("Completed"))
                             continue;
+
+                        if (string.IsNullOrEmpty(job.SerialNumber))
+                        {
+                            ChassisAction chassisAction = new ChassisAction(job.Server, credentials);
+                            job.SerialNumber = await chassisAction.GetServiceTagAsync();
+                        }
 
                         JobAction action = new JobAction(job.Server, credentials);
                         IdracJob idracJob = await action.GetJobAsync(job.JobUri);

@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Redfish\Chassis\ChassisAction.cs" />
     <Compile Include="Redfish\Common\Enums\FirmwareUpdateMode.cs" />
     <Compile Include="Redfish\Common\Enums\ScpExportMode.cs" />
     <Compile Include="Redfish\Common\Enums\ScpFileContent.cs" />
@@ -62,7 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Racadm\" />
-    <Folder Include="Redfish\Chassis\" />
     <Folder Include="Redfish\Storage\" />
   </ItemGroup>
   <ItemGroup>

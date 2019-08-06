@@ -35,6 +35,34 @@ namespace ServerToolsUI.ViewModel
             }
         }
 
+        private bool rightDrawerVisible = false;
+        public bool RightDrawerVisible
+        {
+            get => rightDrawerVisible;
+            set
+            {
+                if(value != rightDrawerVisible)
+                {
+                    rightDrawerVisible = value;
+                    NotifyPropertyChanged("RightDrawerVisible");
+                }
+            }
+        }
+
+        private object rightDrawerContent;
+        public object RightDrawerContent
+        {
+            get => rightDrawerContent;
+            set
+            {
+                if(value != rightDrawerContent)
+                {
+                    rightDrawerContent = value;
+                    NotifyPropertyChanged("RightDrawerContent");
+                }
+            }
+        }
+
         public RelayCommand SettingsCommand { get; private set; }
 
         private void GoToHome(object parameter)
@@ -57,13 +85,13 @@ namespace ServerToolsUI.ViewModel
             CurrentView = new ScpImportViewModel();
         }
 
-        private async void Settings(object parameter)
+        private void Settings(object parameter)
         {
-            var view = new SettingsView()
+            RightDrawerContent = new SettingsView()
             {
                 DataContext = new SettingsViewModel()
             };
-            await DialogHost.Show(view);
+            RightDrawerVisible = true;
         }
     }
 }

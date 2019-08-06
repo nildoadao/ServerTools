@@ -32,11 +32,5 @@
                           IsChecked="{Binding Dark}"
                           Command="{Binding SetThemeCommand}"/>
         </StackPanel>
-        <Button Grid.Row="2"
-                Margin="15"
-                Style="{DynamicResource MaterialDesignFlatButton}"
-                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-            OK
-        </Button>
     </Grid>
 </UserControl>
