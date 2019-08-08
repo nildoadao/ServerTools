@@ -32,9 +32,6 @@ namespace ServerToolsIdrac.Redfish.Actions
 
         public async Task<Job> GetJobAsync(string jobId)
         {
-            if (!await ConnectionUtil.CheckConnectionAsync(host))
-                throw new Exception(string.Format("Server {0} unreachable", host));
-
             var request = new RestRequest(JobStatus + jobId, Method.GET);
             var response = await client.ExecuteTaskAsync(request);
 

@@ -194,7 +194,7 @@ namespace ServerToolsUI.ViewModel
                 ExportFinished = true;
                 NoExportCardVisible = true;
                 ExportFail = false;
-                ExportMessage = string.Format("Export executado com sucesso !, salvo em {0}",
+                ExportMessage = string.Format("Export executado com sucesso, salvo em {0}",
                     Path.Combine(downloadsFolder, fileName));
             }
             catch(Exception ex)

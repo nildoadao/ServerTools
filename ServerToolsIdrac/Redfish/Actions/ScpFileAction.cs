@@ -23,6 +23,12 @@ namespace ServerToolsIdrac.Redfish.Actions
         private IRestClient client;
         private string host;
         private NetworkCredential credentials;
+
+        /// <summary>
+        /// Creates a new SCP file action
+        /// </summary>
+        /// <param name="host">Host to perform SCP actions</param>
+        /// <param name="credentials">Idrac credentials</param>
         public ScpFileAction(string host, NetworkCredential credentials)
         {
             this.host = host;
@@ -33,15 +39,29 @@ namespace ServerToolsIdrac.Redfish.Actions
             client.RemoteCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
         }
 
+        /// <summary>
+        /// Exports an SCP file
+        /// </summary>
+        /// <param name="target">SCP target</param>
+        /// <param name="exportUse">Scp use strategy</param>
+        /// <returns></returns>
         public async Task<string> ExportScpFileAsync(string target, string exportUse)
         {
             if (!await ConnectionUtil.CheckConnectionAsync(host))
-                throw new Exception(string.Format("servidor {0} inacessivel", host));
-          
+                throw new Exception(string.Format("Server {0} unreachable", host));
+
             string jobUri = await CreateExportJobAsync(target, exportUse);
             return await GetFileContentAsync(jobUri);   
         }
 
+        /// <summary>
+        /// Performs an SCP File Import
+        /// </summary>
+        /// <param name="path">Local SCP file path</param>
+        /// <param name="target">SCP Target</param>
+        /// <param name="shutdownType">Shutdown strategy</param>
+        /// <param name="powerStatus">Host power status</param>
+        /// <returns></returns>
         public async Task<string> ImportScpFileAsync(string path, string target, string shutdownType, string powerStatus)
         {
             if (!await ConnectionUtil.CheckConnectionAsync(host))
@@ -62,6 +82,14 @@ namespace ServerToolsIdrac.Redfish.Actions
                 .FirstOrDefault().ToString();
         }
 
+        /// <summary>
+        /// Build the SCP Import Request
+        /// </summary>
+        /// <param name="path">SCP File path</param>
+        /// <param name="target">SCP Import targer</param>
+        /// <param name="shutdownType">Shutdown strategy</param>
+        /// <param name="powerStatus">Host current power status</param>
+        /// <returns></returns>
         private object BuildRequestBody(string path, string target, string shutdownType, string powerStatus)
         {
             string file = File.ReadAllText(path);
@@ -77,6 +105,11 @@ namespace ServerToolsIdrac.Redfish.Actions
             };
         }
 
+        /// <summary>
+        /// Returns the SCP File Content
+        /// </summary>
+        /// <param name="jobUri">Scp Task Uri</param>
+        /// <returns>File Text</returns>
         private async Task<string> GetFileContentAsync(string jobUri)
         {
             var request = new RestRequest(jobUri);
@@ -88,23 +121,7 @@ namespace ServerToolsIdrac.Redfish.Actions
 
             TaskAction task = new TaskAction(host, credentials);
             string jobId = await task.GetTaskIdAsync(jobUri);
-            JobAction action = new JobAction(host, credentials);
-            DateTime start = DateTime.Now;
-
-            while (true)
-            {
-                Job job = await action.GetJobAsync(jobId);
-
-                if (job.JobState.Contains("Completed"))
-                    break;
-
-                if (job.JobState.Contains("Failed"))
-                    throw new RedfishException(string.Format("{0} Has failed", jobId));
-
-                if (DateTime.Now > start.AddSeconds(JobAction.JobTimeout))
-                    throw new TimeoutException(string.Format("{0} Time exceeded", jobId));
-            }
-
+            await WaitJobAsync(jobId);
             response = await client.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)
@@ -112,6 +129,34 @@ namespace ServerToolsIdrac.Redfish.Actions
                     response.StatusCode));
 
             return response.Content;
+        }
+
+        /// <summary>
+        /// Waits until the Job is completed
+        /// </summary>
+        /// <param name="jobId">Job Id for watch</param>
+        /// <returns>True when the Job is finished</returns>
+        private async Task<bool> WaitJobAsync(string jobId)
+        {
+            JobAction action = new JobAction(host, credentials);
+            DateTime start = DateTime.Now;
+
+            Job job = new Job()
+            {
+                JobState = ""
+            };
+
+            while (!job.JobState.Equals("Completed"))
+            {
+                job = await action.GetJobAsync(jobId);
+
+                if (job.JobState.Contains("Failed"))
+                    throw new RedfishException(string.Format("{0} Has failed", jobId));
+
+                if (DateTime.Now > start.AddSeconds(JobAction.JobTimeout))
+                    throw new TimeoutException(string.Format("{0} Time exceeded", jobId));
+            }
+            return true;
         }
 
         private async Task<string> CreateExportJobAsync(string target, string exportUse)

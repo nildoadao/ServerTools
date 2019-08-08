@@ -123,13 +123,13 @@ namespace ServerToolsUI.Model
                         if (job.JobStatus.Contains("Failed") || job.JobStatus.Contains("Completed"))
                             continue;
 
-                        if (string.IsNullOrEmpty(job.SerialNumber))
+                        if (job.SerialNumber.Equals("Unknow"))
                         {
                             ChassisAction chassisAction = new ChassisAction(job.Server, credentials);
                             job.SerialNumber = await chassisAction.GetServiceTagAsync();
                         }
 
-                        if (string.IsNullOrEmpty(job.JobId))
+                        if (job.JobId.Equals("Unknow"))
                         {
                             TaskAction taskAction = new TaskAction(job.Server, credentials);
                             job.JobId = await taskAction.GetTaskIdAsync(job.JobUri);
