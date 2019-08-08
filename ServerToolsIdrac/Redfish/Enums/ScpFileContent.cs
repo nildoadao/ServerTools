@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerToolsIdrac.Common.Enums
+namespace ServerToolsIdrac.Redfish.Enums
 {
     public enum ScpFileContent
     {

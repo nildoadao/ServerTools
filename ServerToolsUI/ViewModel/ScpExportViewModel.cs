@@ -1,6 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
-using ServerToolsIdrac.Common.Enums;
-using ServerToolsIdrac.Redfish.Scp;
+using ServerToolsIdrac.Redfish.Actions;
+using ServerToolsIdrac.Redfish.Enums;
 using ServerToolsUI.Util;
 using ServerToolsUI.View;
 using System;

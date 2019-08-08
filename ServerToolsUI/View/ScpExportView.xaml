@@ -145,11 +145,11 @@
                                          VerticalAlignment="Center">
                     <materialDesign:PackIcon.Style>
                         <Style TargetType="materialDesign:PackIcon">
-                            <Setter Property="Kind" Value="EmoticonWink"/>
+                            <Setter Property="Kind" Value="CheckCircle"/>
                             <Setter Property="Foreground" Value="Green"/>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding ExportFail}" Value="True">
-                                    <Setter Property="Kind" Value="EmoticonDead"/>
+                                    <Setter Property="Kind" Value="CloseCircle"/>
                                     <Setter Property="Foreground" Value="Red"/>
                                 </DataTrigger>
                             </Style.Triggers>

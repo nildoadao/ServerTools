@@ -1,9 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
-using ServerToolsIdrac.Common.Enums;
-using ServerToolsIdrac.Redfish.Common;
-using ServerToolsIdrac.Redfish.Firmware;
-using ServerToolsIdrac.Redfish.Job;
+using ServerToolsIdrac.Redfish.Actions;
+using ServerToolsIdrac.Redfish.Enums;
 using ServerToolsIdrac.Redfish.Util;
 using ServerToolsUI.Model;
 using ServerToolsUI.Util;

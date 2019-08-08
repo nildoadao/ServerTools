@@ -6,9 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerToolsIdrac.Redfish.Common
+namespace ServerToolsIdrac.Redfish.Models
 {
-    public class IdracJob : INotifyPropertyChanged
+    public class Job : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

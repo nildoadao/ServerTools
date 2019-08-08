@@ -9,7 +9,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerToolsIdrac.Redfish.Chassis
+namespace ServerToolsIdrac.Redfish.Actions
 {
     public class ChassisAction
     {
@@ -30,8 +30,8 @@ namespace ServerToolsIdrac.Redfish.Chassis
 
         public async Task<string> GetServiceTagAsync()
         {
-            if(!await ConnectionUtil.CheckConnectionAsync(host))
-                throw new Exception(string.Format("Servidor {0} inacessivel", host));
+            if (!await ConnectionUtil.CheckConnectionAsync(host))
+                throw new Exception(string.Format("Server {0} unreachable", host));
 
             var request = new RestRequest(ChassisRoot);
             var response = await client.ExecuteTaskAsync(request);

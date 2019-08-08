@@ -1,6 +1,5 @@
-﻿using ServerToolsIdrac.Redfish.Chassis;
-using ServerToolsIdrac.Redfish.Common;
-using ServerToolsIdrac.Redfish.Job;
+﻿using ServerToolsIdrac.Redfish.Actions;
+using ServerToolsIdrac.Redfish.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -70,6 +69,7 @@ namespace ServerToolsUI.Model
         {
             Jobs.Add(new JobsDataGridInfo()
             {
+                SerialNumber = "Unknow",
                 JobId = "Unknow",
                 JobName = "Unknow",
                 JobMessage = "Unknow",
@@ -107,7 +107,9 @@ namespace ServerToolsUI.Model
 
         private async void Timer_Tick(object sender, EventArgs e)
         {
+            timer.Stop();
             await UpdateJobsAsync();
+            timer.Start();
         }
 
         private async Task UpdateJobsAsync()
@@ -127,8 +129,14 @@ namespace ServerToolsUI.Model
                             job.SerialNumber = await chassisAction.GetServiceTagAsync();
                         }
 
+                        if (string.IsNullOrEmpty(job.JobId))
+                        {
+                            TaskAction taskAction = new TaskAction(job.Server, credentials);
+                            job.JobId = await taskAction.GetTaskIdAsync(job.JobUri);
+                        }
+
                         JobAction action = new JobAction(job.Server, credentials);
-                        IdracJob idracJob = await action.GetJobAsync(job.JobUri);
+                        Job idracJob = await action.GetJobAsync(job.JobId);
                         job.JobName = idracJob.Name;
                         job.JobId = idracJob.Id;
                         job.JobMessage = idracJob.Message;

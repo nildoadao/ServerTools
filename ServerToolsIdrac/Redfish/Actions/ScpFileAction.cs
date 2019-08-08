@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using RestSharp.Authenticators;
+using ServerToolsIdrac.Redfish.Models;
 using ServerToolsIdrac.Redfish.Util;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerToolsIdrac.Redfish.Scp
+namespace ServerToolsIdrac.Redfish.Actions
 {
     public class ScpFileAction
     {
@@ -21,10 +22,11 @@ namespace ServerToolsIdrac.Redfish.Scp
 
         private IRestClient client;
         private string host;
-
+        private NetworkCredential credentials;
         public ScpFileAction(string host, NetworkCredential credentials)
         {
             this.host = host;
+            this.credentials = credentials;
             client = new RestClient(string.Format("https://{0}", host));
             client.Authenticator = new NtlmAuthenticator(credentials);
             // Ignore SSL Certificate
@@ -43,7 +45,7 @@ namespace ServerToolsIdrac.Redfish.Scp
         public async Task<string> ImportScpFileAsync(string path, string target, string shutdownType, string powerStatus)
         {
             if (!await ConnectionUtil.CheckConnectionAsync(host))
-                throw new Exception(string.Format("Servidor {0} inacessivel", host));
+                throw new Exception(string.Format("Server {0} unreachable", host));
 
             var request = new RestRequest(ImportSystemConfiguration, Method.POST, DataFormat.Json);
             var body = BuildRequestBody(path, target, shutdownType, powerStatus);
@@ -81,7 +83,32 @@ namespace ServerToolsIdrac.Redfish.Scp
             var response = await client.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)
-                throw new RedfishException(string.Format("Fail to retrive SCP File, Error Code {0}", 
+                throw new RedfishException(string.Format("Fail to retrive SCP File, Error Code {0}",
+                    response.StatusCode));
+
+            TaskAction task = new TaskAction(host, credentials);
+            string jobId = await task.GetTaskIdAsync(jobUri);
+            JobAction action = new JobAction(host, credentials);
+            DateTime start = DateTime.Now;
+
+            while (true)
+            {
+                Job job = await action.GetJobAsync(jobId);
+
+                if (job.JobState.Contains("Completed"))
+                    break;
+
+                if (job.JobState.Contains("Failed"))
+                    throw new RedfishException(string.Format("{0} Has failed", jobId));
+
+                if (DateTime.Now > start.AddSeconds(JobAction.JobTimeout))
+                    throw new TimeoutException(string.Format("{0} Time exceeded", jobId));
+            }
+
+            response = await client.ExecuteTaskAsync(request);
+
+            if (!response.IsSuccessful)
+                throw new RedfishException(string.Format("Fail to retrive SCP File, Error Code {0}",
                     response.StatusCode));
 
             return response.Content;

@@ -1,7 +1,5 @@
 ﻿using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
-using ServerToolsIdrac.Redfish.Common;
-using ServerToolsIdrac.Redfish.Firmware;
 using ServerToolsIdrac.Redfish.Util;
 using ServerToolsUI.Model;
 using ServerToolsUI.ViewModel;

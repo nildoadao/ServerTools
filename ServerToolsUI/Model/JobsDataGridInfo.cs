@@ -1,5 +1,4 @@
-﻿using ServerToolsIdrac.Redfish.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;

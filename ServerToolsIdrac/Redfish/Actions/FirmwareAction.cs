@@ -1,6 +1,5 @@
 ﻿using RestSharp;
 using RestSharp.Authenticators;
-using ServerToolsIdrac.Redfish.Common;
 using ServerToolsIdrac.Redfish.Util;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerToolsIdrac.Redfish.Firmware
+namespace ServerToolsIdrac.Redfish.Actions
 {
     public class FirmwareAction
     {
@@ -81,7 +80,7 @@ namespace ServerToolsIdrac.Redfish.Firmware
         public async Task<string> UpdateFirmwareAsync(string path, string option)
         {
             if (!await ConnectionUtil.CheckConnectionAsync(host))
-                throw new Exception(string.Format("Servidor {0} inacessivel", host));
+                throw new Exception(string.Format("Server {0} unreachable", host));
 
             string location = await UploadFileAsync(path);
 

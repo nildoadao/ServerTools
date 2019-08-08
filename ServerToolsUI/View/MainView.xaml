@@ -12,99 +12,38 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
-        BorderBrush="Transparent"
         BorderThickness="0"
-        WindowStyle="None"
+        WindowStyle="SingleBorderWindow"
         TextElement.FontSize="14"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         DataContext="{DynamicResource MainViewModel}">
     <Window.Resources>
         <viewmodels:MainViewModel x:Key="MainViewModel"/>
     </Window.Resources>
-    <WindowChrome.WindowChrome>
-        <WindowChrome
-            x:Name="chrome"
-            CaptionHeight="0"
-            CornerRadius="0"
-            GlassFrameThickness="10"
-            ResizeBorderThickness="6"
-            UseAeroCaptionButtons="False" />
-    </WindowChrome.WindowChrome>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <md:ColorZone
-            MouseDown="ColorZone_MouseDown"
-            Mode="PrimaryMid">
-            <DockPanel>
-                <Button
-                    Style="{DynamicResource MaterialDesignToolForegroundButton}"
+        <DockPanel>
+            <Button HorizontalAlignment="Right"
                     DockPanel.Dock="Right"
-                    Name="CloseButton"
-                    Click="CloseButton_Click"
-                    Margin="5">
-                    <md:PackIcon
-                        Kind="WindowClose"
-                        Height="20"
-                        Width="20"/>
-                </Button>
-                <Button
+                    Margin="0,0,5,0"
                     Style="{DynamicResource MaterialDesignToolForegroundButton}"
-                    DockPanel.Dock="Right"
-                    Name="MaximizeButton"
-                    Click="MaximizeButton_Click"
-                    Margin="5">
-                    <md:PackIcon
-                        Height="20"
-                        Width="20">
-                        <md:PackIcon.Style>
-                            <Style TargetType="md:PackIcon">
-                                <Setter Property="Kind" Value="WindowMaximize"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ElementName=MainWindow, Path=WindowState}" Value="Maximized">
-                                        <Setter Property="Kind" Value="WindowRestore"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </md:PackIcon.Style>
-                    </md:PackIcon>
-                </Button>
-                <Button
-                    Style="{DynamicResource MaterialDesignToolForegroundButton}"
-                    DockPanel.Dock="Right"
-                    Name="MinimizeButton"
-                    Click="MinimizeButton_Click"
-                    Margin="5">
-                    <md:PackIcon
-                        Kind="WindowMinimize"
-                        Height="20"
-                        Width="20"/>
-                </Button>
-                <Button Margin="5"
-                        HorizontalAlignment="Right"
-                        DockPanel.Dock="Right"
-                        Style="{DynamicResource MaterialDesignToolForegroundButton}"
-                        Command="{Binding SettingsCommand}">
-                    <md:PackIcon Kind="SettingsOutline"
+                    Command="{Binding SettingsCommand}"
+                    ToolTip="Configurações">
+                <md:PackIcon Kind="SettingsOutline"
                                          Height="20"
                                          Width="20"/>
-                </Button>
-                <TextBlock HorizontalAlignment="Left" 
-                           DockPanel.Dock="Left"
-                           VerticalAlignment="Center"
-                           Margin="15"
-                       Style="{DynamicResource MaterialDesignBody1TextBlock}">
-                    Server Tools 
-                </TextBlock>
-            </DockPanel>
-        </md:ColorZone>
-        <md:DialogHost Identifier="MainHost" Grid.Row="1">
-            <Frame Content="{Binding CurrentView}" NavigationUIVisibility="Hidden"/>
+            </Button>
+        </DockPanel>
+        <md:DialogHost Identifier="MainHost" Grid.Row="1" Grid.ColumnSpan="2">
+            <Frame Content="{Binding CurrentView}" 
+                   NavigationUIVisibility="Hidden"/>
         </md:DialogHost>
         <md:DrawerHost IsRightDrawerOpen="{Binding RightDrawerVisible}"
-                       Grid.Row="1">
+                       Grid.Row="1" 
+                       Grid.ColumnSpan="2">
             <md:DrawerHost.RightDrawerContent>
                 <DockPanel MinWidth="250">
                     <ContentControl

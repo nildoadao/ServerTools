@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerToolsIdrac.Common.Enums
+namespace ServerToolsIdrac.Redfish.Enums
 {
-    public enum ShutdownType
+    public enum FirmwareUpdateMode
     {
-        Graceful,
-        Forced,
-        NoReboot
+        Now,
+        NowAndReboot,
+        NextReboot
     }
 }

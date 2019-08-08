@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Authenticators;
-using ServerToolsIdrac.Redfish.Common;
+using ServerToolsIdrac.Redfish.Models;
 using ServerToolsIdrac.Redfish.Util;
 using System;
 using System.Collections.Generic;
@@ -10,13 +10,13 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerToolsIdrac.Redfish.Job
+namespace ServerToolsIdrac.Redfish.Actions
 {
     public class JobAction
     {
         // Uris to Job Actions
         public const string JobStatus = @"/redfish/v1/Managers/iDRAC.Embedded.1/Jobs/";
-        public const double JobTimeout = 10;
+        public const double JobTimeout = 600;
 
         private IRestClient client;
         private string host;
@@ -30,12 +30,12 @@ namespace ServerToolsIdrac.Redfish.Job
             client.RemoteCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
         }
 
-        public async Task<IdracJob> GetJobAsync(string jobUri)
+        public async Task<Job> GetJobAsync(string jobId)
         {
             if (!await ConnectionUtil.CheckConnectionAsync(host))
-                throw new Exception(string.Format("Servidor {0} inacessivel", host));
+                throw new Exception(string.Format("Server {0} unreachable", host));
 
-            var request = new RestRequest(jobUri, Method.GET);
+            var request = new RestRequest(JobStatus + jobId, Method.GET);
             var response = await client.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)
@@ -44,12 +44,13 @@ namespace ServerToolsIdrac.Redfish.Job
 
             try
             {
-                return JsonConvert.DeserializeObject<IdracJob>(response.Content);
+                return JsonConvert.DeserializeObject<Job>(response.Content);
             }
             catch(Exception ex)
             {
                 throw new RedfishException(string.Format("Fail to read Job: {0}", ex.Message));
             }
         }
+
     }
 }

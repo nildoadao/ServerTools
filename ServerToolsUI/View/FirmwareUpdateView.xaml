@@ -39,7 +39,7 @@
                     VerticalAlignment="Center"
                     Style="{DynamicResource MaterialDesignFlatButton}"
                     Command="{Binding BackCommand}"
-                    materialDesign:HintAssist.Hint="Voltar">
+                    ToolTip="Voltar">
                 <materialDesign:PackIcon Kind="ArrowLeftCircleOutline"
                                          Width="auto"
                                          Height="auto"/>
@@ -84,7 +84,7 @@
                             VerticalAlignment="Center"
                             Name="OpenFolderButton" 
                             Command="{Binding OpenFolderCommand}"
-                            materialDesign:HintAssist.Hint="Selecionar Arquivo">
+                            ToolTip="Selecionar Arquivo">
                         <materialDesign:PackIcon Kind="FileFindOutline" 
                                                  Width="auto" 
                                                  Height="auto"/>
@@ -125,14 +125,13 @@
                               VerticalAlignment="Center"
                               Text="{Binding Server}">
                     </TextBox>
-                    <Button Name="AddServerButton" 
-                            Style="{DynamicResource MaterialDesignFloatingActionButton}" 
+                    <Button Style="{DynamicResource MaterialDesignFloatingActionButton}" 
                             Width="40" Height="40" 
                             HorizontalAlignment="Left" 
                             IsDefault="True"
                             VerticalAlignment="Center" Margin="5"
                             Command="{Binding AddServerCommand}"
-                            materialDesign:HintAssist.Hint="Adicionar Servidor">
+                            ToolTip="Adicionar Servidor">
                         <materialDesign:PackIcon Kind="Plus" Width="auto" Height="auto"/>
                     </Button>
                     <Button Style="{DynamicResource MaterialDesignFlatButton}" 
@@ -202,7 +201,7 @@
                 Margin="15"
                 Grid.Row="3"
                 VerticalAlignment="Bottom"
-                materialDesign:HintAssist.Hint="Iniciar Update"
+                ToolTip="Iniciar Update"
                 Command="{Binding UpdateFirmwareCommand}">
             Atualizar
         </Button>
