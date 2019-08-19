@@ -35,6 +35,8 @@
             </TextBox>
         </materialDesign:Card>
         <Button Grid.Row="2"
+                IsDefault="True"
+                ToolTip="Adicionar Lista"
                 Margin="15"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"

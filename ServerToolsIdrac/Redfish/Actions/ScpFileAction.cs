@@ -68,7 +68,19 @@ namespace ServerToolsIdrac.Redfish.Actions
                 throw new Exception(string.Format("Server {0} unreachable", host));
 
             var request = new RestRequest(ImportSystemConfiguration, Method.POST, DataFormat.Json);
-            var body = BuildRequestBody(path, target, shutdownType, powerStatus);
+
+            string file = File.ReadAllText(path);
+            var body = new
+            {
+                ImportBuffer = file,
+                ShareParameters = new
+                {
+                    Target = target
+                },
+                ShutdownType = shutdownType,
+                HostPowerState = powerStatus
+            };
+
             request.AddJsonBody(body);
             var response = await client.ExecuteTaskAsync(request);
 
@@ -80,29 +92,6 @@ namespace ServerToolsIdrac.Redfish.Actions
                 .Where(x => x.Name == "Location")
                 .Select(x => x.Value)
                 .FirstOrDefault().ToString();
-        }
-
-        /// <summary>
-        /// Build the SCP Import Request
-        /// </summary>
-        /// <param name="path">SCP File path</param>
-        /// <param name="target">SCP Import targer</param>
-        /// <param name="shutdownType">Shutdown strategy</param>
-        /// <param name="powerStatus">Host current power status</param>
-        /// <returns></returns>
-        private object BuildRequestBody(string path, string target, string shutdownType, string powerStatus)
-        {
-            string file = File.ReadAllText(path);
-            return  new
-            {
-                ImportBuffer = file,
-                ShareParameters = new
-                {
-                    Target = target
-                },
-                ShutdownType = shutdownType,
-                HostPowerState = powerStatus
-            };
         }
 
         /// <summary>
