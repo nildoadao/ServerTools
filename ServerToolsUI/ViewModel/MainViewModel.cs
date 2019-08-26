@@ -18,6 +18,7 @@ namespace ServerToolsUI.ViewModel
             NavigationUtil.Register("FirmwareUpdate", GoToUpdateFirmware);
             NavigationUtil.Register("ScpExport", GoToScpExport);
             NavigationUtil.Register("ScpImport", GoToScpImport);
+            NavigationUtil.Register("CustomScript", GoToCustomScript);
             SettingsCommand = new RelayCommand(Settings);
         }
 
@@ -64,6 +65,11 @@ namespace ServerToolsUI.ViewModel
         }
 
         public RelayCommand SettingsCommand { get; private set; }
+
+        private void GoToCustomScript(object parameter)
+        {
+            CurrentView = new CustomScriptViewModel();
+        }
 
         private void GoToHome(object parameter)
         {

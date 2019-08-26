@@ -45,3 +45,7 @@ D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ServersListView.g.cs
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ServersListView.baml
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\SettingsView.g.cs
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\SettingsView.baml
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\CustomScriptView.g.cs
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\CustomScriptView.baml
+D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\Renci.SshNet.dll
+D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\Renci.SshNet.xml

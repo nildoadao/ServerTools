@@ -23,7 +23,7 @@ namespace ServerToolsIdrac.Redfish.Util
                     else
                         connection = false;
                 }
-                catch (Exception) // Caso o endereço seja fornecido de maneira errada / mal formatado
+                catch (Exception) // In case the IP is in the wrong format
                 {
                     connection = false;
                 }

@@ -41,6 +41,9 @@
             <DataTemplate DataType="{x:Type ViewModels:SettingsViewModel}">
                 <Views:SettingsView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:CustomScriptViewModel}">
+                <Views:CustomScriptView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

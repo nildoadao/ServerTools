@@ -17,10 +17,12 @@ namespace ServerToolsUI.ViewModel
             ScpExportPageCommand = new RelayCommand(ScpExportPage);
             ScpImportPageCommand = new RelayCommand(ScpImportPage);
             FirmwareUpdatePageCommand = new RelayCommand(FirmwareUpdatePage);
+            CustomScriptPageCommand = new RelayCommand(CustomScriptPage);
         }
         public RelayCommand ScpImportPageCommand { get; private set; }
         public RelayCommand ScpExportPageCommand { get; private set; }
         public RelayCommand FirmwareUpdatePageCommand { get; private set; }
+        public RelayCommand CustomScriptPageCommand { get; private set; }
 
         private void ScpImportPage(object parameter)
         {
@@ -35,6 +37,11 @@ namespace ServerToolsUI.ViewModel
         private void FirmwareUpdatePage(object parameter)
         {
             NavigationUtil.NotifyColleagues("FirmwareUpdate", null);
+        }
+
+        private void CustomScriptPage(object parameter)
+        {
+            NavigationUtil.NotifyColleagues("CustomScript", null);
         }
     }
 }

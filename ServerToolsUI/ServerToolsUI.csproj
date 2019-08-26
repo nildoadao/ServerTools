@@ -67,10 +67,12 @@
     </ApplicationDefinition>
     <Compile Include="Model\JobMonitor.cs" />
     <Compile Include="Model\JobsDataGridInfo.cs" />
+    <Compile Include="Model\TasksDataGridInfo.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Util\NavigationUtil.cs" />
     <Compile Include="Util\RelayCommand.cs" />
     <Compile Include="ViewModel\CredentialsViewModel.cs" />
+    <Compile Include="ViewModel\CustomScriptViewModel.cs" />
     <Compile Include="ViewModel\FirmwareUpdateViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -83,6 +85,9 @@
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\CredentialsView.xaml.cs">
       <DependentUpon>CredentialsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomScriptView.xaml.cs">
+      <DependentUpon>CustomScriptView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ScpExportView.xaml.cs">
       <DependentUpon>ScpExportView.xaml</DependentUpon>
@@ -100,6 +105,10 @@
       <DependentUpon>UserMessageView.xaml</DependentUpon>
     </Compile>
     <Page Include="View\CredentialsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomScriptView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

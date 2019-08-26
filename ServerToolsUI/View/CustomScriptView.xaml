@@ -1,0 +1,236 @@
+﻿<Page x:Class="ServerToolsUI.View.CustomScriptView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ServerToolsUI.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="1000"
+      Title="CustomScriptView"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      Background="{DynamicResource MaterialDesignPaper}"
+      TextElement.FontWeight="Medium"
+      TextElement.FontSize="14"
+      FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"
+                              MinWidth="360"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <GridSplitter Grid.Row="1"
+                      Grid.RowSpan="3"
+                      ResizeDirection="Columns"
+                      Width="5">
+        </GridSplitter>
+        <StackPanel Orientation="Horizontal"
+                    Grid.ColumnSpan="3">
+            <Button Margin="15"
+                    VerticalAlignment="Center"
+                    Command="{Binding BackCommand}"
+                    Style="{DynamicResource MaterialDesignFlatButton}"
+                    materialDesign:HintAssist.Hint="Voltar">
+                <materialDesign:PackIcon Kind="ArrowLeftCircleOutline"
+                                         Width="auto"
+                                         Height="auto"/>
+            </Button>
+            <TextBlock HorizontalAlignment="Left" 
+                       FontSize="28" Margin="15" 
+                       Style="{DynamicResource MaterialDesignTitleTextBlock}">
+                Executar Script Customizado
+            </TextBlock>
+        </StackPanel>
+
+        <GroupBox Margin="15"
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  Style="{DynamicResource MaterialDesignCardGroupBox}" 
+                  Header="Script" 
+                  Background="Transparent">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Arquivo:" 
+                               Style="{DynamicResource MaterialDesignBody1TextBlock}" 
+                               Margin="5" 
+                               VerticalAlignment="Center" 
+                               HorizontalAlignment="Right"/>
+                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left">
+                    <TextBox Style="{DynamicResource MaterialDesignTextBox}" 
+                             Width="200" Margin="5" 
+                             materialDesign:HintAssist.Hint="Local do arquivo" 
+                             VerticalAlignment="Center"
+                             Text="{Binding FilePath, ValidatesOnNotifyDataErrors=True}"/>
+                    <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                            Margin="5" 
+                            VerticalAlignment="Center"
+                            Command="{Binding OpenFolderCommand}"
+                            materialDesign:HintAssist.Hint="Selecionar Firmware">
+                        <materialDesign:PackIcon Kind="FileFindOutline" 
+                                                 Width="auto" 
+                                                 Height="auto"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" 
+                  Grid.Row="1"
+                  Header="Adicionar Servidores" 
+                  Margin="15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox  Margin="5" Style="{DynamicResource MaterialDesignTextBox}" 
+                              HorizontalAlignment="Left"
+                              Width="200"
+                              materialDesign:HintAssist.Hint="IP ou Hostname"                                   
+                              VerticalAlignment="Center"
+                              Text="{Binding Server, ValidatesOnNotifyDataErrors=True}">
+                    </TextBox>
+                    <Button Name="AddServerButton" 
+                            Style="{DynamicResource MaterialDesignFloatingActionButton}" 
+                            Width="40" Height="40" 
+                            HorizontalAlignment="Left" 
+                            ToolTip="Adicionar Servidor"
+                            IsDefault="True"
+                            Command="{Binding AddServerCommand}"
+                            VerticalAlignment="Center" Margin="5">
+                        <materialDesign:PackIcon Kind="Plus" Width="auto" Height="auto"/>
+                    </Button>
+                    <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center" 
+                            Command="{Binding OpenServerListCommand}"
+                            ToolTip="Adicionar Lista"
+                            Margin="5">
+                        <materialDesign:PackIcon 
+                            Kind="FormatListNumbered"
+                            Width="auto"
+                            Height="auto"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <materialDesign:Card Grid.Row="2"
+                             Margin="15"
+                             Width="auto"
+                             Visibility="{Binding Path=NoServerCardVisible, Converter={StaticResource BoolToVis}}">
+            <TextBlock
+                VerticalAlignment="Center"
+                Margin="15">
+                Nenhum servidor adicionado.
+            </TextBlock>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="2"
+                             Margin="15"
+                             Width="auto"
+                             Visibility="{Binding Path=HasServers, Converter={StaticResource BoolToVis}}">
+            <DataGrid Name="ServersDataGrid"
+                      AutoGenerateColumns="False" 
+                      Background="Transparent"
+                      CanUserAddRows="False" 
+                      CanUserDeleteRows="False" 
+                      CanUserResizeColumns="False"
+                      IsReadOnly="True" MaxHeight="400"
+                      ItemsSource="{Binding Servers}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+                        FontSize="12"
+                        Binding="{Binding}"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="DeleteButton" 
+                                    VerticalAlignment="Center"
+                                    Style="{DynamicResource MaterialDesignFlatButton}"
+                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}, Path=DataContext.RemoveServerCommand}"
+                                    CommandParameter="{Binding }">
+                                    <materialDesign:PackIcon Kind="MinusCircle" 
+                                                Width="14" 
+                                                Height="14" 
+                                                Foreground="Red"/>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                <DataGrid.RowHeight>
+                    34
+                </DataGrid.RowHeight>
+            </DataGrid>
+        </materialDesign:Card>
+
+        <Button Margin="15"
+                Grid.Row="3"
+                VerticalAlignment="Bottom"
+                Command="{Binding RunScriptCommand}"
+                materialDesign:HintAssist.Hint="Executar Scipt">
+            Executar
+        </Button>
+        <materialDesign:Card
+            Grid.Row="2"
+            Grid.Column="1"
+            Grid.RowSpan="2"
+            Margin="15"
+            Visibility="{Binding Path=NoJobCardVisible, Converter={StaticResource BoolToVis}}">
+            <TextBlock
+                VerticalAlignment="Center"
+                Margin="15">
+                Nenhum Job.
+            </TextBlock>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="2"
+                             Grid.Column="1"
+                             Grid.RowSpan="2"
+                             Margin="15"
+                             Visibility="{Binding Path=HasJobs, Converter={StaticResource BoolToVis}}">
+            <StackPanel Grid.Row="2"
+                    Grid.Column="1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="15"
+                               VerticalAlignment="Center">
+                        Jobs em Execução
+                    </TextBlock>
+                    <Button Margin="15"
+                            materialDesign:HintAssist.Hint="Limpar Jobs">
+                        Limpar Jobs
+                    </Button>
+                </StackPanel>
+                <DataGrid Name="JobsDataGrid"                 
+                          Grid.Row="2"
+                          Grid.Column="1"
+                          Grid.RowSpan="2"
+                          MaxHeight="300" 
+                          Margin="15" 
+                          HorizontalContentAlignment="Center"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"                          
+                  ItemsSource="{Binding Tasks}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Servidor" Binding="{Binding Server}"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding ScriptTask.Status}"/>
+                        <DataGridTextColumn Header="Mensagem" Binding="{Binding JobMessage}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</Page>
