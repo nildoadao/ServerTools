@@ -210,6 +210,7 @@
                         Jobs em Execução
                     </TextBlock>
                     <Button Margin="15"
+                            Command="{Binding ClearJobsCommand}"
                             materialDesign:HintAssist.Hint="Limpar Jobs">
                         Limpar Jobs
                     </Button>
@@ -223,10 +224,10 @@
                           HorizontalContentAlignment="Center"
                           AutoGenerateColumns="False"
                           IsReadOnly="True"                          
-                  ItemsSource="{Binding Tasks}">
+                  ItemsSource="{Binding Jobs}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Servidor" Binding="{Binding Server}"/>
-                        <DataGridTextColumn Header="Status" Binding="{Binding ScriptTask.Status}"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding JobStatus}"/>
                         <DataGridTextColumn Header="Mensagem" Binding="{Binding JobMessage}"/>
                     </DataGrid.Columns>
                 </DataGrid>

@@ -1,6 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using ServerToolsIdrac.Racadm.Actions;
+using ServerToolsIdrac.Racadm.Model;
 using ServerToolsUI.Model;
 using ServerToolsUI.Util;
 using ServerToolsUI.View;
@@ -21,13 +22,14 @@ namespace ServerToolsUI.ViewModel
         public CustomScriptViewModel()
         {
             Servers = new ObservableCollection<string>();
-            Tasks = new ObservableCollection<TasksDataGridInfo>();
+            Jobs = new ObservableCollection<JobsDataGridInfo>();
             AddServerCommand = new RelayCommand(AddServer);
             RemoveServerCommand = new RelayCommand(RemoveServer);
             BackCommand = new RelayCommand(Back);
             OpenFolderCommand = new RelayCommand(OpenFolder);
             OpenServerListCommand = new RelayCommand(OpenServerList);
             RunScriptCommand = new RelayCommand(RunScript);
+            ClearJobsCommand = new RelayCommand(ClearJobs);
         }
 
         private ObservableCollection<string> servers;
@@ -44,16 +46,16 @@ namespace ServerToolsUI.ViewModel
             }
         }
 
-        private ObservableCollection<TasksDataGridInfo> tasks;
-        public ObservableCollection<TasksDataGridInfo> Tasks
+        private ObservableCollection<JobsDataGridInfo> jobs;
+        public ObservableCollection<JobsDataGridInfo> Jobs
         {
-            get => tasks;
+            get => jobs;
             set
             {
-                if(value != tasks)
+                if(value != jobs)
                 {
-                    tasks = value;
-                    NotifyPropertyChanged("Tasks");
+                    jobs = value;
+                    NotifyPropertyChanged("Jobs");
                 }
             }
         }
@@ -151,6 +153,7 @@ namespace ServerToolsUI.ViewModel
         public RelayCommand OpenFolderCommand { get; private set; }
         public RelayCommand OpenServerListCommand { get; private set; }
         public RelayCommand RunScriptCommand { get; private set; }
+        public RelayCommand ClearJobsCommand { get; private set; }
 
         private bool Validate()
         {
@@ -188,6 +191,12 @@ namespace ServerToolsUI.ViewModel
                 HasServers = true;
             }
             Server = string.Empty;
+        }
+
+        private void ClearJobs(object parameter)
+        {
+            Jobs.Clear();
+            HasJobs = false;
         }
 
         private void RemoveServer(object parameter)
@@ -254,9 +263,43 @@ namespace ServerToolsUI.ViewModel
 
             NetworkCredential credentials = (NetworkCredential)await DialogHost.Show(view, "MainHost");
             HasJobs = true;
+            string[] script;
 
-            string[] script = File.ReadAllLines(FilePath);
-            //Run Script async.
+            try
+            {
+                script = File.ReadAllLines(FilePath);
+            }
+            catch(Exception e)
+            {
+                var userMessage = new UserMessageView()
+                {
+                    DataContext = new UserMessageViewModel(string.Format("Falha ao abrir script: {0}", e.Message))
+                };
+                await DialogHost.Show(userMessage, "MainHost");
+                return;
+            }
+
+            foreach(var item in Servers)
+            {
+                JobsDataGridInfo job = new JobsDataGridInfo() { Server = item, JobStatus = "Running" };
+                Jobs.Add(job);
+                SshAction action = new SshAction(item, credentials);
+                try
+                {
+                    SshResponse response = await action.RunScriptAsync(script);
+                    job.JobMessage = response.Message;
+
+                    if (response.StatusCode != 0)
+                        job.JobStatus = "Failed";
+                    else
+                        job.JobStatus = "Success";
+                }
+                catch(Exception e)
+                {
+                    job.JobMessage = e.Message;
+                    job.JobStatus = "Failed";
+                }
+            }
         }
     }
 }

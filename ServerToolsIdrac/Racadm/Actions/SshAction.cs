@@ -1,4 +1,5 @@
 ﻿using Renci.SshNet;
+using ServerToolsIdrac.Racadm.Model;
 using ServerToolsIdrac.Racadm.Util;
 using System;
 using System.Collections.Generic;
@@ -20,44 +21,57 @@ namespace ServerToolsIdrac.Racadm.Actions
             this.credential = credential;
         }
 
-        public async Task<string> RunCommandAsync(string command)
+        public async Task<SshResponse> RunCommandAsync(string command)
         {
-            string result = "";
+            SshResponse result = null;
 
             await Task.Run(() =>
             {
                 using (SshClient client = new SshClient(host, credential.UserName, credential.Password))
                 {
-                    client.Connect();
-                    var commandResult = client.RunCommand(command);
-
-                    if (commandResult.ExitStatus != 0 | commandResult.Result.Contains("ERROR"))
-                        throw new RacadmException(commandResult.Result);
-
-                    result = commandResult.Result;
+                    try
+                    {
+                        client.Connect();
+                        var commandResult = client.RunCommand(command);
+                        result = new SshResponse(commandResult.Result, commandResult.ExitStatus);
+                    }
+                    catch(Exception e)
+                    {
+                        result = new SshResponse(e.Message, -1);
+                    }
                 }
             });
 
             return result;
         }
 
-        public Task RunScriptAsync(IEnumerable<string> commands)
+        public async Task<SshResponse> RunScriptAsync(IEnumerable<string> commands)
         {
-            return Task.Run(() =>
+            SshResponse result = null;
+            await Task.Run(() =>
             {
                 using (SshClient client = new SshClient(host, credential.UserName, credential.Password))
                 {
-                    client.Connect();
-
-                    foreach (var command in commands)
+                    try
                     {
-                        var commandResult = client.RunCommand(command);
+                        client.Connect();
 
-                        if (commandResult.ExitStatus != 0 | commandResult.Result.Contains("ERROR"))
-                            throw new RacadmException(commandResult.Result);
+                        foreach (var command in commands)
+                        {
+                            var commandResult = client.RunCommand(command);
+                            result = new SshResponse(commandResult.Result, commandResult.ExitStatus);
+
+                            if (commandResult.ExitStatus != 0 | commandResult.Result.Contains("ERROR"))
+                                break;
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        result = new SshResponse(e.Message, -1);
                     }
                 }
             });
+            return result;
         }
     }
 }
