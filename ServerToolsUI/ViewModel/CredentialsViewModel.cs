@@ -49,6 +49,9 @@ namespace ServerToolsUI.ViewModel
 
         private void Ok(object parameter)
         {
+            if (SecurePassword == null || SecurePassword.Length == 0)
+                return;
+
             NetworkCredential credential = new NetworkCredential(User, SecurePassword);
             DialogHost.CloseDialogCommand.Execute(credential, null);
         }

@@ -30,6 +30,7 @@ namespace ServerToolsUI.ViewModel
             ClearJobsCommand = new RelayCommand(ClearJobs);
             OpenServerListCommand = new RelayCommand(OpenServerList);
             BackCommand = new RelayCommand(Back);
+            CancelCommand = new RelayCommand(Cancel);
             Servers = new ObservableCollection<string>();
         }
 
@@ -173,6 +174,20 @@ namespace ServerToolsUI.ViewModel
             }
         }
 
+        private bool cancellationRequested = false;
+        public bool CancellationRequested
+        {
+            get => cancellationRequested;
+            set
+            {
+                if(value != cancellationRequested)
+                {
+                    cancellationRequested = value;
+                    NotifyPropertyChanged("CancellationRequested");
+                }
+            }
+        }
+
         private JobMonitor monitor;
         public JobMonitor Monitor
         {
@@ -193,7 +208,12 @@ namespace ServerToolsUI.ViewModel
         public RelayCommand ClearJobsCommand { get; private set; }
         public RelayCommand OpenServerListCommand { get; private set; }
         public RelayCommand BackCommand { get; private set; }
+        public RelayCommand CancelCommand { get; private set; }
 
+        private void Cancel(object parameter)
+        {
+            CancellationRequested = true;
+        }
         private void AddServer(object parameter)
         {
             if (!string.IsNullOrEmpty(Server))
@@ -249,6 +269,7 @@ namespace ServerToolsUI.ViewModel
             HasJobs = true;
             NoJobCardVisible = false;
             Monitor = new JobMonitor(credentials, JobRefreshTime);
+            CancellationRequested = false;
 
             foreach (string server in Servers)
             {
@@ -262,8 +283,13 @@ namespace ServerToolsUI.ViewModel
                 {
                     Monitor.AddJob(server, "");
                 }
-                Monitor.Start();
+                if (CancellationRequested)
+                {
+                    CancellationRequested = false;
+                    break;
+                }
             }
+            Monitor.Start();
             HasJobs = Monitor.Jobs.Any();
             NoJobCardVisible = !HasJobs;
         }

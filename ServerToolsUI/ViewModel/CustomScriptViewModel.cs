@@ -30,6 +30,7 @@ namespace ServerToolsUI.ViewModel
             OpenServerListCommand = new RelayCommand(OpenServerList);
             RunScriptCommand = new RelayCommand(RunScript);
             ClearJobsCommand = new RelayCommand(ClearJobs);
+            CancelCommand = new RelayCommand(Cancel);
         }
 
         private ObservableCollection<string> servers;
@@ -146,6 +147,19 @@ namespace ServerToolsUI.ViewModel
                 }
             }
         }
+        private bool cancellationRequested;
+        public bool CancellationRequested
+        {
+            get => cancellationRequested;
+            set
+            {
+                if(value != cancellationRequested)
+                {
+                    cancellationRequested = value;
+                    NotifyPropertyChanged("CancellationRequested");
+                }
+            }
+        }
 
         public RelayCommand AddServerCommand { get; private set; }
         public RelayCommand RemoveServerCommand { get; private set; }
@@ -154,6 +168,12 @@ namespace ServerToolsUI.ViewModel
         public RelayCommand OpenServerListCommand { get; private set; }
         public RelayCommand RunScriptCommand { get; private set; }
         public RelayCommand ClearJobsCommand { get; private set; }
+        public RelayCommand CancelCommand { get; private set; }
+
+        private void Cancel(object parameter)
+        {
+            CancellationRequested = true;
+        }
 
         private bool Validate()
         {
@@ -262,7 +282,7 @@ namespace ServerToolsUI.ViewModel
             };
 
             NetworkCredential credentials = (NetworkCredential)await DialogHost.Show(view, "MainHost");
-            HasJobs = true;
+            
             string[] script;
 
             try
@@ -279,7 +299,10 @@ namespace ServerToolsUI.ViewModel
                 return;
             }
 
-            foreach(var item in Servers)
+            HasJobs = true;
+            CancellationRequested = false;
+
+            foreach (var item in Servers)
             {
                 JobsDataGridInfo job = new JobsDataGridInfo() { Server = item, JobStatus = "Running" };
                 Jobs.Add(job);
@@ -298,6 +321,12 @@ namespace ServerToolsUI.ViewModel
                 {
                     job.JobMessage = e.Message;
                     job.JobStatus = "Failed";
+                }
+
+                if (CancellationRequested)
+                {
+                    CancellationRequested = false;
+                    break;
                 }
             }
         }

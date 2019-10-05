@@ -1,6 +1,7 @@
 ﻿using Renci.SshNet;
 using ServerToolsIdrac.Racadm.Model;
 using ServerToolsIdrac.Racadm.Util;
+using ServerToolsIdrac.Redfish.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,9 @@ namespace ServerToolsIdrac.Racadm.Actions
         {
             SshResponse result = null;
 
+            if (!await ConnectionUtil.CheckConnectionAsync(host))
+                throw new Exception(string.Format("Server {0} unreachable", host));
+
             await Task.Run(() =>
             {
                 using (SshClient client = new SshClient(host, credential.UserName, credential.Password))
@@ -48,6 +52,10 @@ namespace ServerToolsIdrac.Racadm.Actions
         public async Task<SshResponse> RunScriptAsync(IEnumerable<string> commands)
         {
             SshResponse result = null;
+
+            if (!await ConnectionUtil.CheckConnectionAsync(host))
+                throw new Exception(string.Format("Server {0} unreachable", host));
+
             await Task.Run(() =>
             {
                 using (SshClient client = new SshClient(host, credential.UserName, credential.Password))

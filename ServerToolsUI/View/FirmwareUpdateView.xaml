@@ -22,7 +22,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="5*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"
@@ -168,7 +168,7 @@
                       CanUserAddRows="False" 
                       CanUserDeleteRows="False" 
                       CanUserResizeColumns="False"
-                      IsReadOnly="True" MaxHeight="400"
+                      IsReadOnly="True"
                       ItemsSource="{Binding Servers, ValidatesOnNotifyDataErrors=True}">
                 <DataGrid.Columns>
                     <DataGridTextColumn 
@@ -219,43 +219,44 @@
         </materialDesign:Card>
         <materialDesign:Card Grid.Row="2"
                              Grid.Column="1"
-                             Grid.RowSpan="2"
                              Margin="15"
                              Visibility="{Binding Path=HasJobs, Converter={StaticResource BoolToVis}}">
-            <StackPanel Grid.Row="2"
-                    Grid.Column="1">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Margin="15"
+            <ScrollViewer>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="15"
                                VerticalAlignment="Center">
                         Jobs em Execução
-                    </TextBlock>
-                    <Button Margin="15"
+                        </TextBlock>
+                        <Button Margin="15"
+                            Command="{Binding CancelCommand}"
+                            materialDesign:HintAssist.Hint="Cancelar">
+                            Cancelar
+                        </Button>
+                        <Button Margin="15"
                             Command="{Binding ClearJobsCommand}"
                             materialDesign:HintAssist.Hint="Limpar Jobs">
-                        Limpar Jobs
-                    </Button>
-                </StackPanel>
-                <DataGrid Name="JobsDataGrid"                 
-                          Grid.Row="2"
-                          Grid.Column="1"
-                          Grid.RowSpan="2"
-                          MaxHeight="300" 
+                            Limpar Jobs
+                        </Button>
+                    </StackPanel>
+                    <DataGrid Name="JobsDataGrid"                 
                           Margin="15" 
                           HorizontalContentAlignment="Center"
                           AutoGenerateColumns="False"
                           IsReadOnly="True"                          
                   ItemsSource="{Binding Monitor.Jobs}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Servidor" Binding="{Binding Server}"/>
-                        <DataGridTextColumn Header="Serial" Binding="{Binding SerialNumber}"/>
-                        <DataGridTextColumn Header="Job Id" Binding="{Binding JobId}"/>
-                        <DataGridTextColumn Header="Nome" Binding="{Binding JobName}"/>
-                        <DataGridTextColumn Header="Status" Binding="{Binding JobStatus}"/>
-                        <DataGridTextColumn Header="% Concluido" Binding="{Binding JobPercentComplete}"/>
-                        <DataGridTextColumn Header="Mensagem" Binding="{Binding JobMessage}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </StackPanel>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Servidor" Binding="{Binding Server}"/>
+                            <DataGridTextColumn Header="Serial" Binding="{Binding SerialNumber}"/>
+                            <DataGridTextColumn Header="Job Id" Binding="{Binding JobId}"/>
+                            <DataGridTextColumn Header="Nome" Binding="{Binding JobName}"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding JobStatus}"/>
+                            <DataGridTextColumn Header="% Concluido" Binding="{Binding JobPercentComplete}"/>
+                            <DataGridTextColumn Header="Mensagem" Binding="{Binding JobMessage}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </ScrollViewer>
         </materialDesign:Card>
     </Grid>
 </Page>
