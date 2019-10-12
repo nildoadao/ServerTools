@@ -18,14 +18,15 @@ namespace ServerToolsIdrac.Redfish.Actions
         public const string JobStatus = @"/redfish/v1/Managers/iDRAC.Embedded.1/Jobs/";
         public const double JobTimeout = 600;
 
-        private IRestClient client;
-        private string host;
+        private readonly IRestClient client;
 
         public JobAction(string host, NetworkCredential credentials)
         {
-            this.host = host;
-            client = new RestClient(string.Format("https://{0}", host));
-            client.Authenticator = new NtlmAuthenticator(credentials);
+            client = new RestClient(string.Format("https://{0}", host))
+            {
+                Authenticator = new NtlmAuthenticator(credentials)
+            };
+        
             // Ignore SSL Certificate
             client.RemoteCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
         }

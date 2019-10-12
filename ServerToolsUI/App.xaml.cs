@@ -1,11 +1,6 @@
 ﻿using MaterialDesignThemes.Wpf;
 using ServerToolsUI.Properties;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ServerToolsUI
@@ -15,6 +10,7 @@ namespace ServerToolsUI
     /// </summary>
     public partial class App : Application
     {
+
         protected override void OnStartup(StartupEventArgs e)
         {
             SetTheme(Settings.Default.Theme);

@@ -13,8 +13,8 @@ namespace ServerToolsIdrac.Racadm.Actions
 {
     public class SshAction
     {
-        private string host;
-        private NetworkCredential credential;
+        private readonly string host;
+        private readonly NetworkCredential credential;
 
         public SshAction(string host, NetworkCredential credential)
         {

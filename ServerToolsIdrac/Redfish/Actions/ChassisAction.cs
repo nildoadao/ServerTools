@@ -16,14 +16,17 @@ namespace ServerToolsIdrac.Redfish.Actions
         // Uris to Chassis actions
         public const string ChassisRoot = @"/redfish/v1/Chassis/System.Embedded.1";
 
-        private IRestClient client;
-        private string host;
+        private readonly IRestClient client;
+        private readonly string host;
 
         public ChassisAction(string host, NetworkCredential credentials)
         {
             this.host = host;
-            client = new RestClient(string.Format("https://{0}", host));
-            client.Authenticator = new NtlmAuthenticator(credentials);
+            client = new RestClient(string.Format("https://{0}", host))
+            {
+                Authenticator = new NtlmAuthenticator(credentials)
+            };
+
             // Ignore SSL Certificate
             client.RemoteCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
         }

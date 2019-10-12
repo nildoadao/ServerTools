@@ -20,9 +20,9 @@ namespace ServerToolsIdrac.Redfish.Actions
         public const string ExportSystemConfiguration = @"/redfish/v1/Managers/iDRAC.Embedded.1/Actions/Oem/EID_674_Manager.ExportSystemConfiguration";
         public const string ImportSystemConfiguration = @"/redfish/v1/Managers/iDRAC.Embedded.1/Actions/Oem/EID_674_Manager.ImportSystemConfiguration";
 
-        private IRestClient client;
-        private string host;
-        private NetworkCredential credentials;
+        private readonly IRestClient client;
+        private readonly string host;
+        private readonly NetworkCredential credentials;
 
         /// <summary>
         /// Creates a new SCP file action
@@ -33,8 +33,11 @@ namespace ServerToolsIdrac.Redfish.Actions
         {
             this.host = host;
             this.credentials = credentials;
-            client = new RestClient(string.Format("https://{0}", host));
-            client.Authenticator = new NtlmAuthenticator(credentials);
+            client = new RestClient(string.Format("https://{0}", host))
+            {
+                Authenticator = new NtlmAuthenticator(credentials)
+            };
+
             // Ignore SSL Certificate
             client.RemoteCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
         }
