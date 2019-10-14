@@ -71,6 +71,7 @@ namespace ServerToolsIdrac.Redfish.Actions
                 throw new Exception(string.Format("Server {0} unreachable", host));
 
             var request = new RestRequest(ImportSystemConfiguration, Method.POST, DataFormat.Json);
+            request.AddHeader("Accept", "*/*");
 
             string file = File.ReadAllText(path);
             var body = new
@@ -105,6 +106,7 @@ namespace ServerToolsIdrac.Redfish.Actions
         private async Task<string> GetFileContentAsync(string jobUri)
         {
             var request = new RestRequest(jobUri);
+            request.AddHeader("Accept", "*/*");
             var response = await client.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)
@@ -154,6 +156,8 @@ namespace ServerToolsIdrac.Redfish.Actions
         private async Task<string> CreateExportJobAsync(string target, string exportUse)
         {
             var request = new RestRequest(ExportSystemConfiguration, Method.POST);
+            request.AddHeader("Accept", "*/*");
+
             var body = new
             {
                 ExportFormat = "XML",

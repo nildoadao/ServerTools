@@ -37,6 +37,7 @@ namespace ServerToolsIdrac.Redfish.Actions
                 throw new Exception(string.Format("Server {0} unreachable", host));
 
             var request = new RestRequest(ChassisRoot);
+            request.AddHeader("Accept", "*/*");
             var response = await client.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)

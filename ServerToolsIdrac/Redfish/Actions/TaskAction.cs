@@ -32,6 +32,8 @@ namespace ServerToolsIdrac.Redfish.Actions
         public async Task<string> GetTaskIdAsync(string jobUri)
         {
             var request = new RestRequest(jobUri);
+            request.AddHeader("Accept", "*/*");
+
             var response = await client.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)

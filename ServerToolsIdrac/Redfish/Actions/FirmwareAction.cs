@@ -37,6 +37,7 @@ namespace ServerToolsIdrac.Redfish.Actions
         private async Task<string> UploadFileAsync(string path)
         {
             var request = new RestRequest(FirmwareInventory, Method.POST);
+            request.AddHeader("Accept", "*/*");
             request.AddFile("firmware", path);
             string etag = await GetEtagHeaderAsync();
             request.AddHeader("If-Match", etag);
@@ -59,6 +60,7 @@ namespace ServerToolsIdrac.Redfish.Actions
         private async Task<string> GetEtagHeaderAsync()
         {
             var request = new RestRequest(FirmwareInventory);
+            request.AddHeader("Accept", "*/*");
             var response = await client.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)
@@ -90,6 +92,7 @@ namespace ServerToolsIdrac.Redfish.Actions
             };
 
             var request = new RestRequest(DellUpdateService, Method.POST, DataFormat.Json);
+            request.AddHeader("Accept", "*/*");
 
             var body = new
             {

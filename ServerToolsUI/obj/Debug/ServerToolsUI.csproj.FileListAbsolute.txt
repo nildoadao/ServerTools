@@ -49,5 +49,7 @@ D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\CustomScriptView.g.cs
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\CustomScriptView.baml
 D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\Renci.SshNet.dll
 D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\Renci.SshNet.xml
-D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\ServerToolsUI.exe.CodeAnalysisLog.xml
-D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\ServerToolsUI.exe.lastcodeanalysissucceeded
+D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\ServerToolsUI.exe.manifest
+D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\ServerToolsUI.application
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\ServerToolsUI.exe.manifest
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\ServerToolsUI.application
