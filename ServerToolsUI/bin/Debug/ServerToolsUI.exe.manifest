@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="ServerToolsUI.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="ServerToolsUI.exe" version="1.0.0.2" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <application />
   <entryPoint>
     <assemblyIdentity name="ServerToolsUI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
@@ -109,7 +109,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>fp7o4sS4ZfkWGy2wc4aq3vhLEnImhmd9k6JUBuTbQjA=</dsig:DigestValue>
+        <dsig:DigestValue>/CGXecg2Piff/AUWABFdgdruXv9JnmUNPJBz2U/292Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -121,7 +121,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>RAJvjkV9V6cd24vcoU3Bt6/OIQX2/ag3IX/KDEfaYxg=</dsig:DigestValue>
+        <dsig:DigestValue>OwrhPplaPHsVu1Y4liZhLYmSbNOzzTAjvO2L3aNhYj4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -137,13 +137,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="ServerToolsUI.exe.config" size="935">
+  <file name="ServerToolsUI.exe.config" size="930">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>TLUGC4CoOyBwnM/1gkitTnl1wv9XuX+bjmnqYkervv0=</dsig:DigestValue>
+      <dsig:DigestValue>x/mySJByzzEvYmoxvAEMYVy1IaPcTCcaeZ0fyOInKRE=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

@@ -17,14 +17,16 @@ namespace ServerToolsIdrac.Redfish.Actions
         public const string DellUpdateService = @"/redfish/v1/UpdateService/Actions/Oem/DellUpdateService.Install";
         public const string SimpleUpdate = @"/redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate";
 
-        private IRestClient client;
-        private string host;
+        private readonly IRestClient client;
+        private readonly string host;
 
         public FirmwareAction(string host, NetworkCredential credentials)
         {
             this.host = host;
-            client = new RestClient(string.Format("https://{0}", host));
-            client.Authenticator = new NtlmAuthenticator(credentials);
+            client = new RestClient(string.Format("https://{0}", host))
+            {
+                Authenticator = new NtlmAuthenticator(credentials)
+            };
             // Ignore SSL Certificate
             client.RemoteCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
         }
