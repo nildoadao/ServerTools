@@ -2,6 +2,7 @@
 using ServerToolsUI.Properties;
 using System;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace ServerToolsUI
 {
@@ -15,6 +16,17 @@ namespace ServerToolsUI
         {
             SetTheme(Settings.Default.Theme);
             base.OnStartup(e);
+        }
+
+        void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            // Fix the problem to open the clipboard .NET < 4.5
+            // Copied from: https://stackoverflow.com/questions/12769264/openclipboard-failed-when-copy-pasting-data-from-wpf-datagrid/13523188
+
+            var comException = e.Exception as System.Runtime.InteropServices.COMException;
+
+            if (comException != null && comException.ErrorCode == -2147221040)
+                e.Handled = true;
         }
 
         public void SetTheme(BaseTheme theme)

@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:ServerToolsUI"
              xmlns:ViewModels="clr-namespace:ServerToolsUI.ViewModel"
              xmlns:Views="clr-namespace:ServerToolsUI.View"
+             DispatcherUnhandledException="Application_DispatcherUnhandledException"
              StartupUri="View/MainView.xaml">
     <Application.Resources>
         <ResourceDictionary>

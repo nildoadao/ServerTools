@@ -114,14 +114,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ServerToolsUI.exe" size="114144">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ServerToolsUI.exe" size="114656">
       <assemblyIdentity name="ServerToolsUI" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>OwrhPplaPHsVu1Y4liZhLYmSbNOzzTAjvO2L3aNhYj4=</dsig:DigestValue>
+        <dsig:DigestValue>ZpDAaCUa0ulg2krNh3sj2A0st0NlcKbk1Wm0kRLbz00=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

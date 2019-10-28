@@ -10,3 +10,4 @@ D:\Visual Studio\ServerTools\ServerToolsIdrac\obj\Debug\ServerToolsIdrac.dll
 D:\Visual Studio\ServerTools\ServerToolsIdrac\obj\Debug\ServerToolsIdrac.pdb
 D:\Visual Studio\ServerTools\ServerToolsIdrac\bin\Debug\Renci.SshNet.dll
 D:\Visual Studio\ServerTools\ServerToolsIdrac\bin\Debug\Renci.SshNet.xml
+D:\Visual Studio\ServerTools\ServerToolsIdrac\obj\Debug\ServerToolsIdrac.csprojAssemblyReference.cache
