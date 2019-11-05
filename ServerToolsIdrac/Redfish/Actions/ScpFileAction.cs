@@ -40,6 +40,7 @@ namespace ServerToolsIdrac.Redfish.Actions
 
             // Ignore SSL Certificate
             client.RemoteCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12;
         }
 
         /// <summary>
