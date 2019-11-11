@@ -70,6 +70,7 @@
     <Compile Include="Redfish\Actions\ScpFileAction.cs" />
     <Compile Include="Redfish\Util\ConnectionUtil.cs" />
     <Compile Include="Racadm\Util\RacadmException.cs" />
+    <Compile Include="Redfish\Util\HttpUtil.cs" />
     <Compile Include="Redfish\Util\RedfishException.cs" />
   </ItemGroup>
   <ItemGroup />
