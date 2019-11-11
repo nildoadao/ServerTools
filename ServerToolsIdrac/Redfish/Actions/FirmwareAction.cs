@@ -3,8 +3,11 @@ using RestSharp.Authenticators;
 using ServerToolsIdrac.Redfish.Util;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,19 +20,26 @@ namespace ServerToolsIdrac.Redfish.Actions
         public const string DellUpdateService = @"/redfish/v1/UpdateService/Actions/Oem/DellUpdateService.Install";
         public const string SimpleUpdate = @"/redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate";
 
-        private readonly IRestClient client;
+        private IRestClient restClient;
         private readonly string host;
+        private NetworkCredential credential;
 
         public FirmwareAction(string host, NetworkCredential credentials)
         {
             this.host = host;
-            client = new RestClient(string.Format("https://{0}", host))
+            restClient = new RestClient(string.Format("https://{0}", host))
             {
                 Authenticator = new NtlmAuthenticator(credentials)
             };
+            HttpClient client = new HttpClient()
+            {
+                
+            };
+            this.credential = credentials;
             // Ignore SSL Certificate
-            client.RemoteCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+            restClient.RemoteCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12;
+            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
         }
 
         /// <summary>
@@ -39,21 +49,39 @@ namespace ServerToolsIdrac.Redfish.Actions
         /// <returns>Location for the resource created</returns>
         private async Task<string> UploadFileAsync(string path)
         {
-            var request = new RestRequest(FirmwareInventory, Method.POST);
-            request.AddHeader("Accept", "*/*");
-            request.AddFile("firmware", path);
-            string etag = await GetEtagHeaderAsync();
-            request.AddHeader("If-Match", etag);
-            var response = await client.ExecuteTaskAsync(request);
+            var boundary = Guid.NewGuid().ToString();
+            using (HttpClient client = new HttpClient())
+            using (var request = new HttpRequestMessage(HttpMethod.Post, client.BaseAddress + FirmwareInventory))
+            using (var multipartContent = new MultipartFormDataContent(boundary))
+            using (var fileContent = new StreamContent(File.Open(path, FileMode.Open)))
+            {
+                client.BaseAddress = new Uri(string.Format("https://{0}", host));
+                var credentials = string.Format("{0}:{1}", credential.UserName, credential.Password);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(credentials))); ;
+                var etag = await GetEtagHeaderAsync();
+                request.Headers.TryAddWithoutValidation("If-Match", etag);
+                fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+                {
+                    Name = "\"file\"",
+                    FileName = string.Format("\"{0}\"", Path.GetFileName(path)),
+                };
+                fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
+                // Na Idrac 7/8 o update não aceita a boundary entre ""
+                multipartContent.Headers.Remove("Content-Type");
+                multipartContent.Headers.TryAddWithoutValidation("Content-Type", "multipart/form-data; boundary=" + boundary);
+                multipartContent.Add(fileContent);
+                request.Content = multipartContent;
+                using (HttpResponseMessage response = await client.SendAsync(request))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+                        throw new UnauthorizedAccessException("Acesso denied, check user/password");
 
-            if (!response.IsSuccessful)
-                throw new RedfishException(string.Format("Fail to upload the file, Error Code {0}",
-                    response.StatusCode));
+                    if (!response.IsSuccessStatusCode)
+                        throw new HttpRequestException("Fail to Upload Firmware to Idrac: " + response.ReasonPhrase);
 
-            return response.Headers
-                .Where(x => x.Name == "Location")
-                .Select(x => x.Value)
-                .FirstOrDefault().ToString();
+                    return response.Headers.Location.ToString();
+                }
+            }
         }
 
         /// <summary>
@@ -64,7 +92,7 @@ namespace ServerToolsIdrac.Redfish.Actions
         {
             var request = new RestRequest(FirmwareInventory);
             request.AddHeader("Accept", "*/*");
-            var response = await client.ExecuteTaskAsync(request);
+            var response = await restClient.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)
                 throw new RedfishException(string.Format("Fail to get Etag Header, Error Code {0}",
@@ -104,7 +132,7 @@ namespace ServerToolsIdrac.Redfish.Actions
             };
 
             request.AddJsonBody(body);
-            var response = await client.ExecuteTaskAsync(request);
+            var response = await restClient.ExecuteTaskAsync(request);
 
             if (!response.IsSuccessful)
                 throw new RedfishException(string.Format("Fail to create update Job, Error Code {0}", 

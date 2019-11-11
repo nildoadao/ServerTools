@@ -16,6 +16,7 @@ namespace ServerToolsUI.ViewModel
         public CredentialsViewModel()
         {
             OkCommand = new RelayCommand(Ok);
+            CancelCommand = new RelayCommand(Cancel);
         }
         private string user;
         public string User
@@ -46,6 +47,7 @@ namespace ServerToolsUI.ViewModel
         }
 
         public RelayCommand OkCommand { get; private set; }
+        public RelayCommand CancelCommand { get; private set; }
 
         private void Ok(object parameter)
         {
@@ -54,6 +56,11 @@ namespace ServerToolsUI.ViewModel
 
             NetworkCredential credential = new NetworkCredential(User, SecurePassword);
             DialogHost.CloseDialogCommand.Execute(credential, null);
+        }
+
+        private void Cancel(object parameter)
+        {
+            DialogHost.CloseDialogCommand.Execute(null, null);
         }
     }
 }

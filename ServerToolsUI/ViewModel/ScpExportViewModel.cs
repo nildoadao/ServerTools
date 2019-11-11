@@ -170,6 +170,10 @@ namespace ServerToolsUI.ViewModel
             };
 
             NetworkCredential credentials = (NetworkCredential)await DialogHost.Show(view, "MainHost");
+
+            if (credentials == null)
+                return;
+
             ScpFileAction action = new ScpFileAction(Host, credentials);
 
             ExportMessage = "";

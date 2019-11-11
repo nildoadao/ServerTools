@@ -13,6 +13,7 @@ namespace ServerToolsUI.ViewModel
         public ServersListViewModel()
         {
             CloseCommand = new RelayCommand(Close);
+            CancelCommand = new RelayCommand(Cancel);
         }
 
         private string servers;
@@ -29,6 +30,7 @@ namespace ServerToolsUI.ViewModel
             }
         }
         public RelayCommand CloseCommand { get; private set; }
+        public RelayCommand CancelCommand { get; private set; }
 
         private void Close(object parameter)
         {
@@ -45,6 +47,11 @@ namespace ServerToolsUI.ViewModel
                 DialogHost.CloseDialogCommand.Execute(serverList, null);
             }
 
+        }
+
+        private void Cancel(object parameter)
+        {
+            DialogHost.CloseDialogCommand.Execute(null, null);
         }
     }
 }

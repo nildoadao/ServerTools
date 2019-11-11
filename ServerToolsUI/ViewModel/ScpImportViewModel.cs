@@ -292,6 +292,10 @@ namespace ServerToolsUI.ViewModel
             };
 
             NetworkCredential credentials = (NetworkCredential)await DialogHost.Show(view, "MainHost");
+
+            if (credentials == null)
+                return;
+
             HasJobs = true;
             NoJobCardVisible = false;
             Monitor = new JobMonitor(credentials, JobRefreshTime);
