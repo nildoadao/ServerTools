@@ -20,12 +20,12 @@
         </Grid.RowDefinitions>
         <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}"
                Margin="15">
-            Configurações
+            Settings
         </TextBlock>
         <StackPanel Grid.Row="1">
             <TextBlock Style="{DynamicResource MaterialDesignBody1TextBlock}"
                    Margin="5">
-            Tema Escuro
+            Dark Theme
             </TextBlock>
             <ToggleButton Margin="5"
                           HorizontalAlignment="Left"

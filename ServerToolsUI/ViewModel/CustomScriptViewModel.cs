@@ -183,7 +183,7 @@ namespace ServerToolsUI.ViewModel
             {
                 List<string> errors = new List<string>()
                 {
-                    "Informe o Script a ser utilizado"
+                    "Inform the Script to be used"
                 };
                 validationErrors["FilePath"] = errors;
             }
@@ -192,7 +192,7 @@ namespace ServerToolsUI.ViewModel
             {
                 List<string> errors = new List<string>()
                 {
-                    "Adicione ao menos 1 servidor para a execução do Script"
+                    "Add at least 1 server to run the script"
                 };
                 validationErrors["Server"] = errors;
             }
@@ -237,7 +237,7 @@ namespace ServerToolsUI.ViewModel
         {
             var folderDialog = new OpenFileDialog()
             {
-                Filter = "Arquivos de texto (*.txt)| *.txt"
+                Filter = "Text Files (*.txt)| *.txt"
             };
             folderDialog.FileOk += (object sender, System.ComponentModel.CancelEventArgs e) =>
             {
@@ -296,7 +296,7 @@ namespace ServerToolsUI.ViewModel
             {
                 var userMessage = new UserMessageView()
                 {
-                    DataContext = new UserMessageViewModel(string.Format("Falha ao abrir script: {0}", e.Message))
+                    DataContext = new UserMessageViewModel(string.Format("Fail to open the script: {0}", e.Message))
                 };
                 await DialogHost.Show(userMessage, "MainHost");
                 return;

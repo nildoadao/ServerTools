@@ -41,7 +41,7 @@ namespace ServerToolsUI.ViewModel
             {
                 List<string> errors = new List<string>()
                 {
-                    "Informe o Arquivo SCP a ser utilizado"
+                    "Inform an SCP File to be used"
                 };
                 validationErrors["FilePath"] = errors;
             }
@@ -50,7 +50,7 @@ namespace ServerToolsUI.ViewModel
             {
                 List<string> errors = new List<string>()
                 {
-                    "Adicione ao menos 1 servidor para o Import"
+                    "Add at least 1 server to perform an import"
                 };
                 validationErrors["Server"] = errors;
             }

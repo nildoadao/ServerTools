@@ -42,7 +42,7 @@ namespace ServerToolsUI.ViewModel
             {
                 List<string> errors = new List<string>()
                 {
-                    "Informe o Firmware a ser utilizado"
+                    "Inform the Firmware file"
                 };
                 validationErrors["FirmwarePath"] = errors;               
             }
@@ -51,7 +51,7 @@ namespace ServerToolsUI.ViewModel
             {
                 List<string> errors = new List<string>()
                 {
-                    "Adicione ao menos 1 servidor para Update"
+                    "Add at least 1 server for the Update"
                 };
                 validationErrors["Server"] = errors;
             }

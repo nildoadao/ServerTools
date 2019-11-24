@@ -12,7 +12,6 @@ D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\App.baml
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\ServerToolsUI.g.resources
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\ServerToolsUI.Properties.Resources.resources
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\ServerToolsUI.csproj.GenerateResource.cache
-D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\ServerToolsUI.csproj.CoreCompileInputs.cache
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\ServerToolsUI.csproj.CopyComplete
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\ServerToolsUI.exe
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\ServerToolsUI.pdb

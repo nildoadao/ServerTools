@@ -48,7 +48,7 @@
                        FontSize="28" Margin="15" 
                        Style="{DynamicResource MaterialDesignTitleTextBlock}" 
                        Grid.ColumnSpan="3">
-                Importar Arquivo SCP
+                Import SCP File
             </TextBlock>
         </StackPanel>
 
@@ -56,7 +56,7 @@
                   Grid.Row="1"
                   Grid.Column="1"
                   Style="{DynamicResource MaterialDesignCardGroupBox}" 
-                  Header="Dados do Import" 
+                  Header="Import Info" 
                   Background="Transparent">
             <Grid>
                 <Grid.RowDefinitions>
@@ -68,7 +68,7 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Arquivo:" 
+                <TextBlock Text="File:" 
                                Style="{DynamicResource MaterialDesignBody1TextBlock}" 
                                Margin="5" 
                                VerticalAlignment="Center" 
@@ -76,14 +76,14 @@
                 <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left">
                     <TextBox Style="{DynamicResource MaterialDesignTextBox}" 
                              Width="200" Margin="5" 
-                             materialDesign:HintAssist.Hint="Local do arquivo" 
+                             materialDesign:HintAssist.Hint="Path" 
                              VerticalAlignment="Center"
                              Text="{Binding FilePath, ValidatesOnNotifyDataErrors=True}"/>
                     <Button Style="{DynamicResource MaterialDesignFlatButton}" 
                             Margin="5" 
                             VerticalAlignment="Center"
                             Command="{Binding OpenFolderCommand}"
-                            materialDesign:HintAssist.Hint="Selecionar Firmware">
+                            materialDesign:HintAssist.Hint="Select Firmware">
                         <materialDesign:PackIcon Kind="FileFindOutline" 
                                                  Width="auto" 
                                                  Height="auto"/>
@@ -101,7 +101,7 @@
                               VerticalAlignment="Center"
                               Name="ModeCombobox"
                               SelectedIndex="{Binding SelectedTarget}">
-                    <ComboBoxItem Content="Tudo"/>
+                    <ComboBoxItem Content="All"/>
                     <ComboBoxItem Content="System"/>
                     <ComboBoxItem Content="BIOS"/>
                     <ComboBoxItem Content="IDRAC"/>
@@ -110,7 +110,7 @@
                     <ComboBoxItem Content="Lifecycle"/>
                     <ComboBoxItem Content="RAID"/>
                 </ComboBox>
-                <TextBlock Text="Modo de desligamento:"
+                <TextBlock Text="Shutdown Mode:"
                            Grid.Row="2"
                            Style="{DynamicResource MaterialDesignBody1TextBlock}"
                            Margin="5"
@@ -141,7 +141,7 @@
                     <TextBox  Margin="5" Style="{DynamicResource MaterialDesignTextBox}" 
                               HorizontalAlignment="Left"
                               Width="200"
-                              materialDesign:HintAssist.Hint="IP ou Hostname"                                   
+                              materialDesign:HintAssist.Hint="IP or Hostname"                                   
                               VerticalAlignment="Center"
                               Text="{Binding Server, ValidatesOnNotifyDataErrors=True}">
                     </TextBox>
@@ -149,7 +149,7 @@
                             Style="{DynamicResource MaterialDesignFloatingActionButton}" 
                             Width="40" Height="40" 
                             HorizontalAlignment="Left" 
-                            ToolTip="Adicionar Servidor"
+                            ToolTip="Add Server"
                             IsDefault="True"
                             VerticalAlignment="Center" Margin="5"
                             Command="{Binding AddServerCommand}">
@@ -158,7 +158,7 @@
                     <Button Style="{DynamicResource MaterialDesignFlatButton}" 
                             HorizontalAlignment="Left" 
                             VerticalAlignment="Center" 
-                            ToolTip="Adicionar Lista"
+                            ToolTip="Add List"
                             Margin="5"
                             Command="{Binding OpenServerListCommand}">
                         <materialDesign:PackIcon 
@@ -176,7 +176,7 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Margin="15">
-                Nenhum servidor adicionado.
+                No Server Added.
             </TextBlock>
         </materialDesign:Card>
         <materialDesign:Card Grid.Row="2"
@@ -233,7 +233,7 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Margin="15">
-                Nenhum Job.
+                No Job.
             </TextBlock>
         </materialDesign:Card>
         <materialDesign:Card Grid.Row="2"
@@ -245,12 +245,12 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="15"
                                VerticalAlignment="Center">
-                        Jobs em Execução
+                        Jobs Running
                         </TextBlock>
                         <Button Margin="15"
                             Command="{Binding ClearJobsCommand}"
-                            materialDesign:HintAssist.Hint="Limpar Jobs">
-                            Limpar Jobs
+                            materialDesign:HintAssist.Hint="Clear Jobs">
+                            Clear Jobs
                         </Button>
                     </StackPanel>
                     <DataGrid Name="JobsDataGrid"                 
@@ -260,13 +260,13 @@
                           IsReadOnly="True"                          
                   ItemsSource="{Binding Monitor.Jobs}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Servidor" Binding="{Binding Server}"/>
-                            <DataGridTextColumn Header="Serial" Binding="{Binding SerialNumber}"/>
+                            <DataGridTextColumn Header="Server" Binding="{Binding Server}"/>
+                            <DataGridTextColumn Header="Serial Number" Binding="{Binding SerialNumber}"/>
                             <DataGridTextColumn Header="Job Id" Binding="{Binding JobId}"/>
-                            <DataGridTextColumn Header="Nome" Binding="{Binding JobName}"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding JobName}"/>
                             <DataGridTextColumn Header="Status" Binding="{Binding JobStatus}"/>
-                            <DataGridTextColumn Header="% Concluido" Binding="{Binding JobPercentComplete}"/>
-                            <DataGridTextColumn Header="Mensagem" Binding="{Binding JobMessage}"/>
+                            <DataGridTextColumn Header="%" Binding="{Binding JobPercentComplete}"/>
+                            <DataGridTextColumn Header="Message" Binding="{Binding JobMessage}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>

@@ -22,7 +22,7 @@
                    Style="{DynamicResource MaterialDesignTitleTextBlock}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center">
-            Insira os servidores
+            Insert Servers
         </TextBlock>
         <materialDesign:Card Grid.Row="1"
                              Margin="15">
@@ -30,7 +30,7 @@
                      Margin="5"
                      MaxHeight="300"
                      MinWidth="300"
-                     materialDesign:HintAssist.Hint="Escreva ou cole uma lista de servidores."
+                     materialDesign:HintAssist.Hint="Write or paste servers"
                      Text="{Binding Servers}">
             </TextBox>
         </materialDesign:Card>
@@ -39,22 +39,22 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             
-            <Button ToolTip="Cancelar"
+            <Button ToolTip="Cancel"
                     Margin="15"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Style="{DynamicResource MaterialDesignFlatButton}"
                     Command="{Binding CancelCommand}">
-                Cancelar
+                Cancel
             </Button>
             <Button IsDefault="True"
-                    ToolTip="Adicionar Lista"
+                    ToolTip="Add List"
                     Margin="15"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Style="{DynamicResource MaterialDesignFlatButton}"
                     Command="{Binding CloseCommand}">
-                Adicionar
+                Add
             </Button>
         </StackPanel>
 

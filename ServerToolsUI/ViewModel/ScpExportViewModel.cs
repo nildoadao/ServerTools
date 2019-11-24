@@ -31,7 +31,7 @@ namespace ServerToolsUI.ViewModel
             {
                 List<string> errors = new List<string>()
                 {
-                    "Informe o Host para export"
+                    "Inform an host to export"
                 };
                 validationErrors["Host"] = errors;
             }
@@ -198,7 +198,7 @@ namespace ServerToolsUI.ViewModel
                 ExportFinished = true;
                 NoExportCardVisible = true;
                 ExportFail = false;
-                ExportMessage = string.Format("Export executado com sucesso, salvo em {0}",
+                ExportMessage = string.Format("Export completed, save in {0}",
                     Path.Combine(downloadsFolder, fileName));
             }
             catch(Exception ex)

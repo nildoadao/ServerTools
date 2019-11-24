@@ -47,7 +47,7 @@
             <TextBlock HorizontalAlignment="Left" 
                        FontSize="28" Margin="15" 
                        Style="{DynamicResource MaterialDesignTitleTextBlock}">
-                Executar Script Customizado
+                Custom Script
             </TextBlock>
         </StackPanel>
 
@@ -65,7 +65,7 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Arquivo:" 
+                <TextBlock Text="File:" 
                                Style="{DynamicResource MaterialDesignBody1TextBlock}" 
                                Margin="5" 
                                VerticalAlignment="Center" 
@@ -73,14 +73,14 @@
                 <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left">
                     <TextBox Style="{DynamicResource MaterialDesignTextBox}" 
                              Width="200" Margin="5" 
-                             materialDesign:HintAssist.Hint="Local do arquivo" 
+                             materialDesign:HintAssist.Hint="Path" 
                              VerticalAlignment="Center"
                              Text="{Binding FilePath, ValidatesOnNotifyDataErrors=True}"/>
                     <Button Style="{DynamicResource MaterialDesignFlatButton}" 
                             Margin="5" 
                             VerticalAlignment="Center"
                             Command="{Binding OpenFolderCommand}"
-                            materialDesign:HintAssist.Hint="Selecionar Firmware">
+                            materialDesign:HintAssist.Hint="Select Firmware">
                         <materialDesign:PackIcon Kind="FileFindOutline" 
                                                  Width="auto" 
                                                  Height="auto"/>
@@ -90,7 +90,7 @@
         </GroupBox>
         <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" 
                   Grid.Row="1"
-                  Header="Adicionar Servidores" 
+                  Header="Add Servers" 
                   Margin="15">
             <Grid>
                 <Grid.RowDefinitions>
@@ -101,7 +101,7 @@
                     <TextBox  Margin="5" Style="{DynamicResource MaterialDesignTextBox}" 
                               HorizontalAlignment="Left"
                               Width="200"
-                              materialDesign:HintAssist.Hint="IP ou Hostname"                                   
+                              materialDesign:HintAssist.Hint="IP or Hostname"                                   
                               VerticalAlignment="Center"
                               Text="{Binding Server, ValidatesOnNotifyDataErrors=True}">
                     </TextBox>
@@ -109,7 +109,7 @@
                             Style="{DynamicResource MaterialDesignFloatingActionButton}" 
                             Width="40" Height="40" 
                             HorizontalAlignment="Left" 
-                            ToolTip="Adicionar Servidor"
+                            ToolTip="Add Server"
                             IsDefault="True"
                             Command="{Binding AddServerCommand}"
                             VerticalAlignment="Center" Margin="5">
@@ -119,7 +119,7 @@
                             HorizontalAlignment="Left" 
                             VerticalAlignment="Center" 
                             Command="{Binding OpenServerListCommand}"
-                            ToolTip="Adicionar Lista"
+                            ToolTip="Add List"
                             Margin="5">
                         <materialDesign:PackIcon 
                             Kind="FormatListNumbered"
@@ -136,7 +136,7 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Margin="15">
-                Nenhum servidor adicionado.
+                No Server Added.
             </TextBlock>
         </materialDesign:Card>
         <materialDesign:Card Grid.Row="2"
@@ -183,7 +183,7 @@
                 VerticalAlignment="Bottom"
                 Command="{Binding RunScriptCommand}"
                 materialDesign:HintAssist.Hint="Executar Scipt">
-            Executar
+            Execute
         </Button>
         <materialDesign:Card
             Grid.Row="2"
@@ -193,7 +193,7 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Margin="15">
-                Nenhum Job.
+                No Job.
             </TextBlock>
         </materialDesign:Card>
         <materialDesign:Card Grid.Row="2"
@@ -206,17 +206,17 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="15"
                                VerticalAlignment="Center">
-                        Jobs em Execução
+                        Jobs Running
                         </TextBlock>
                         <Button Margin="15"
                             Command="{Binding CancelCommand}"
-                            materialDesign:HintAssist.Hint="Cancelar">
-                            Cancelar
+                            materialDesign:HintAssist.Hint="Cancel">
+                            Cancel
                         </Button>
                         <Button Margin="15"
                             Command="{Binding ClearJobsCommand}"
-                            materialDesign:HintAssist.Hint="Limpar Jobs">
-                            Limpar Jobs
+                            materialDesign:HintAssist.Hint="Clear Jobs">
+                            Clear Jobs
                         </Button>
                     </StackPanel>
                     <DataGrid Name="JobsDataGrid"                 
@@ -226,9 +226,9 @@
                           IsReadOnly="True"                          
                   ItemsSource="{Binding Jobs}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Servidor" Binding="{Binding Server}"/>
+                            <DataGridTextColumn Header="Server" Binding="{Binding Server}"/>
                             <DataGridTextColumn Header="Status" Binding="{Binding JobStatus}"/>
-                            <DataGridTextColumn Header="Mensagem" Binding="{Binding JobMessage}"/>
+                            <DataGridTextColumn Header="Message" Binding="{Binding JobMessage}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>

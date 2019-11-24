@@ -48,14 +48,14 @@
                        VerticalAlignment="Center"
                    FontSize="28" Margin="15" 
                    Style="{DynamicResource MaterialDesignTitleTextBlock}" 
-                   Grid.ColumnSpan="3">Update de Firmware</TextBlock>
+                   Grid.ColumnSpan="3">Firmware Update</TextBlock>
         </StackPanel>
 
         <GroupBox Margin="15"
                   Grid.Row="1"
                   Grid.Column="1"
                   Style="{DynamicResource MaterialDesignCardGroupBox}" 
-                  Header="Selecionar o Firmware" 
+                  Header="Select Firmware File" 
                   Background="Transparent">
             <Grid>
                 <Grid.RowDefinitions>
@@ -66,7 +66,7 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Arquivo:" 
+                <TextBlock Text="File:" 
                                Style="{DynamicResource MaterialDesignBody1TextBlock}" 
                                Margin="5" 
                                VerticalAlignment="Center" 
@@ -76,7 +76,7 @@
                             HorizontalAlignment="Left">
                     <TextBox Style="{DynamicResource MaterialDesignTextBox}" 
                                  Width="200" Margin="5" 
-                                 materialDesign:HintAssist.Hint="Local do arquivo" 
+                                 materialDesign:HintAssist.Hint="Path" 
                                  VerticalAlignment="Center"
                              Text="{Binding FirmwarePath, ValidatesOnNotifyDataErrors=True}"/>
                     <Button Style="{DynamicResource MaterialDesignFlatButton}" 
@@ -84,13 +84,13 @@
                             VerticalAlignment="Center"
                             Name="OpenFolderButton" 
                             Command="{Binding OpenFolderCommand}"
-                            ToolTip="Selecionar Arquivo">
+                            ToolTip="Select File">
                         <materialDesign:PackIcon Kind="FileFindOutline" 
                                                  Width="auto" 
                                                  Height="auto"/>
                     </Button>
                 </StackPanel>
-                <TextBlock Text="Modo de instalação:" 
+                <TextBlock Text="Install Mode:" 
                                Style="{DynamicResource MaterialDesignBody1TextBlock}" 
                                Margin="5" Grid.Row="1" 
                                HorizontalAlignment="Right" 
@@ -102,15 +102,15 @@
                               VerticalAlignment="Center"
                               Name="ModeCombobox"
                               SelectedIndex="{Binding SelectedMode}">
-                    <ComboBoxItem Content="Agora"/>
-                    <ComboBoxItem Content="Agora e reiniciar"/>
-                    <ComboBoxItem Content="Próximo boot"/>
+                    <ComboBoxItem Content="Now"/>
+                    <ComboBoxItem Content="Now and Reboot"/>
+                    <ComboBoxItem Content="Next boot"/>
                 </ComboBox>
             </Grid>
         </GroupBox>
         <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" 
                   Grid.Row="1"
-                  Header="Adicionar Servidores" 
+                  Header="Add Servers" 
                   Margin="15">
             <Grid>
                 <Grid.RowDefinitions>
@@ -121,7 +121,7 @@
                     <TextBox  Margin="5" Style="{DynamicResource MaterialDesignTextBox}" 
                               HorizontalAlignment="Left"
                               Width="200"
-                              materialDesign:HintAssist.Hint="IP ou Hostname"                                   
+                              materialDesign:HintAssist.Hint="IP or Hostname"                                   
                               VerticalAlignment="Center"
                               Text="{Binding Server}">
                     </TextBox>
@@ -131,13 +131,13 @@
                             IsDefault="True"
                             VerticalAlignment="Center" Margin="5"
                             Command="{Binding AddServerCommand}"
-                            ToolTip="Adicionar Servidor">
+                            ToolTip="Add Servers">
                         <materialDesign:PackIcon Kind="Plus" Width="auto" Height="auto"/>
                     </Button>
                     <Button Style="{DynamicResource MaterialDesignFlatButton}" 
                             HorizontalAlignment="Left" 
                             VerticalAlignment="Center" 
-                            ToolTip="Adicionar Lista"
+                            ToolTip="Add List"
                             Margin="5"
                             Command="{Binding OpenServerListCommand}">
                         <materialDesign:PackIcon 
@@ -155,7 +155,7 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Margin="15">
-                Nenhum servidor adicionado.
+                No Server Added.
             </TextBlock>
         </materialDesign:Card>
         <materialDesign:Card Grid.Row="2"
@@ -201,9 +201,9 @@
                 Margin="15"
                 Grid.Row="3"
                 VerticalAlignment="Bottom"
-                ToolTip="Iniciar Update"
+                ToolTip="Update"
                 Command="{Binding UpdateFirmwareCommand}">
-            Atualizar
+            Update
         </Button>
         <materialDesign:Card
             Grid.Row="2"
@@ -214,7 +214,7 @@
             <TextBlock
                 VerticalAlignment="Center"
                 Margin="15">
-                Nenhum Job.
+                No Job.
             </TextBlock>
         </materialDesign:Card>
         <materialDesign:Card Grid.Row="2"
@@ -226,17 +226,17 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="15"
                                VerticalAlignment="Center">
-                        Jobs em Execução
+                        Jobs Running
                         </TextBlock>
                         <Button Margin="15"
                             Command="{Binding CancelCommand}"
                             materialDesign:HintAssist.Hint="Cancelar">
-                            Cancelar
+                            Cancel
                         </Button>
                         <Button Margin="15"
                             Command="{Binding ClearJobsCommand}"
                             materialDesign:HintAssist.Hint="Limpar Jobs">
-                            Limpar Jobs
+                            Clear Jobs
                         </Button>
                     </StackPanel>
                     <DataGrid Name="JobsDataGrid"                 
@@ -246,13 +246,13 @@
                           IsReadOnly="True"                          
                   ItemsSource="{Binding Monitor.Jobs}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Servidor" Binding="{Binding Server}"/>
-                            <DataGridTextColumn Header="Serial" Binding="{Binding SerialNumber}"/>
+                            <DataGridTextColumn Header="Server" Binding="{Binding Server}"/>
+                            <DataGridTextColumn Header="Serial Number" Binding="{Binding SerialNumber}"/>
                             <DataGridTextColumn Header="Job Id" Binding="{Binding JobId}"/>
-                            <DataGridTextColumn Header="Nome" Binding="{Binding JobName}"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding JobName}"/>
                             <DataGridTextColumn Header="Status" Binding="{Binding JobStatus}"/>
-                            <DataGridTextColumn Header="% Concluido" Binding="{Binding JobPercentComplete}"/>
-                            <DataGridTextColumn Header="Mensagem" Binding="{Binding JobMessage}"/>
+                            <DataGridTextColumn Header="%" Binding="{Binding JobPercentComplete}"/>
+                            <DataGridTextColumn Header="Message" Binding="{Binding JobMessage}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>

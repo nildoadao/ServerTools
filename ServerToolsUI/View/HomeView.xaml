@@ -22,7 +22,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <GroupBox Margin="15" Header="Funções com Redfish">
+        <GroupBox Margin="15" Header="Redfish Fuctions">
             <WrapPanel Margin="15">
                 <StackPanel Orientation="Vertical"
                             Margin="5">
@@ -40,7 +40,7 @@
                     </Button>
                     <TextBlock Margin="5"
                                Style="{DynamicResource MaterialDesignBody1TextBlock}">
-                        Update de Firmware
+                        Firmware Update
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Vertical"
@@ -58,7 +58,7 @@
                     </Button>
                     <TextBlock Margin="5"
                                Style="{DynamicResource MaterialDesignBody1TextBlock}">
-                        Exportar Arquivo SCP
+                        Export SCP File
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Vertical"
@@ -76,12 +76,12 @@
                     </Button>
                     <TextBlock Margin="5"
                                Style="{DynamicResource MaterialDesignBody1TextBlock}">
-                        Importar Arquivo SCP
+                        Import SCP File
                     </TextBlock>
                 </StackPanel>
             </WrapPanel>
         </GroupBox>
-        <GroupBox Grid.Row="1" Margin="15" Header="Funções com Racadm">
+        <GroupBox Grid.Row="1" Margin="15" Header="Racadm Functions">
             <WrapPanel Margin="15">
                 <StackPanel Orientation="Vertical"
                             Margin="5">
@@ -99,7 +99,7 @@
                     </Button>
                     <TextBlock Margin="5"
                                Style="{DynamicResource MaterialDesignBody1TextBlock}">
-                        Script Customizado
+                        Custom Script
                     </TextBlock>
                 </StackPanel>
             </WrapPanel>
