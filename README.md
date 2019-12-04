@@ -19,12 +19,12 @@ Minimum iDRAC 7/8 FW 2.40.40.40, iDRAC9 FW 3.00.00.00
 
 # Home Page
 
-![alt text](https://github.com/nildoadao/ServerTools/blob/master/ServerToolsUI/Prints/home_page.png)
+![alt text](https://github.com/nildoadao/ServerTools/blob/master/ServerToolsUI/Prints/Home%20Page.png)
 
-# Add/Remove Multiple servers
+# Track Multiple Jobs Simultaneously 
 
-![alt text](https://github.com/nildoadao/ServerTools/blob/master/ServerToolsUI/Prints/add_servers.gif)
+![alt text](https://github.com/nildoadao/ServerTools/blob/master/ServerToolsUI/Prints/Import%20SCP.png)
 
-# Dell Firmware Update
+# Perform Firmware Updates from local files (.exe)
 
-![alt text](https://github.com/nildoadao/ServerTools/blob/master/ServerToolsUI/Prints/firmware_update.png)
+![alt text](https://github.com/nildoadao/ServerTools/blob/master/ServerToolsUI/Prints/Firmware%20Update.png)
