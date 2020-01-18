@@ -7,14 +7,14 @@
     <framework targetVersion="4.5.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="ServerToolsUI.exe.manifest" size="8189">
+    <dependentAssembly dependencyType="install" codebase="ServerToolsUI.exe.manifest" size="8887">
       <assemblyIdentity name="ServerToolsUI.exe" version="1.0.0.9" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>skukckJnJTtLPtwAPL9KE09M6+JO0J0dedCXicp77Gk=</dsig:DigestValue>
+        <dsig:DigestValue>NqWiSIDNCWVpBs1d73U1qD/yaBvW0YC/iui0k8exDkk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

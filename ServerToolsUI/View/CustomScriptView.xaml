@@ -126,6 +126,18 @@
                             Width="auto"
                             Height="auto"/>
                     </Button>
+                    <Button
+                        Style="{DynamicResource MaterialDesignFlatButton}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        ToolTip="Add CSV"
+                        Margin="5"
+                        Command="{Binding OpenCsvFileCommand}">
+                        <materialDesign:PackIcon
+                            Kind="FileCsv"
+                            Width="auto"
+                            Height="auto"/>
+                    </Button>
                 </StackPanel>
             </Grid>
         </GroupBox>

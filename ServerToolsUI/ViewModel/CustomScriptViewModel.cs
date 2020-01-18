@@ -1,4 +1,5 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using LumenWorks.Framework.IO.Csv;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using ServerToolsIdrac.Racadm.Actions;
 using ServerToolsIdrac.Racadm.Model;
@@ -31,7 +32,11 @@ namespace ServerToolsUI.ViewModel
             RunScriptCommand = new RelayCommand(RunScript);
             ClearJobsCommand = new RelayCommand(ClearJobs);
             CancelCommand = new RelayCommand(Cancel);
+            OpenCsvFileCommand = new RelayCommand(OpenCsvFile);
+            passwords = new Dictionary<string, NetworkCredential>();
         }
+
+        private Dictionary<string, NetworkCredential> passwords;
 
         private ObservableCollection<string> servers;
         public ObservableCollection<string> Servers
@@ -169,6 +174,7 @@ namespace ServerToolsUI.ViewModel
         public RelayCommand RunScriptCommand { get; private set; }
         public RelayCommand ClearJobsCommand { get; private set; }
         public RelayCommand CancelCommand { get; private set; }
+        public RelayCommand OpenCsvFileCommand { get; private set; }
 
         private void Cancel(object parameter)
         {
@@ -224,6 +230,7 @@ namespace ServerToolsUI.ViewModel
             if (!HasJobs)
             {
                 Servers.Remove((string)parameter);
+                passwords.Remove((string)parameter);
                 HasServers = servers.Any();
             }
         }
@@ -271,20 +278,63 @@ namespace ServerToolsUI.ViewModel
             catch { } // Dialog return an empty List
         }
 
+        private async void OpenCsvFile(object parameter)
+        {
+            string file = string.Empty;
+
+            var folderDialog = new OpenFileDialog()
+            {
+                Filter = "CSV Files (*.csv)| *.csv"
+            };
+            folderDialog.FileOk += (object sender, System.ComponentModel.CancelEventArgs e) =>
+            {
+                OpenFileDialog dialog = (OpenFileDialog)sender;
+                file = dialog.FileName;
+            };
+            folderDialog.ShowDialog();
+
+            if (string.IsNullOrEmpty(file))
+                return;
+
+            try
+            {
+                using(CsvReader csv = new CsvReader(new StreamReader(file), false, ';'))
+                {
+                    while (csv.ReadNextRecord())
+                    {
+                        Servers.Add(csv[0]);
+                        passwords.Add(csv[0], new NetworkCredential(csv[1], csv[2]));
+                    }
+
+                    HasServers = true;
+                }
+            }
+            catch(Exception e)
+            {
+                var userMessage = new UserMessageView()
+                {
+                    DataContext = new UserMessageViewModel(string.Format("Fail to open the script: {0}", e.Message))
+                };
+                await DialogHost.Show(userMessage, "MainHost");
+                return;
+            }
+
+        }
+
         private async void RunScript(object parameter)
         {
             if (!Validate())
                 return;
 
-            var view = new CredentialsView()
-            {
-                DataContext = new CredentialsViewModel()
-            };
+            //var view = new CredentialsView()
+            //{
+            //    DataContext = new CredentialsViewModel()
+            //};
 
-            NetworkCredential credentials = (NetworkCredential)await DialogHost.Show(view, "MainHost");
+            //NetworkCredential credentials = (NetworkCredential)await DialogHost.Show(view, "MainHost");
 
-            if (credentials == null)
-                return;
+            //if (credentials == null)
+            //    return;
 
             string[] script;
 
@@ -309,7 +359,7 @@ namespace ServerToolsUI.ViewModel
             {
                 JobsDataGridInfo job = new JobsDataGridInfo() { Server = item, JobStatus = "Running" };
                 Jobs.Add(job);
-                SshAction action = new SshAction(item, credentials);
+                SshAction action = new SshAction(item, passwords[item]);
                 try
                 {
                     SshResponse response = await action.RunScriptAsync(script);
