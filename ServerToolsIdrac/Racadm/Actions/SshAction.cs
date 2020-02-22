@@ -1,4 +1,5 @@
 ﻿using Renci.SshNet;
+using Renci.SshNet.Common;
 using ServerToolsIdrac.Racadm.Model;
 using ServerToolsIdrac.Racadm.Util;
 using ServerToolsIdrac.Redfish.Util;
@@ -22,6 +23,17 @@ namespace ServerToolsIdrac.Racadm.Actions
             this.credential = credential;
         }
 
+        private void HandleKeyEvent(object sender, AuthenticationPromptEventArgs e)
+        {
+            foreach (AuthenticationPrompt prompt in e.Prompts)
+            {
+                if (prompt.Request.IndexOf("Password:", StringComparison.InvariantCultureIgnoreCase) != -1)
+                {
+                    prompt.Response = credential.Password;
+                }
+            }
+        }
+
         public async Task<SshResponse> RunCommandAsync(string command)
         {
             SshResponse result = null;
@@ -31,7 +43,11 @@ namespace ServerToolsIdrac.Racadm.Actions
 
             await Task.Run(() =>
             {
-                using (SshClient client = new SshClient(host, credential.UserName, credential.Password))
+                KeyboardInteractiveAuthenticationMethod keyboardbAuthentication = new KeyboardInteractiveAuthenticationMethod(credential.UserName);
+                keyboardbAuthentication.AuthenticationPrompt += new EventHandler<AuthenticationPromptEventArgs>(HandleKeyEvent);
+                ConnectionInfo connectionInfo = new ConnectionInfo(host, 22, credential.UserName, keyboardbAuthentication);
+
+                using (SshClient client = new SshClient(connectionInfo))
                 {
                     try
                     {
@@ -58,7 +74,11 @@ namespace ServerToolsIdrac.Racadm.Actions
 
             await Task.Run(() =>
             {
-                using (SshClient client = new SshClient(host, credential.UserName, credential.Password))
+                KeyboardInteractiveAuthenticationMethod keyboardbAuthentication = new KeyboardInteractiveAuthenticationMethod(credential.UserName);
+                keyboardbAuthentication.AuthenticationPrompt += new EventHandler<AuthenticationPromptEventArgs>(HandleKeyEvent);
+                ConnectionInfo connectionInfo = new ConnectionInfo(host, 22, credential.UserName, keyboardbAuthentication);
+
+                using (SshClient client = new SshClient(connectionInfo))
                 {
                     try
                     {
@@ -73,7 +93,7 @@ namespace ServerToolsIdrac.Racadm.Actions
                                 break;
                         }
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         result = new SshResponse(e.Message, -1);
                     }

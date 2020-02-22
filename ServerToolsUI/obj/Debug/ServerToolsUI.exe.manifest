@@ -102,14 +102,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ServerToolsIdrac.dll" size="39424">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ServerToolsIdrac.dll" size="39936">
       <assemblyIdentity name="ServerToolsIdrac" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>XSPKTCX2DUWrujZKYjo4OPKVTFENoYrr8+nkXmWa8aM=</dsig:DigestValue>
+        <dsig:DigestValue>8b3Tx6MCGhsp6vdMgNzYytHmJrVli6yC9p4pD4VT8HY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
