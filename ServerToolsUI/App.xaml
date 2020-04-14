@@ -45,6 +45,9 @@
             <DataTemplate DataType="{x:Type ViewModels:CustomScriptViewModel}">
                 <Views:CustomScriptView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:GetProcessorAndCoreViewModel}">
+                <Views:GetProcessorAndCoreView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

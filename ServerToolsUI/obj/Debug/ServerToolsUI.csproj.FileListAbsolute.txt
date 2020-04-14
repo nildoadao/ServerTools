@@ -52,3 +52,8 @@ D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\ServerToolsUI.exe.manifest
 D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\ServerToolsUI.application
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\ServerToolsUI.exe.manifest
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\ServerToolsUI.application
+D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\HtmlAgilityPack.dll
+D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\HtmlAgilityPack.pdb
+D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\HtmlAgilityPack.xml
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\GetProcessorAndCoreView.g.cs
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\GetProcessorAndCoreView.baml

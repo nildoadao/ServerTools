@@ -19,6 +19,7 @@ namespace ServerToolsUI.ViewModel
             NavigationUtil.Register("ScpExport", GoToScpExport);
             NavigationUtil.Register("ScpImport", GoToScpImport);
             NavigationUtil.Register("CustomScript", GoToCustomScript);
+            NavigationUtil.Register("GetProcessorAndCore", GoToGetProcessorAndCore);
             SettingsCommand = new RelayCommand(Settings);
         }
 
@@ -89,6 +90,11 @@ namespace ServerToolsUI.ViewModel
         private void GoToScpImport(object parameter)
         {
             CurrentView = new ScpImportViewModel();
+        }
+
+        private void GoToGetProcessorAndCore(object parameter)
+        {
+            CurrentView = new GetProcessorAndCoreViewModel();
         }
 
         private void Settings(object parameter)
