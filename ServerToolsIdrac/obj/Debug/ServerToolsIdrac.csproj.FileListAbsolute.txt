@@ -13,3 +13,4 @@ D:\Visual Studio\ServerTools\ServerToolsIdrac\obj\Debug\ServerToolsIdrac.csprojA
 D:\Visual Studio\ServerTools\ServerToolsIdrac\bin\Debug\HtmlAgilityPack.dll
 D:\Visual Studio\ServerTools\ServerToolsIdrac\bin\Debug\HtmlAgilityPack.pdb
 D:\Visual Studio\ServerTools\ServerToolsIdrac\bin\Debug\HtmlAgilityPack.xml
+D:\Visual Studio\ServerTools\ServerToolsIdrac\obj\Debug\ServerToolsIdrac.csproj.CoreCompileInputs.cache

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Visual Studio\ServerTools\ServerToolsUI\App.xaml
-11576341620
+12954933494
 
-34-750797433
+36-1350280165
 18-1944638343
-View\CredentialsView.xaml;View\CustomScriptView.xaml;View\FirmwareUpdateView.xaml;View\GetProcessorAndCoreView.xaml;View\HomeView.xaml;View\MainView.xaml;View\ScpExportView.xaml;View\ScpImportView.xaml;View\ServersListView.xaml;View\SettingsView.xaml;View\UserMessageView.xaml;
+View\CredentialsView.xaml;View\CustomScriptView.xaml;View\FirmwareUpdateView.xaml;View\GetProcessorAndCoreView.xaml;View\GetProcessorInternetView.xaml;View\HomeView.xaml;View\MainView.xaml;View\ScpExportView.xaml;View\ScpImportView.xaml;View\ServersListView.xaml;View\SettingsView.xaml;View\UserMessageView.xaml;
 
 False
 

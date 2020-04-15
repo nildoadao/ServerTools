@@ -20,6 +20,7 @@ namespace ServerToolsUI.ViewModel
             NavigationUtil.Register("ScpImport", GoToScpImport);
             NavigationUtil.Register("CustomScript", GoToCustomScript);
             NavigationUtil.Register("GetProcessorAndCore", GoToGetProcessorAndCore);
+            NavigationUtil.Register("GetProcessorInternet", GoToGetProcessorInternet);
             SettingsCommand = new RelayCommand(Settings);
         }
 
@@ -95,6 +96,11 @@ namespace ServerToolsUI.ViewModel
         private void GoToGetProcessorAndCore(object parameter)
         {
             CurrentView = new GetProcessorAndCoreViewModel();
+        }
+
+        private void GoToGetProcessorInternet(object parameter)
+        {
+            CurrentView = new GetProcessorInternetViewModel();
         }
 
         private void Settings(object parameter)

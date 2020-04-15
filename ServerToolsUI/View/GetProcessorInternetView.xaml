@@ -1,0 +1,228 @@
+﻿<Page x:Class="ServerToolsUI.View.GetProcessorInternetView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ServerToolsUI.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="1000"
+      Title="GetProcessorInternetView"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      Background="{DynamicResource MaterialDesignPaper}"
+      TextElement.FontWeight="Medium"
+      TextElement.FontSize="14"
+      FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto">
+
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"
+                              MinWidth="360"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <GridSplitter Grid.Row="1"
+                      Grid.RowSpan="3"
+                      ResizeDirection="Columns"
+                      Width="5">
+        </GridSplitter>
+        <StackPanel Orientation="Horizontal"
+                    Grid.ColumnSpan="3">
+            <Button Margin="15"
+                    VerticalAlignment="Center"
+                    Command="{Binding BackCommand}"
+                    Style="{DynamicResource MaterialDesignFlatButton}"
+                    materialDesign:HintAssist.Hint="Voltar">
+                <materialDesign:PackIcon Kind="ArrowLeftCircleOutline"
+                                         Width="auto"
+                                         Height="auto"/>
+            </Button>
+            <TextBlock HorizontalAlignment="Left" 
+                       FontSize="28" Margin="15" 
+                       Style="{DynamicResource MaterialDesignTitleTextBlock}">
+                Modelo Processador
+            </TextBlock>
+        </StackPanel>
+
+        <GroupBox Margin="15"
+                  Grid.Row="1"
+                  Grid.Column="1"
+                  Style="{DynamicResource MaterialDesignCardGroupBox}" 
+                  Header="Fabricante" 
+                  Background="Transparent">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Style="{DynamicResource MaterialDesignFloatingHintComboBox}" 
+                              Width="200" Margin="5" 
+                              Grid.Row="1" Grid.Column="1" 
+                              HorizontalAlignment="Left" 
+                              VerticalAlignment="Center"
+                              Name="ModeCombobox"
+                              SelectedIndex="{Binding SelectedManufacturer}">
+                    <ComboBoxItem Content="Dell"/>
+                    <ComboBoxItem Content="HPE"/>
+                </ComboBox>
+            </Grid>
+        </GroupBox>
+        <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" 
+                  Grid.Row="1"
+                  Header="Adicionar Serial Number" 
+                  Margin="15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox  Margin="5" Style="{DynamicResource MaterialDesignTextBox}" 
+                              HorizontalAlignment="Left"
+                              Width="200"
+                              materialDesign:HintAssist.Hint="Serial Number"                                   
+                              VerticalAlignment="Center"
+                              Text="{Binding Server, ValidatesOnNotifyDataErrors=True}">
+                    </TextBox>
+                    <Button Name="AddServerButton" 
+                            Style="{DynamicResource MaterialDesignFloatingActionButton}" 
+                            Width="40" Height="40" 
+                            HorizontalAlignment="Left" 
+                            ToolTip="Add Server"
+                            IsDefault="True"
+                            Command="{Binding AddServerCommand}"
+                            VerticalAlignment="Center" Margin="5">
+                        <materialDesign:PackIcon Kind="Plus" Width="auto" Height="auto"/>
+                    </Button>
+                    <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center" 
+                            Command="{Binding OpenServerListCommand}"
+                            ToolTip="Add List"
+                            Margin="5">
+                        <materialDesign:PackIcon 
+                            Kind="FormatListNumbered"
+                            Width="auto"
+                            Height="auto"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+        <materialDesign:Card Grid.Row="2"
+                             Margin="15"
+                             Width="auto"
+                             Visibility="{Binding Path=NoServerCardVisible, Converter={StaticResource BoolToVis}}">
+            <TextBlock
+                VerticalAlignment="Center"
+                Margin="15">
+                No Server Added.
+            </TextBlock>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="2"
+                             Margin="15"
+                             Width="auto"
+                             Visibility="{Binding Path=HasServers, Converter={StaticResource BoolToVis}}">
+            <DataGrid Name="ServersDataGrid"
+                      AutoGenerateColumns="False" 
+                      Background="Transparent"
+                      CanUserAddRows="False" 
+                      CanUserDeleteRows="False" 
+                      CanUserResizeColumns="False"
+                      IsReadOnly="True" 
+                      ItemsSource="{Binding Servers}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+                        FontSize="12"
+                        Binding="{Binding}"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="DeleteButton" 
+                                    VerticalAlignment="Center"
+                                    Style="{DynamicResource MaterialDesignFlatButton}"
+                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}, Path=DataContext.RemoveServerCommand}"
+                                    CommandParameter="{Binding }">
+                                    <materialDesign:PackIcon Kind="MinusCircle" 
+                                                Width="14" 
+                                                Height="14" 
+                                                Foreground="Red"/>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                <DataGrid.RowHeight>
+                    34
+                </DataGrid.RowHeight>
+            </DataGrid>
+        </materialDesign:Card>
+
+        <Button Margin="15"
+                Grid.Row="3"
+                VerticalAlignment="Bottom"
+                Command="{Binding CollectDataCommand}"
+                materialDesign:HintAssist.Hint="Executar Scipt">
+            Execute
+        </Button>
+        <materialDesign:Card
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="15"
+            Visibility="{Binding Path=NoJobCardVisible, Converter={StaticResource BoolToVis}}">
+            <TextBlock
+                VerticalAlignment="Center"
+                Margin="15">
+                No Job.
+            </TextBlock>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="2"
+                             Grid.Column="1"
+                             Width="auto"
+                             Margin="15"
+                             Visibility="{Binding Path=HasJobs, Converter={StaticResource BoolToVis}}">
+            <ScrollViewer>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="15"
+                               VerticalAlignment="Center">
+                        Jobs Running
+                        </TextBlock>
+                        <Button Margin="15"
+                            Command="{Binding CancelCommand}"
+                            materialDesign:HintAssist.Hint="Cancel">
+                            Cancel
+                        </Button>
+                        <Button Margin="15"
+                            Command="{Binding ClearJobsCommand}"
+                            materialDesign:HintAssist.Hint="Clear Jobs">
+                            Clear Jobs
+                        </Button>
+                    </StackPanel>
+                    <DataGrid Name="JobsDataGrid"                 
+                          Margin="15" 
+                          HorizontalContentAlignment="Center"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"                          
+                  ItemsSource="{Binding Jobs}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Server" Binding="{Binding Server}"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding JobStatus}"/>
+                            <DataGridTextColumn Header="Message" Binding="{Binding JobMessage}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </ScrollViewer>
+        </materialDesign:Card>
+    </Grid>
+</Page>

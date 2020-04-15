@@ -104,6 +104,7 @@
     <Compile Include="ViewModel\CustomScriptViewModel.cs" />
     <Compile Include="ViewModel\FirmwareUpdateViewModel.cs" />
     <Compile Include="ViewModel\GetProcessorAndCoreViewModel.cs" />
+    <Compile Include="ViewModel\GetProcessorInternetViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ScpExportViewModel.cs" />
@@ -121,6 +122,9 @@
     </Compile>
     <Compile Include="View\GetProcessorAndCoreView.xaml.cs">
       <DependentUpon>GetProcessorAndCoreView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GetProcessorInternetView.xaml.cs">
+      <DependentUpon>GetProcessorInternetView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ScpExportView.xaml.cs">
       <DependentUpon>ScpExportView.xaml</DependentUpon>
@@ -150,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\GetProcessorAndCoreView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GetProcessorInternetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

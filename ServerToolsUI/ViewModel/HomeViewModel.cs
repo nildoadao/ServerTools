@@ -19,12 +19,14 @@ namespace ServerToolsUI.ViewModel
             FirmwareUpdatePageCommand = new RelayCommand(FirmwareUpdatePage);
             CustomScriptPageCommand = new RelayCommand(CustomScriptPage);
             GetProcessorAndCoreCommand = new RelayCommand(GetProcessorAndCorePage);
+            GetProcessorInternetCommand = new RelayCommand(GetProcessorInternetPage);
         }
         public RelayCommand ScpImportPageCommand { get; private set; }
         public RelayCommand ScpExportPageCommand { get; private set; }
         public RelayCommand FirmwareUpdatePageCommand { get; private set; }
         public RelayCommand CustomScriptPageCommand { get; private set; }
         public RelayCommand GetProcessorAndCoreCommand { get; private set; }
+        public RelayCommand GetProcessorInternetCommand { get; private set; }
         private void ScpImportPage(object parameter)
         {
             NavigationUtil.NotifyColleagues("ScpImport", null);
@@ -48,6 +50,11 @@ namespace ServerToolsUI.ViewModel
         private void GetProcessorAndCorePage(object parameter)
         {
             NavigationUtil.NotifyColleagues("GetProcessorAndCore", null);
+        }
+
+        private void GetProcessorInternetPage(object parameter)
+        {
+            NavigationUtil.NotifyColleagues("GetProcessorInternet", null);
         }
     }
 }

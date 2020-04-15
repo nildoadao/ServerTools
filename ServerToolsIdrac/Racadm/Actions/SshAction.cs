@@ -44,8 +44,9 @@ namespace ServerToolsIdrac.Racadm.Actions
             await Task.Run(() =>
             {
                 KeyboardInteractiveAuthenticationMethod keyboardbAuthentication = new KeyboardInteractiveAuthenticationMethod(credential.UserName);
+                PasswordAuthenticationMethod pauth = new PasswordAuthenticationMethod(credential.UserName, credential.Password);
                 keyboardbAuthentication.AuthenticationPrompt += new EventHandler<AuthenticationPromptEventArgs>(HandleKeyEvent);
-                ConnectionInfo connectionInfo = new ConnectionInfo(host, 22, credential.UserName, keyboardbAuthentication);
+                ConnectionInfo connectionInfo = new ConnectionInfo(host, 22, credential.UserName, pauth, keyboardbAuthentication);
 
                 using (SshClient client = new SshClient(connectionInfo))
                 {
@@ -75,8 +76,9 @@ namespace ServerToolsIdrac.Racadm.Actions
             await Task.Run(() =>
             {
                 KeyboardInteractiveAuthenticationMethod keyboardbAuthentication = new KeyboardInteractiveAuthenticationMethod(credential.UserName);
+                PasswordAuthenticationMethod pauth = new PasswordAuthenticationMethod(credential.UserName, credential.Password);
                 keyboardbAuthentication.AuthenticationPrompt += new EventHandler<AuthenticationPromptEventArgs>(HandleKeyEvent);
-                ConnectionInfo connectionInfo = new ConnectionInfo(host, 22, credential.UserName, keyboardbAuthentication);
+                ConnectionInfo connectionInfo = new ConnectionInfo(host, 22, credential.UserName, pauth, keyboardbAuthentication);
 
                 using (SshClient client = new SshClient(connectionInfo))
                 {

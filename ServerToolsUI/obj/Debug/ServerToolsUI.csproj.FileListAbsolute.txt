@@ -57,3 +57,6 @@ D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\HtmlAgilityPack.pdb
 D:\Visual Studio\ServerTools\ServerToolsUI\bin\Debug\HtmlAgilityPack.xml
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\GetProcessorAndCoreView.g.cs
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\GetProcessorAndCoreView.baml
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\GetProcessorInternetView.g.cs
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\GetProcessorInternetView.baml
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\ServerToolsUI.csproj.CoreCompileInputs.cache

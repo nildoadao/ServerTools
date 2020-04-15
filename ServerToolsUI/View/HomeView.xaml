@@ -121,6 +121,25 @@
                         Processor e Quantidade de Cores via SSH
                     </TextBlock>
                 </StackPanel>
+                <StackPanel Orientation="Vertical"
+                            Margin="5">
+                    <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                            Height="auto" 
+                            Width="auto"
+                            Command="{Binding GetProcessorInternetCommand}">
+                        <materialDesign:PackIcon Kind="InternetExplorer"
+                                                 Width="50"
+                                                 Height="50"
+                                                 Margin="5"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"/>
+
+                    </Button>
+                    <TextBlock Margin="5"
+                               Style="{DynamicResource MaterialDesignBody1TextBlock}">
+                        Processador via Internet
+                    </TextBlock>
+                </StackPanel>
             </WrapPanel>
         </GroupBox>
     </Grid>

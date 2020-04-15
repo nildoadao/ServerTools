@@ -1,4 +1,5 @@
 ﻿using MaterialDesignThemes.Wpf;
+using ServerToolsIdrac.Internet;
 using ServerToolsIdrac.Racadm.Actions;
 using ServerToolsIdrac.Racadm.Model;
 using ServerToolsUI.Model;
@@ -292,7 +293,7 @@ namespace ServerToolsUI.ViewModel
             {
                 if (line.Contains("name"))
                 {
-                    processorName = line.Split('\n')[1].Trim();
+                    processorName = line.Split('=')[1].Trim();
                     break;
                 }
             }
@@ -308,7 +309,7 @@ namespace ServerToolsUI.ViewModel
             {
                 if (line.Contains("number_cores"))
                 {
-                    coreNumber = line.Split('\n')[1].Trim();
+                    coreNumber = line.Split('=')[1].Trim();
                     break;
                 }
             }
@@ -332,7 +333,7 @@ namespace ServerToolsUI.ViewModel
 
             string command;
 
-            if (SelectedManufacturer == 1)
+            if (SelectedManufacturer == 0)
                 command = "racadm hwinventory";
             else
                 command = "show /system1/cpu1";
@@ -345,11 +346,12 @@ namespace ServerToolsUI.ViewModel
                 JobsDataGridInfo job = new JobsDataGridInfo() { Server = item, JobStatus = "Running" };
                 Jobs.Add(job);
                 SshAction action = new SshAction(item, credentials);
+
                 try
                 {
                     SshResponse response = await action.RunCommandAsync(command);
 
-                    if (SelectedManufacturer == 1)
+                    if (SelectedManufacturer == 0)
                         job.JobMessage = string.Format("Processador: {0}, Cores: {1}",
                             GetDellProcessor(response.Message), GetDellCoreNumber(response.Message));
                     else
