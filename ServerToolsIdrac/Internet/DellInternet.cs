@@ -34,14 +34,22 @@ namespace ServerToolsIdrac.Internet
 
             foreach(var line in lines)
             {
-                if (line.ToLower().Contains("ghz"))
+                if (line.ToLower().Contains("ghz") |
+                    line.ToLower().Contains("gold")|
+                    line.ToLower().Contains("xeon"))
                 {
                     processor = line.Substring(11);
                     processor = processor.Split(',')[0];
                     break;
                 }
             }
-            Thread.Sleep(6000);
+
+            //Delay between requests
+            await Task.Run(() =>
+            {
+                Thread.Sleep(6000);
+            });
+            
             return processor;
         }
     }

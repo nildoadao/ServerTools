@@ -43,7 +43,13 @@ namespace ServerToolsIdrac.Internet
                     break;
                 }
             }
-            Thread.Sleep(6000);
+
+            //Delay between requests
+            await Task.Run(() =>
+            {
+                Thread.Sleep(6000);
+            });
+
             return processorName;
         }
     }
