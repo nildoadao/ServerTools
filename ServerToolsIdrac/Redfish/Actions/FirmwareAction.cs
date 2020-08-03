@@ -45,42 +45,22 @@ namespace ServerToolsIdrac.Redfish.Actions
         /// <returns>Location for the resource created</returns>
         private async Task<string> UploadFileAsync(string path)
         {
-            var boundary = Guid.NewGuid().ToString();
-            using (var request = new HttpRequestMessage(HttpMethod.Post, string.Format("https://{0}{1}", host, FirmwareInventory)))
-            using (var multipartContent = new MultipartFormDataContent(boundary))
-            using (var fileContent = new StreamContent(File.Open(path, FileMode.Open)))
-            {
-                var credentialsHeader = string.Format("{0}:{1}", credentials.UserName, credentials.Password);
-                request.Headers.Authorization = 
-                    new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(credentialsHeader))); 
+            var request = new RestRequest(FirmwareInventory, Method.POST);
+            var etag = await GetEtagHeaderAsync();
+            restClient.Timeout = -1;
+            request.AddHeader("If-Match", etag);
+            request.AddHeader("Accept", "*/*");
+            request.AddFile("file", path);
+            var response = await restClient.ExecuteTaskAsync(request);
 
-                var etag = await GetEtagHeaderAsync();
-                request.Headers.TryAddWithoutValidation("If-Match", etag);
+            if (!response.IsSuccessful)
+                throw new RedfishException(string.Format("Fail to Upload the file, Error Code {0}",
+                    response.StatusCode));
 
-                fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
-                {
-                    Name = "\"file\"",
-                    FileName = string.Format("\"{0}\"", Path.GetFileName(path)),
-                };
-                fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("multipart/form-data");
-
-                // Idrac 7/8 don't accept boundary in quotes, so we have to manualy add the header
-                multipartContent.Headers.Remove("Content-Type");
-                multipartContent.Headers.TryAddWithoutValidation("Content-Type", "multipart/form-data; boundary=" + boundary);
-                multipartContent.Add(fileContent);
-                request.Content = multipartContent;
-
-                using (HttpResponseMessage response = await HttpUtil.Client.SendAsync(request))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
-                        throw new UnauthorizedAccessException("Access denied, check user/password");
-
-                    if (!response.IsSuccessStatusCode)
-                        throw new HttpRequestException("Fail to Upload Firmware to Idrac: " + response.ReasonPhrase);
-
-                    return response.Headers.Location.ToString();
-                }
-            }
+            return response.Headers
+                .Where(x => x.Name == "Location")
+                .Select(x => x.Value)
+                .FirstOrDefault().ToString();
         }
 
         /// <summary>

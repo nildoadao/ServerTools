@@ -90,9 +90,6 @@ namespace ServerToolsIdrac.Racadm.Actions
                         {
                             var commandResult = client.RunCommand(command);
                             result = new SshResponse(commandResult.Result, commandResult.ExitStatus);
-
-                            if (commandResult.ExitStatus != 0 | commandResult.Result.Contains("ERROR"))
-                                break;
                         }
                     }
                     catch (Exception e)
