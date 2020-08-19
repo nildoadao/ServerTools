@@ -1,5 +1,6 @@
 ﻿using Renci.SshNet;
 using Renci.SshNet.Common;
+using ServerToolsIdrac.Network;
 using ServerToolsIdrac.Racadm.Model;
 using ServerToolsIdrac.Racadm.Util;
 using ServerToolsIdrac.Redfish.Util;

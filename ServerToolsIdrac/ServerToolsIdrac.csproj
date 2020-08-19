@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Internet\DellInternet.cs" />
     <Compile Include="Internet\HpeInternet.cs" />
+    <Compile Include="Network\NetworkUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Racadm\Actions\SshAction.cs" />
     <Compile Include="Racadm\Model\SshResponse.cs" />
