@@ -79,6 +79,24 @@
                         Import SCP File
                     </TextBlock>
                 </StackPanel>
+                <StackPanel Orientation="Vertical"
+                            Margin="5">
+                    <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                        Height="auto" 
+                        Width="auto"
+                        Command="{Binding SearchIdracPageCommand}">
+                        <materialDesign:PackIcon Kind="IpNetwork"
+                                                 Width="50"
+                                                 Height="50"
+                                                 Margin="5"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"/>
+                    </Button>
+                    <TextBlock Margin="5"
+                               Style="{DynamicResource MaterialDesignBody1TextBlock}">
+                        Deploy DHCP
+                    </TextBlock>
+                </StackPanel>
             </WrapPanel>
         </GroupBox>
         <GroupBox Grid.Row="1" Margin="15" Header="SSH Functions">

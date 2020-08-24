@@ -60,3 +60,5 @@ D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\GetProcessorAndCoreVie
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\GetProcessorInternetView.g.cs
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\GetProcessorInternetView.baml
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\ServerToolsUI.csproj.CoreCompileInputs.cache
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\SearchIdracView.g.cs
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\SearchIdracView.baml

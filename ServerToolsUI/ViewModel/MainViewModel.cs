@@ -21,6 +21,7 @@ namespace ServerToolsUI.ViewModel
             NavigationUtil.Register("CustomScript", GoToCustomScript);
             NavigationUtil.Register("GetProcessorAndCore", GoToGetProcessorAndCore);
             NavigationUtil.Register("GetProcessorInternet", GoToGetProcessorInternet);
+            NavigationUtil.Register("SearchIdrac", GoToSearchIdrac);
             SettingsCommand = new RelayCommand(Settings);
         }
 
@@ -103,6 +104,10 @@ namespace ServerToolsUI.ViewModel
             CurrentView = new GetProcessorInternetViewModel();
         }
 
+        private void GoToSearchIdrac(object parameter)
+        {
+            CurrentView = new SearchIdracViewModel();
+        }
         private void Settings(object parameter)
         {
             RightDrawerContent = new SettingsView()

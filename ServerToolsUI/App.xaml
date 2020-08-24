@@ -51,6 +51,9 @@
             <DataTemplate DataType="{x:Type ViewModels:GetProcessorInternetViewModel}">
                 <Views:GetProcessorInternetView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:SearchIdracViewModel}">
+                <Views:SearchIdracView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

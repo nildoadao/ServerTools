@@ -20,6 +20,7 @@ namespace ServerToolsUI.ViewModel
             CustomScriptPageCommand = new RelayCommand(CustomScriptPage);
             GetProcessorAndCoreCommand = new RelayCommand(GetProcessorAndCorePage);
             GetProcessorInternetCommand = new RelayCommand(GetProcessorInternetPage);
+            SearchIdracPageCommand = new RelayCommand(SearchIdracPage);
         }
         public RelayCommand ScpImportPageCommand { get; private set; }
         public RelayCommand ScpExportPageCommand { get; private set; }
@@ -27,6 +28,8 @@ namespace ServerToolsUI.ViewModel
         public RelayCommand CustomScriptPageCommand { get; private set; }
         public RelayCommand GetProcessorAndCoreCommand { get; private set; }
         public RelayCommand GetProcessorInternetCommand { get; private set; }
+        public RelayCommand SearchIdracPageCommand { get; private set; }
+
         private void ScpImportPage(object parameter)
         {
             NavigationUtil.NotifyColleagues("ScpImport", null);
@@ -55,6 +58,11 @@ namespace ServerToolsUI.ViewModel
         private void GetProcessorInternetPage(object parameter)
         {
             NavigationUtil.NotifyColleagues("GetProcessorInternet", null);
+        }
+
+        private void SearchIdracPage(object parameter)
+        {
+            NavigationUtil.NotifyColleagues("SearchIdrac", null);
         }
     }
 }

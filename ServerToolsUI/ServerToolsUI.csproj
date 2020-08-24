@@ -109,6 +109,7 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ScpExportViewModel.cs" />
     <Compile Include="ViewModel\ScpImportViewModel.cs" />
+    <Compile Include="ViewModel\SearchIdracViewModel.cs" />
     <Compile Include="ViewModel\ServersListViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\UserMessageViewModel.cs" />
@@ -131,6 +132,9 @@
     </Compile>
     <Compile Include="View\ScpImportView.xaml.cs">
       <DependentUpon>ScpImportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SearchIdracView.xaml.cs">
+      <DependentUpon>SearchIdracView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ServersListView.xaml.cs">
       <DependentUpon>ServersListView.xaml</DependentUpon>
@@ -188,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ScpImportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SearchIdracView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -10,6 +10,9 @@ namespace ServerToolsIdrac.Network
     {
         private static int[] ParseIPAddress(string Ip)
         {
+            if(string.IsNullOrEmpty(Ip))
+                throw new ArgumentException("Invalid IP Address");
+
             string[] stringOctects = Ip.Split('.');
 
             if (stringOctects.Length != 4)
@@ -25,6 +28,16 @@ namespace ServerToolsIdrac.Network
                     throw new ArgumentException("Invalid IP Address");
             }
             return octects;               
+        }
+
+        public static bool ValidateIpAddress(string ip)
+        {
+            try
+            {
+                var parsedIp = ParseIPAddress(ip);
+                return true;
+            }
+            catch { return false; }
         }
 
         public static string GetNetworkAddress(string ipAddress, string netMask)
