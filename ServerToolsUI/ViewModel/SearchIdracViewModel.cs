@@ -568,11 +568,10 @@ namespace ServerToolsUI.ViewModel
             }
 
             CancelToken = false;
-
+            Monitor = new JobMonitor(credentials, JobRefreshTime);
             foreach (var item in Idracs)
             {
                 JobsDataGridInfo job = new JobsDataGridInfo() { Server = item.Server, JobStatus = "Running" };
-                Monitor = new JobMonitor(credentials, JobRefreshTime);
                 Monitor.Jobs.Add(job);
                 SshAction action = new SshAction(item.Server, credentials);
                 try

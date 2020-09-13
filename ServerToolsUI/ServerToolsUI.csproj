@@ -100,6 +100,7 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Util\NavigationUtil.cs" />
     <Compile Include="Util\RelayCommand.cs" />
+    <Compile Include="ViewModel\ChangeIpViewModel.cs" />
     <Compile Include="ViewModel\CredentialsViewModel.cs" />
     <Compile Include="ViewModel\CustomScriptViewModel.cs" />
     <Compile Include="ViewModel\FirmwareUpdateViewModel.cs" />
@@ -115,6 +116,9 @@
     <Compile Include="ViewModel\UserMessageViewModel.cs" />
     <Compile Include="ViewModel\Validators\StringNotEmptyRule.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\ChangeIpView.xaml.cs">
+      <DependentUpon>ChangeIpView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CredentialsView.xaml.cs">
       <DependentUpon>CredentialsView.xaml</DependentUpon>
     </Compile>
@@ -145,6 +149,10 @@
     <Compile Include="View\UserMessageView.xaml.cs">
       <DependentUpon>UserMessageView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\ChangeIpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CredentialsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

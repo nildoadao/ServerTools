@@ -54,6 +54,9 @@
             <DataTemplate DataType="{x:Type ViewModels:SearchIdracViewModel}">
                 <Views:SearchIdracView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:ChangeIpViewModel}">
+                <Views:ChangeIpView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

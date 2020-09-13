@@ -22,6 +22,7 @@ namespace ServerToolsUI.ViewModel
             NavigationUtil.Register("GetProcessorAndCore", GoToGetProcessorAndCore);
             NavigationUtil.Register("GetProcessorInternet", GoToGetProcessorInternet);
             NavigationUtil.Register("SearchIdrac", GoToSearchIdrac);
+            NavigationUtil.Register("ChangeIp", GoToChangeIp);
             SettingsCommand = new RelayCommand(Settings);
         }
 
@@ -108,6 +109,12 @@ namespace ServerToolsUI.ViewModel
         {
             CurrentView = new SearchIdracViewModel();
         }
+
+        private void GoToChangeIp(object parameter)
+        {
+            CurrentView = new ChangeIpViewModel();
+        }
+
         private void Settings(object parameter)
         {
             RightDrawerContent = new SettingsView()

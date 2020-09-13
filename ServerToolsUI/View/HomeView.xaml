@@ -85,7 +85,7 @@
                         Height="auto" 
                         Width="auto"
                         Command="{Binding SearchIdracPageCommand}">
-                        <materialDesign:PackIcon Kind="IpNetwork"
+                        <materialDesign:PackIcon Kind="ServerNetwork"
                                                  Width="50"
                                                  Height="50"
                                                  Margin="5"
@@ -95,6 +95,24 @@
                     <TextBlock Margin="5"
                                Style="{DynamicResource MaterialDesignBody1TextBlock}">
                         Deploy DHCP
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Vertical"
+                            Margin="5">
+                    <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                        Height="auto" 
+                        Width="auto"
+                        Command="{Binding ChangeIpPageCommand}">
+                        <materialDesign:PackIcon Kind="IpNetwork"
+                                                 Width="50"
+                                                 Height="50"
+                                                 Margin="5"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"/>
+                    </Button>
+                    <TextBlock Margin="5"
+                               Style="{DynamicResource MaterialDesignBody1TextBlock}">
+                        Alterar IP DHCP
                     </TextBlock>
                 </StackPanel>
             </WrapPanel>
