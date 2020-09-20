@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal">
             <Button Margin="15"
@@ -45,12 +45,13 @@
         </StackPanel>
         <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" 
                   Grid.Row="1"
+                  Width="auto"
                   Header="Informações da Rede" 
                   Margin="15">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -75,6 +76,7 @@
                          Text="{Binding NetworkMask, ValidatesOnNotifyDataErrors=True}"/>
                 <Button Margin="5"
                         Command="{Binding SearchIdracsCommand}"
+                        VerticalAlignment="Bottom"
                         Grid.Row="2"
                         materialDesign:HintAssist.Hint="Procurar Idracs">
                     Procurar
@@ -93,8 +95,9 @@
                     VerticalAlignment="Top"
                     Visibility="{Binding Path=Searching, Converter={StaticResource BoolToVis}}">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Margin="5">
-                    Procurando...
+                        <TextBlock Margin="15"
+                                   VerticalAlignment="Bottom">
+                            Procurando...
                         </TextBlock>
                         <ProgressBar Margin="5"
                              IsIndeterminate="True"/>
@@ -104,29 +107,32 @@
         </GroupBox>
         <GroupBox
             Grid.Row="1"
-            Width="auto"
             Grid.Column="1"
+            Width="auto"
             Margin="15"
             Header="Idracs Encontradas">
             <StackPanel
                 Orientation="Vertical">
-                <DataGrid
-                HorizontalContentAlignment="Center"
-                AutoGenerateColumns="False"
-                ItemsSource="{Binding Idracs}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="IP" Binding="{Binding Ip}"/>
-                        <DataGridTextColumn Header="Serial Number" Binding="{Binding SerialNumber}"/>
-                        <DataGridTextColumn Header="Novo IP" Binding="{Binding NewIp, ValidatesOnNotifyDataErrors=True}"/>
-                        <DataGridTextColumn Header="Nova Mascara" Binding="{Binding NewMask, ValidatesOnNotifyDataErrors=True}"/>
-                        <DataGridTextColumn Header="Novo Gateway" Binding="{Binding NewGateway, ValidatesOnNotifyDataErrors=True}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <ScrollViewer
+                    MaxHeight="200">
+                    <DataGrid
+                    AutoGenerateColumns="False"
+                    ItemsSource="{Binding Idracs}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="IP" Binding="{Binding Ip}"/>
+                            <DataGridTextColumn Header="Serial Number" Binding="{Binding SerialNumber}"/>
+                            <DataGridTextColumn Header="Novo IP" Binding="{Binding NewIp, ValidatesOnNotifyDataErrors=True}"/>
+                            <DataGridTextColumn Header="Nova Mascara" Binding="{Binding NewMask, ValidatesOnNotifyDataErrors=True}"/>
+                            <DataGridTextColumn Header="Novo Gateway" Binding="{Binding NewGateway, ValidatesOnNotifyDataErrors=True}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </ScrollViewer>
                 <Button
-                   Margin="5"
+                   Margin="15"
                    Command="{Binding ChangeIpCommand}"
                    Grid.Row="2"
                     VerticalAlignment="Bottom"
+                    HorizontalAlignment="Left"
                    materialDesign:HintAssist.Hint="Procurar Idracs">
                     Trocar IP
                 </Button>
@@ -134,9 +140,9 @@
         </GroupBox>
         <materialDesign:Card Grid.Row="2"
                              Grid.ColumnSpan="2"
-                             Width="auto"
                              Margin="15">
-            <ScrollViewer>
+            <ScrollViewer
+                MaxHeight="300">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="15"
@@ -159,7 +165,7 @@
                           HorizontalContentAlignment="Center"
                           AutoGenerateColumns="False"
                           IsReadOnly="True"                          
-                  ItemsSource="{Binding Jobs}">
+                          ItemsSource="{Binding Jobs}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Server" Binding="{Binding Server}"/>
                             <DataGridTextColumn Header="Status" Binding="{Binding JobStatus}"/>
