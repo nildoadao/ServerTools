@@ -94,7 +94,7 @@
                     </Button>
                     <TextBlock Margin="5"
                                Style="{DynamicResource MaterialDesignBody1TextBlock}">
-                        Deploy DHCP
+                        DHCP Deploy
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Vertical"
@@ -112,7 +112,7 @@
                     </Button>
                     <TextBlock Margin="5"
                                Style="{DynamicResource MaterialDesignBody1TextBlock}">
-                        Alterar IP DHCP
+                        Change Idrac IP
                     </TextBlock>
                 </StackPanel>
             </WrapPanel>
@@ -154,7 +154,7 @@
                     </Button>
                     <TextBlock Margin="5"
                                Style="{DynamicResource MaterialDesignBody1TextBlock}">
-                        Processor e Quantidade de Cores via SSH
+                        Processor e Core Count SSH
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Vertical"
@@ -173,7 +173,7 @@
                     </Button>
                     <TextBlock Margin="5"
                                Style="{DynamicResource MaterialDesignBody1TextBlock}">
-                        Processador via Internet
+                        Processor Internet
                     </TextBlock>
                 </StackPanel>
             </WrapPanel>

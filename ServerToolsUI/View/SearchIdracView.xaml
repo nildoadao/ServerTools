@@ -17,338 +17,370 @@
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </Page.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <Button Margin="15"
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal"
+                        Grid.ColumnSpan="3">
+                <Button Margin="15"
                     VerticalAlignment="Center"
                     Style="{DynamicResource MaterialDesignFlatButton}"
                     Command="{Binding BackCommand}"
                     materialDesign:HintAssist.Hint="Voltar">
-                <materialDesign:PackIcon Kind="ArrowLeftCircleOutline"
+                    <materialDesign:PackIcon Kind="ArrowLeftCircleOutline"
                                          Width="auto"
                                          Height="auto"/>
-            </Button>
-            <TextBlock HorizontalAlignment="Left" 
+                </Button>
+                <TextBlock HorizontalAlignment="Left" 
                        VerticalAlignment="Center"
                        FontSize="28" Margin="15" 
                        Style="{DynamicResource MaterialDesignTitleTextBlock}">
-                Deploy DHCP
-            </TextBlock>
-        </StackPanel>
-        <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" 
+                DHCP Deploy
+                </TextBlock>
+            </StackPanel>
+            <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" 
                   Grid.Row="1"
-                  Header="Informações da Rede" 
+                  Header="Network Information" 
                   Margin="15">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <TextBox Margin="5" Style="{DynamicResource MaterialDesignTextBox}" 
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBox Margin="5" Style="{DynamicResource MaterialDesignTextBox}" 
                          HorizontalAlignment="Left"
                          Grid.ColumnSpan="2"
                          Width="200"
                          materialDesign:HintAssist.Hint="IP"                                   
                          VerticalAlignment="Center"
                          Text="{Binding NetworkIp, ValidatesOnNotifyDataErrors=True}"/>
-                <TextBox Margin="5" Style="{DynamicResource MaterialDesignTextBox}" 
+                    <TextBox Margin="5" Style="{DynamicResource MaterialDesignTextBox}" 
                          HorizontalAlignment="Left"
                          Grid.ColumnSpan="2"
                          Grid.Row="1"
                          Width="200"
-                         materialDesign:HintAssist.Hint="Mascara"                                   
+                         materialDesign:HintAssist.Hint="Mask"                                   
                          VerticalAlignment="Center"
                          Text="{Binding NetworkMask, ValidatesOnNotifyDataErrors=True}"/>
-                <Button Margin="5"
+                    <Button Margin="5"
                         Command="{Binding SearchIdracsCommand}"
                         Grid.Row="2"
-                        materialDesign:HintAssist.Hint="Procurar Idracs">
-                    Procurar
-                </Button>
-                <Button Margin="5"
+                        materialDesign:HintAssist.Hint="Search Idracs">
+                        Search
+                    </Button>
+                    <Button Margin="5"
                         Command="{Binding CancelCommand}"
                         Grid.Row="2"
                         Grid.Column="1"
                         materialDesign:HintAssist.Hint="Clear Jobs" VerticalAlignment="Bottom">
-                    Parar
-                </Button>
-                <materialDesign:Card 
+                        Stop
+                    </Button>
+                    <materialDesign:Card 
                     Grid.Row="4"
                     Grid.ColumnSpan="2"
                     Margin="5"
                     VerticalAlignment="Top"
                     Visibility="{Binding Path=Searching, Converter={StaticResource BoolToVis}}">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Margin="5">
-                    Procurando...
-                        </TextBlock>
-                        <ProgressBar Margin="5"
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Margin="5">
+                    Searching...
+                            </TextBlock>
+                            <ProgressBar Margin="5"
                              IsIndeterminate="True"/>
-                    </StackPanel>
-                </materialDesign:Card>
-            </Grid>
-        </GroupBox>
-        <GroupBox
+                        </StackPanel>
+                    </materialDesign:Card>
+                </Grid>
+            </GroupBox>
+            <GroupBox
             Grid.Row="2"
+                VerticalAlignment="Top"
+                MaxHeight="350"
             Grid.RowSpan="2"
             Margin="15"
-            Header="Idracs Encontradas">
-            <DataGrid
+            Header="Idracs Found">
+                <DataGrid
                 HorizontalContentAlignment="Center"
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
                 ItemsSource="{Binding Idracs}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="IP" Binding="{Binding Server}"/>
-                    <DataGridTextColumn Header="Serial Number" Binding="{Binding SerialNumber}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </GroupBox>
-        <GroupBox Margin="15"
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="IP" Binding="{Binding Server}"/>
+                        <DataGridTextColumn Header="Serial Number" Binding="{Binding SerialNumber}"/>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="DeleteButton" 
+                                    VerticalAlignment="Center"
+                                    Style="{DynamicResource MaterialDesignFlatButton}"
+                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}, Path=DataContext.RemoveServerCommand}"
+                                    CommandParameter="{Binding }">
+                                        <materialDesign:PackIcon Kind="MinusCircle" 
+                                                Width="14" 
+                                                Height="14" 
+                                                Foreground="Red"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <GridSplitter Grid.Row="1" 
+                          Grid.Column="0"
+                          Width="5"
+                          Grid.RowSpan="3"/>
+            <GridSplitter Grid.Row="1" 
+                          Grid.Column="1"
+                          Width="5"
+                          Grid.RowSpan="3"/>
+            <GroupBox Margin="15"
                   Grid.Row="1"
                   Grid.Column="1"
                   Style="{DynamicResource MaterialDesignCardGroupBox}" 
-                  Header="Importar SCP" 
+                  Header="SCP Import" 
                   Background="Transparent">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="File:" 
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="File:" 
                                Style="{DynamicResource MaterialDesignBody1TextBlock}" 
                                Margin="5" 
                                VerticalAlignment="Center" 
                                HorizontalAlignment="Left"/>
-                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left">
-                    <TextBox Style="{DynamicResource MaterialDesignTextBox}" 
-                             Width="150" Margin="5" 
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left">
+                        <TextBox Style="{DynamicResource MaterialDesignTextBox}" 
+                             Width="auto" Margin="5"
+                                 MaxWidth="150"
+                                 MinWidth="100"
                              materialDesign:HintAssist.Hint="Path" 
                              VerticalAlignment="Center"
                              Text="{Binding ScpFilePath, ValidatesOnNotifyDataErrors=True}"/>
-                    <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}" 
                             Margin="5" 
                             VerticalAlignment="Center"
                             Command="{Binding OpenScpFileCommand}"
                             materialDesign:HintAssist.Hint="Select Firmware">
-                        <materialDesign:PackIcon Kind="FileFindOutline" 
+                            <materialDesign:PackIcon Kind="FileFindOutline" 
                                                  Width="auto" 
                                                  Height="auto"/>
-                    </Button>
-                </StackPanel>
-                <TextBlock Text="Target:" 
+                        </Button>
+                    </StackPanel>
+                    <TextBlock Text="Target:" 
                                Style="{DynamicResource MaterialDesignBody1TextBlock}" 
                                Margin="5" Grid.Row="1" 
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center"/>
-                <ComboBox Style="{DynamicResource MaterialDesignFloatingHintComboBox}" 
-                              Width="150" Margin="5" 
+                    <ComboBox Style="{DynamicResource MaterialDesignFloatingHintComboBox}" 
+                              Width="auto" Margin="5" 
                               Grid.Row="1" Grid.Column="1" 
                               HorizontalAlignment="Left" 
                               VerticalAlignment="Center"
                               Name="ModeCombobox"
                               SelectedIndex="{Binding SelectedTarget}">
-                    <ComboBoxItem Content="All"/>
-                    <ComboBoxItem Content="System"/>
-                    <ComboBoxItem Content="BIOS"/>
-                    <ComboBoxItem Content="IDRAC"/>
-                    <ComboBoxItem Content="NIC"/>
-                    <ComboBoxItem Content="FC"/>
-                    <ComboBoxItem Content="Lifecycle"/>
-                    <ComboBoxItem Content="RAID"/>
-                </ComboBox>
-                <TextBlock Text="Shutdown Mode:"
+                        <ComboBoxItem Content="All"/>
+                        <ComboBoxItem Content="System"/>
+                        <ComboBoxItem Content="BIOS"/>
+                        <ComboBoxItem Content="IDRAC"/>
+                        <ComboBoxItem Content="NIC"/>
+                        <ComboBoxItem Content="FC"/>
+                        <ComboBoxItem Content="Lifecycle"/>
+                        <ComboBoxItem Content="RAID"/>
+                    </ComboBox>
+                    <TextBlock Text="Shutdown Mode:"
                            Grid.Row="2"
                            Style="{DynamicResource MaterialDesignBody1TextBlock}"
                            Margin="5"
-                           HorizontalAlignment="Right" 
+                           HorizontalAlignment="Left" 
                            VerticalAlignment="Center"/>
-                <ComboBox Style="{DynamicResource MaterialDesignFloatingHintComboBox}" 
-                          Width="150" Margin="5" 
+                    <ComboBox Style="{DynamicResource MaterialDesignFloatingHintComboBox}" 
+                          Width="auto" Margin="5" 
                           Grid.Row="2" Grid.Column="1" 
                           HorizontalAlignment="Left" 
                           VerticalAlignment="Center"
                           SelectedIndex="{Binding SelectedShutdown}">
-                    <ComboBoxItem Content="Graceful"/>
-                    <ComboBoxItem Content="Forced"/>
-                    <ComboBoxItem Content="No Reboot"/>
-                </ComboBox>
-                <Button Margin="5"
+                        <ComboBoxItem Content="Graceful"/>
+                        <ComboBoxItem Content="Forced"/>
+                        <ComboBoxItem Content="No Reboot"/>
+                    </ComboBox>
+                    <Button Margin="5"
                         Command="{Binding ImportScpFileCommand}"
                         Grid.Row="3"
                         Grid.ColumnSpan="2"
                         materialDesign:HintAssist.Hint="Procurar Idracs">
-                    Importar
-                </Button>
-            </Grid>
-        </GroupBox>
-        <GroupBox Margin="15"
+                        Import
+                    </Button>
+                </Grid>
+            </GroupBox>
+            <GroupBox Margin="15"
                   Grid.Row="2"
                   Grid.Column="1"
                   Style="{DynamicResource MaterialDesignCardGroupBox}" 
-                  Header="Update de Firmware" 
+                  Header="Firmware Update" 
                   Background="Transparent">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="File:" 
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="File:" 
                                Style="{DynamicResource MaterialDesignBody1TextBlock}" 
                                Margin="5" 
                                VerticalAlignment="Center" 
                                HorizontalAlignment="Left"/>
-                <StackPanel Orientation="Horizontal" 
+                    <StackPanel Orientation="Horizontal" 
                             Grid.Column="1" 
                             HorizontalAlignment="Left">
-                    <TextBox Style="{DynamicResource MaterialDesignTextBox}" 
-                                 Width="150" Margin="5" 
+                        <TextBox Style="{DynamicResource MaterialDesignTextBox}" 
+                                 Width="auto" Margin="5" MinWidth="100" MaxWidth="150"
                                  materialDesign:HintAssist.Hint="Path" 
                                  VerticalAlignment="Center"
                              Text="{Binding FirmwarePath, ValidatesOnNotifyDataErrors=True}"/>
-                    <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}" 
                             Margin="5" 
                             VerticalAlignment="Center"
                             Name="OpenFolderButton" 
                             Command="{Binding OpenFirmwareFileCommand}"
                             ToolTip="Select File">
-                        <materialDesign:PackIcon Kind="FileFindOutline" 
+                            <materialDesign:PackIcon Kind="FileFindOutline" 
                                                  Width="auto" 
                                                  Height="auto"/>
-                    </Button>
-                </StackPanel>
-                <TextBlock Text="Install Mode:" 
+                        </Button>
+                    </StackPanel>
+                    <TextBlock Text="Install Mode:" 
                                Style="{DynamicResource MaterialDesignBody1TextBlock}" 
                                Margin="5" Grid.Row="1" 
                                HorizontalAlignment="Left" 
                                VerticalAlignment="Center"/>
-                <ComboBox Style="{DynamicResource MaterialDesignFloatingHintComboBox}" 
-                              Width="150" Margin="5" 
+                    <ComboBox Style="{DynamicResource MaterialDesignFloatingHintComboBox}" 
+                              Width="auto" Margin="5" 
                               Grid.Row="1" Grid.Column="1" 
                               HorizontalAlignment="Left" 
                               VerticalAlignment="Center"
                               SelectedIndex="{Binding SelectedMode}">
-                    <ComboBoxItem Content="Now"/>
-                    <ComboBoxItem Content="Now and Reboot"/>
-                    <ComboBoxItem Content="Next boot"/>
-                </ComboBox>
-                <Button Margin="5"
+                        <ComboBoxItem Content="Now"/>
+                        <ComboBoxItem Content="Now and Reboot"/>
+                        <ComboBoxItem Content="Next boot"/>
+                    </ComboBox>
+                    <Button Margin="5"
                         Command="{Binding UpdateFirmwareCommand}"
                         Grid.Row="2"
                         Grid.ColumnSpan="2"
-                        materialDesign:HintAssist.Hint="Procurar Idracs">
-                    Atualizar
-                </Button>
-            </Grid>
-        </GroupBox>
-        <GroupBox Margin="15"
+                        materialDesign:HintAssist.Hint="Search Idracs">
+                        Update
+                    </Button>
+                </Grid>
+            </GroupBox>
+            <GroupBox Margin="15"
                   Grid.Row="3"
                   Grid.Column="1"
                   Style="{DynamicResource MaterialDesignCardGroupBox}" 
                   Header="Script" 
                   Background="Transparent">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="File:" 
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="File:" 
                                Style="{DynamicResource MaterialDesignBody1TextBlock}" 
                                Margin="5" 
                                VerticalAlignment="Center" 
                                HorizontalAlignment="Right"/>
-                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left">
-                    <TextBox Style="{DynamicResource MaterialDesignTextBox}" 
-                             Width="200" Margin="5" 
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left">
+                        <TextBox Style="{DynamicResource MaterialDesignTextBox}" 
+                             Width="auto" Margin="5" MinWidth="100" MaxWidth="150"
                              materialDesign:HintAssist.Hint="Path" 
                              VerticalAlignment="Center"
                              Text="{Binding ScriptFilePath, ValidatesOnNotifyDataErrors=True}"/>
-                    <Button Style="{DynamicResource MaterialDesignFlatButton}" 
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}" 
                             Margin="5" 
                             VerticalAlignment="Center"
                             Command="{Binding OpenScriptFileCommand}"
                             materialDesign:HintAssist.Hint="Select Firmware">
-                        <materialDesign:PackIcon Kind="FileFindOutline" 
+                            <materialDesign:PackIcon Kind="FileFindOutline" 
                                                  Width="auto" 
                                                  Height="auto"/>
-                    </Button>
-                </StackPanel>
-                <Button Margin="5"
+                        </Button>
+                    </StackPanel>
+                    <Button Margin="5"
                         Command="{Binding RunScriptCommand}"
                         Grid.Row="2"
                         Grid.ColumnSpan="2"
                         materialDesign:HintAssist.Hint="Procurar Idracs">
-                    Rodar Script
-                </Button>
-            </Grid>
-        </GroupBox>
-        <materialDesign:Card Grid.Row="1"
+                        Run Script
+                    </Button>
+                </Grid>
+            </GroupBox>
+            <materialDesign:Card Grid.Row="1"
                              Grid.RowSpan="3"
                              Grid.Column="2"
                              Margin="15">
-            <ScrollViewer>
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="15"
+                <ScrollViewer>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="15"
                                VerticalAlignment="Center">
                         Jobs Running
-                        </TextBlock>
-                        <Button Margin="15"
+                            </TextBlock>
+                            <Button Margin="15"
                             Command="{Binding ClearJobsCommand}"
                             materialDesign:HintAssist.Hint="Clear Jobs">
-                            Clear Jobs
-                        </Button>
-                    </StackPanel>
-                    <DataGrid Name="JobsDataGrid"                 
+                                Clear Jobs
+                            </Button>
+                        </StackPanel>
+                        <DataGrid Name="JobsDataGrid"                 
                           Margin="15" 
+                                  MaxHeight="500"
                           HorizontalContentAlignment="Center"
                           AutoGenerateColumns="False"
                           IsReadOnly="True"                          
                   ItemsSource="{Binding Monitor.Jobs}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Server" Binding="{Binding Server}"/>
-                            <DataGridTextColumn Header="Serial Number" Binding="{Binding SerialNumber}"/>
-                            <DataGridTextColumn Header="Job Id" Binding="{Binding JobId}"/>
-                            <DataGridTextColumn Header="Name" Binding="{Binding JobName}"/>
-                            <DataGridTextColumn Header="Status" Binding="{Binding JobStatus}"/>
-                            <DataGridTextColumn Header="%" Binding="{Binding JobPercentComplete}"/>
-                            <DataGridTextColumn Header="Message" Binding="{Binding JobMessage}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
-            </ScrollViewer>
-        </materialDesign:Card>
-    </Grid>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Server" Binding="{Binding Server}"/>
+                                <DataGridTextColumn Header="Serial Number" Binding="{Binding SerialNumber}"/>
+                                <DataGridTextColumn Header="Job Id" Binding="{Binding JobId}"/>
+                                <DataGridTextColumn Header="Name" Binding="{Binding JobName}"/>
+                                <DataGridTextColumn Header="Status" Binding="{Binding JobStatus}"/>
+                                <DataGridTextColumn Header="%" Binding="{Binding JobPercentComplete}"/>
+                                <DataGridTextColumn Header="Message" Binding="{Binding JobMessage}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </ScrollViewer>
+            </materialDesign:Card>
+        </Grid>
+    </ScrollViewer>
 </Page>

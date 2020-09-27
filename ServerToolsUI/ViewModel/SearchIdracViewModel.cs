@@ -5,6 +5,7 @@ using ServerToolsIdrac.Racadm.Actions;
 using ServerToolsIdrac.Racadm.Model;
 using ServerToolsIdrac.Redfish.Actions;
 using ServerToolsIdrac.Redfish.Enums;
+using ServerToolsIdrac.Redfish.Models;
 using ServerToolsIdrac.Redfish.Util;
 using ServerToolsUI.Model;
 using ServerToolsUI.Util;
@@ -39,6 +40,7 @@ namespace ServerToolsUI.ViewModel
             ClearJobsCommand = new RelayCommand(ClearJobs);
             OpenScriptFileCommand = new RelayCommand(OpenScriptFile);
             RunScriptCommand = new RelayCommand(RunScript);
+            RemoveServerCommand = new RelayCommand(RemoveServer);
         }
 
         private bool ValidateIpAddress()
@@ -160,7 +162,7 @@ namespace ServerToolsUI.ViewModel
             get => networkIp;
             set
             {
-                if(value != networkIp)
+                if (value != networkIp)
                 {
                     networkIp = value;
                     NotifyPropertyChanged("NetworkIp");
@@ -188,7 +190,7 @@ namespace ServerToolsUI.ViewModel
             get => ipsDiscovered;
             set
             {
-                if(value != ipsDiscovered)
+                if (value != ipsDiscovered)
                 {
                     ipsDiscovered = value;
                     NotifyPropertyChanged("IpsDiscovered");
@@ -216,7 +218,7 @@ namespace ServerToolsUI.ViewModel
             get => searching;
             set
             {
-                if(value != searching)
+                if (value != searching)
                 {
                     searching = value;
                     NotifyPropertyChanged("Searching");
@@ -244,7 +246,7 @@ namespace ServerToolsUI.ViewModel
             get => scpFilePath;
             set
             {
-                if(value != scpFilePath)
+                if (value != scpFilePath)
                 {
                     scpFilePath = value;
                     NotifyPropertyChanged("ScpFilePath");
@@ -258,7 +260,7 @@ namespace ServerToolsUI.ViewModel
             get => selectedTarget;
             set
             {
-                if(value != selectedTarget)
+                if (value != selectedTarget)
                 {
                     selectedTarget = value;
                     NotifyPropertyChanged("SelectedTarget");
@@ -336,6 +338,20 @@ namespace ServerToolsUI.ViewModel
             }
         }
 
+        private bool hasJobs = false;
+        public bool HasJobs
+        {
+            get => hasJobs;
+            set
+            {
+                if(value != hasJobs)
+                {
+                    hasJobs = value;
+                    NotifyPropertyChanged("HasJobs");
+                }
+            }
+        }
+
         public RelayCommand BackCommand { get; private set; }
         public RelayCommand SearchIdracsCommand { get; private set; }
         public RelayCommand CancelCommand { get; private set; }
@@ -346,6 +362,7 @@ namespace ServerToolsUI.ViewModel
         public RelayCommand ClearJobsCommand { get; private set; }
         public RelayCommand OpenScriptFileCommand { get; private set; }
         public RelayCommand RunScriptCommand { get; private set; }
+        public RelayCommand RemoveServerCommand { get; private set; }
         private void Back(object parameter)
         {
             NavigationUtil.NotifyColleagues("Home", null);
@@ -451,7 +468,7 @@ namespace ServerToolsUI.ViewModel
 
             if (credentials == null)
                 return;
-
+           
             Monitor = new JobMonitor(credentials, JobRefreshTime);
             CancelToken = false;
 
@@ -462,6 +479,7 @@ namespace ServerToolsUI.ViewModel
                 {
                     string jobUri = await firmware.UpdateFirmwareAsync(FirmwarePath, ((FirmwareUpdateMode)SelectedMode).ToString());
                     Monitor.AddJob(item.Server, jobUri);
+                    HasJobs = true;
                 }
                 catch (Exception)
                 {
@@ -503,6 +521,7 @@ namespace ServerToolsUI.ViewModel
                     string shutdownType = ((ShutdownType)SelectedShutdown).ToString();
                     string jobUri = await scp.ImportScpFileAsync(ScpFilePath, target, shutdownType, "On");
                     Monitor.AddJob(item.Server, jobUri);
+                    HasJobs = true;
                 }
                 catch (Exception)
                 {
@@ -534,6 +553,18 @@ namespace ServerToolsUI.ViewModel
                 ScriptFilePath = dialog.FileName;
             };
             folderDialog.ShowDialog();
+        }
+
+        private void RemoveServer(object parameter)
+        {
+            if (!HasJobs)
+            {
+                try // In case try to remove an server during discovery. avoid concurrent changes
+                {
+                    Idracs.Remove((JobsDataGridInfo)parameter);
+                }
+                catch { }                
+            }
         }
 
         private async void RunScript(object parameter)

@@ -48,7 +48,7 @@
             <TextBlock HorizontalAlignment="Left" 
                        FontSize="28" Margin="15" 
                        Style="{DynamicResource MaterialDesignTitleTextBlock}">
-                Processor e Quantidade de Cores
+                Processor and Core Count
             </TextBlock>
         </StackPanel>
 
@@ -56,7 +56,7 @@
                   Grid.Row="1"
                   Grid.Column="1"
                   Style="{DynamicResource MaterialDesignCardGroupBox}" 
-                  Header="Fabricante" 
+                  Header="Manufacturer" 
                   Background="Transparent">
             <Grid>
                 <Grid.RowDefinitions>
