@@ -8,6 +8,7 @@ Local firmware update
 Local Import / Export SCP Files
 Import files to multiple servers at once
 Support to SSH Scripts (legacy racadm scripts)
+Deploy using DHCP server
 
 Prerequisites:
 
