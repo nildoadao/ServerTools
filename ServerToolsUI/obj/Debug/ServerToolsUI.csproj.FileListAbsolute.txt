@@ -64,3 +64,5 @@ D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\SearchIdracView.g.cs
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\SearchIdracView.baml
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ChangeIpView.g.cs
 D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ChangeIpView.baml
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ScpExportListView.g.cs
+D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\View\ScpExportListView.baml

@@ -23,6 +23,7 @@ namespace ServerToolsUI.ViewModel
             NavigationUtil.Register("GetProcessorInternet", GoToGetProcessorInternet);
             NavigationUtil.Register("SearchIdrac", GoToSearchIdrac);
             NavigationUtil.Register("ChangeIp", GoToChangeIp);
+            NavigationUtil.Register("ScpExportList", GoToScpExportList);
             SettingsCommand = new RelayCommand(Settings);
         }
 
@@ -88,6 +89,11 @@ namespace ServerToolsUI.ViewModel
         private void GoToScpExport(object parameter)
         {
             CurrentView = new ScpExportViewModel();
+        }
+
+        private void GoToScpExportList(object parameter)
+        {
+            CurrentView = new ScpExportListViewModel();
         }
 
         private void GoToScpImport(object parameter)

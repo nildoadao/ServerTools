@@ -22,9 +22,12 @@ namespace ServerToolsUI.ViewModel
             GetProcessorInternetCommand = new RelayCommand(GetProcessorInternetPage);
             SearchIdracPageCommand = new RelayCommand(SearchIdracPage);
             ChangeIpPageCommand = new RelayCommand(ChangeIpPage);
+            ScpExportListPageCommand = new RelayCommand(ScpExportListPage);
         }
         public RelayCommand ScpImportPageCommand { get; private set; }
         public RelayCommand ScpExportPageCommand { get; private set; }
+
+        public RelayCommand ScpExportListPageCommand { get; private set; }
         public RelayCommand FirmwareUpdatePageCommand { get; private set; }
         public RelayCommand CustomScriptPageCommand { get; private set; }
         public RelayCommand GetProcessorAndCoreCommand { get; private set; }
@@ -39,6 +42,11 @@ namespace ServerToolsUI.ViewModel
         private void ScpExportPage(object parameter)
         {
             NavigationUtil.NotifyColleagues("ScpExport", null);
+        }
+
+        private void ScpExportListPage(object parameter)
+        {
+            NavigationUtil.NotifyColleagues("ScpExportList", null);
         }
 
         private void FirmwareUpdatePage(object parameter)

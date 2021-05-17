@@ -1,4 +1,4 @@
-﻿D:\Visual Studio\ServerTools\ServerToolsUI\obj\Debug\GeneratedInternalTypeHelper.g.cs
+﻿
 FD:\Visual Studio\ServerTools\ServerToolsUI\App.xaml;;
 FD:\Visual Studio\ServerTools\ServerToolsUI\View\ChangeIpView.xaml;;
 FD:\Visual Studio\ServerTools\ServerToolsUI\View\CredentialsView.xaml;;
@@ -8,6 +8,7 @@ FD:\Visual Studio\ServerTools\ServerToolsUI\View\GetProcessorAndCoreView.xaml;;
 FD:\Visual Studio\ServerTools\ServerToolsUI\View\GetProcessorInternetView.xaml;;
 FD:\Visual Studio\ServerTools\ServerToolsUI\View\HomeView.xaml;;
 FD:\Visual Studio\ServerTools\ServerToolsUI\View\MainView.xaml;;
+FD:\Visual Studio\ServerTools\ServerToolsUI\View\ScpExportListView.xaml;;
 FD:\Visual Studio\ServerTools\ServerToolsUI\View\ScpExportView.xaml;;
 FD:\Visual Studio\ServerTools\ServerToolsUI\View\ScpImportView.xaml;;
 FD:\Visual Studio\ServerTools\ServerToolsUI\View\SearchIdracView.xaml;;

@@ -30,6 +30,9 @@
             <DataTemplate DataType="{x:Type ViewModels:ScpExportViewModel}">
                 <Views:ScpExportView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModels:ScpExportListViewModel}">
+                <Views:ScpExportListView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type ViewModels:ScpImportViewModel}">
                 <Views:ScpImportView/>
             </DataTemplate>

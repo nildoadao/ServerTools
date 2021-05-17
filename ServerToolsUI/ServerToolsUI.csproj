@@ -52,10 +52,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>47AE7C7A032D4F07D63740E74EBC9A1E52BAF092</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>DF806CF6C0227794F7831A0DB27B88C6912AAD8D</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>ServerToolsUI_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>ServerToolsUI_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -108,6 +108,7 @@
     <Compile Include="ViewModel\GetProcessorInternetViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ScpExportListViewModel.cs" />
     <Compile Include="ViewModel\ScpExportViewModel.cs" />
     <Compile Include="ViewModel\ScpImportViewModel.cs" />
     <Compile Include="ViewModel\SearchIdracViewModel.cs" />
@@ -130,6 +131,9 @@
     </Compile>
     <Compile Include="View\GetProcessorInternetView.xaml.cs">
       <DependentUpon>GetProcessorInternetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ScpExportListView.xaml.cs">
+      <DependentUpon>ScpExportListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ScpExportView.xaml.cs">
       <DependentUpon>ScpExportView.xaml</DependentUpon>
@@ -195,6 +199,10 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ScpExportListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ScpExportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -243,6 +251,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="ServerToolsUI_1_TemporaryKey.pfx" />
     <None Include="ServerToolsUI_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

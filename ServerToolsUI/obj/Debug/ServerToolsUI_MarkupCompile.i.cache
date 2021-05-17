@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Visual Studio\ServerTools\ServerToolsUI\App.xaml
-14-1838370858
+15-996406333
 
-41-1942474121
+43-539568912
 18-1944638343
-View\ChangeIpView.xaml;View\CredentialsView.xaml;View\CustomScriptView.xaml;View\FirmwareUpdateView.xaml;View\GetProcessorAndCoreView.xaml;View\GetProcessorInternetView.xaml;View\HomeView.xaml;View\MainView.xaml;View\ScpExportView.xaml;View\ScpImportView.xaml;View\SearchIdracView.xaml;View\ServersListView.xaml;View\SettingsView.xaml;View\UserMessageView.xaml;
+View\ChangeIpView.xaml;View\CredentialsView.xaml;View\CustomScriptView.xaml;View\FirmwareUpdateView.xaml;View\GetProcessorAndCoreView.xaml;View\GetProcessorInternetView.xaml;View\HomeView.xaml;View\MainView.xaml;View\ScpExportListView.xaml;View\ScpExportView.xaml;View\ScpImportView.xaml;View\SearchIdracView.xaml;View\ServersListView.xaml;View\SettingsView.xaml;View\UserMessageView.xaml;
 
 True
 
